@@ -18,10 +18,10 @@ import time
 
 # Data about this site
 BLOG_AUTHOR = "Isaac Lacoba Molina"  # (translatable)
-BLOG_TITLE = "Tinman: Instrumentaci\u00f3n de un videojuego 3D en red"  # (translatable)
+BLOG_TITLE = "Tinman"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "https://github.com/isaaclacoba/tinman"
+SITE_URL = "http://isaaclacoba.github.io/tinman/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "https://github.com/isaaclacoba/tinman/"

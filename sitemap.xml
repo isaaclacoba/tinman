@@ -5,15 +5,23 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https://github.com/isaaclacoba/tinman/archive.html</loc>
+  <loc>http://isaaclacoba.github.io/tinman/2014/index.html</loc>
   <lastmod>2014-12-03</lastmod>
  </url>
  <url>
-  <loc>https://github.com/isaaclacoba/tinman/categories/index.html</loc>
+  <loc>http://isaaclacoba.github.io/tinman/archive.html</loc>
   <lastmod>2014-12-03</lastmod>
  </url>
  <url>
-  <loc>https://github.com/isaaclacoba/tinman/index.html</loc>
+  <loc>http://isaaclacoba.github.io/tinman/categories/index.html</loc>
+  <lastmod>2014-12-03</lastmod>
+ </url>
+ <url>
+  <loc>http://isaaclacoba.github.io/tinman/index.html</loc>
+  <lastmod>2014-12-03</lastmod>
+ </url>
+ <url>
+  <loc>http://isaaclacoba.github.io/tinman/posts/presentacion.html</loc>
   <lastmod>2014-12-03</lastmod>
  </url>
 </urlset>
