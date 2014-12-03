@@ -21,4 +21,4 @@ Me llamo Isaac y actualmente soy estudiante de Grado en Ingeniería Informática
 Soy oootro apasionado mas de la tecnología, prueba de ello es que haya elegido usar Nikola como generador de mi blog y github pages
 como lugar donde alojarlo, en lugar de las miles de soluciones existentes que te facilitan la vida. Porque pudiendo seguir la solución dificil, ¿para qué vas a seguir la fácil?
 
-Esto último define bien mis preferencias. Desde siempre he sido lo que antes se denominaba como "un jodio friki sin vida" y hoy adopta el término de "gamer". Un apasionado de los videojuegos. Y ya que el proyecto fin de grado es el broche final a lo que ha sido, hasta el momento, mi experiencia como estudiante universitario, decidí que sería perfecto finalizar con un proyecto que me definiese como ingeniero y como persona.
+Esto último define bien mis preferencias. Desde siempre he sido un apasionado de los videojuegos. Y ya que el proyecto fin de grado es el broche final a lo que ha sido, hasta el momento, mi experiencia como estudiante universitario, decidí que sería perfecto finalizar con un proyecto que me definiese como ingeniero y como persona.
