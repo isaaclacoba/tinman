@@ -1,2 +1,6 @@
-tinman-blog/*.pyc
-tinman-blog/output/*
+_site/
+*.pyc
+.DS_Store
+.doit.db.db
+cache/
+output/
