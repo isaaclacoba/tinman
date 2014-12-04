@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="es">
-    <head>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="es">
+<head>
     <meta charset="utf-8">
     <meta name="description" content="blog del proyecto Tinman">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
     <title>Archivo | Tinman</title>
 
     
@@ -27,61 +27,18 @@
 
 </head>
 <body>
-<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
-
-<!-- Menubar -->
-
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-<!-- This keeps the margins nice -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="http://isaaclacoba.github.io/tinman/">
-
-                <span id="blog-title">Tinman</span>
-            </a>
-        </div>
-<!-- /.navbar-header -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                
-                <li class="active">
-<a href="#">Archivo</a>
-                </li>
-<li>
-<a href="categories/index.html">Tags</a>
-                </li>
-<li>
-<a href="rss.xml">feed RSS</a>
-
-                
-            </li>
-</ul>
-
-            <ul class="nav navbar-nav navbar-right">
+<div id="wrapper">
+    <div id="container">
+        <div id="content">
+            <div id="header">
+                <h1 id="blog-title">
+                    <a href="http://isaaclacoba.github.io/tinman/" title="Tinman">Tinman</a>
+                </h1>
                 
                 
-                    
-                
-            </ul>
-        </div>
-<!-- /.navbar-collapse -->
-    </div>
-<!-- /.container -->
-</nav>
-
-<!-- End of Menubar -->
-
-<div class="container" id="content">
-    <div class="body-content">
-        <!--Body content-->
-        <div class="row">
-            
+            </div>
+        <div class="hfeed">
+            <!--Body content-->
             
 <article class="listpage">
     <header>
@@ -94,19 +51,53 @@
 </ul>
 </article>
 
+            <!--End of body content-->
         </div>
-        <!--End of body content-->
-
-        <footer>
-            Contents © 2014         <a href="mailto:isaac.lacoba@gmail.com">Isaac Lacoba Molina</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
-            
-        </footer>
+<!-- .hfeed -->
     </div>
+<!-- #content -->
 </div>
+<!-- #container -->
 
+<div id="primary" class="theme_sidebar">
+    <ul>
+            <li>
+<h3><a href="#">Archivo</a></h3>
+            
+            
+            </li>
+<li>
+<h3><a href="categories/index.html">Tags</a></h3>
+            
+            
+            </li>
+<li>
+<h3><a href="rss.xml">feed RSS</a></h3>
+            
+            
+        </li>
+<li>
+        </li>
+<li>
+    </li>
+</ul>
+</div>
+<!-- #primary .theme_sidebar -->
 
-            <script src="assets/js/all-nocdn.js"></script>
-        <script src="assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
+<div id="footer">
+    <span id="theme-link"><a href="http://www.plaintxt.org/themes/blogtxt/" title="blog.txt theme for WordPress" rel="follow designer">blog.txt</a> 'theme by <span class="vcard"><a class="url fn n" href="http://scottwallick.com/" title="scottwallick.com" rel="follow designer"><span class="given-name">Scott</span><span class="additional-name"> Allan</span><span class="family-name"> Wallick</span></a></span></span>
+    <small>Contents © 2014         <a href="mailto:isaac.lacoba@gmail.com">Isaac Lacoba Molina</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+            
+ </small><p>
+</p>
+</div>
+<!-- #footer -->
+
+</div>
+<!-- #wrapper -->
+    
+    
+    
     
 <!-- Social buttons -->
 <div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
@@ -128,16 +119,6 @@
 </div>
 <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
 <!-- End of social buttons -->
-
-
-    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
-    <!-- fancy dates -->
-    <script>
-    moment.locale("es");
-    fancydates(0, "YYYY-MM-DD HH:mm");
-    </script>
-    <!-- end fancy dates -->
-    
 
 
 </body>
