@@ -7,6 +7,7 @@
 .. type: text
 
 .. image:: tinman.jpg
+   :align: center
 
 Este blog servirá como registro donde quedará plasmada la evolución de mi proyecto fin de grado.
 

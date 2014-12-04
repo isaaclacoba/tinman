@@ -118,7 +118,7 @@ NAVIGATION_LINKS = {
 }
 
 # Name of the theme to use.
-THEME = "blogtxt"
+THEME = "bootstrap3"
 
 # Below this point, everything is optional
 
