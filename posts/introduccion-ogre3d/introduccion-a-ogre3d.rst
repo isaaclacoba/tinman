@@ -9,7 +9,11 @@
 .. image:: ogre-logo.png
    :align: center
 
-En esta primera entrada hablaremos brevemente de Ogre3D, y de porqué se ha elegido como biblioteca de renderizado. Además, crearemos un breve tutorial que nos permitirá renderizar la mascota de Ogre3D, Sinbad, al mismo tiempo que servirá como ejemplo para mostrar la estructura típica de un programa de ogre.
+En esta primera entrada hablaremos brevemente de Ogre3D, y de porqué
+se ha elegido como biblioteca de renderizado. Para ejemplificarlo, se
+ha creado un pequeño programa usando Ogre en el que se renderiza su
+mascota, Sinbad, al mismo tiempo que servirá como ejemplo para mostrar
+la estructura típica de un programa que hace uso de esta biblioteca.
 
 Este post es una adaptación del tutorial que realicé hace unos meses y que podeis encontrar aquí: `<https://bitbucket.org/IsaacLacoba/intro-ogre/overview>`_
 
