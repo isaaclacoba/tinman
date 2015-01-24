@@ -6,6 +6,11 @@
 .. description:
 .. type: text
 
+.. _grafico_mercado:
+.. image:: tinman.jpg
+           :align: center
+
+
 En esta entrada se explicará brevemente qué es el proyecto Tinman, se
 justificarán las razones por las cuales se está realizando este
 proyecto, y por último, se listarán los objetivos que se pretenden
