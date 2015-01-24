@@ -6,7 +6,7 @@
 .. description:
 .. type: text
 
-.. _grafico_mercado:
+.. _logo_tinman:
 .. image:: tinman.jpg
            :align: center
 
