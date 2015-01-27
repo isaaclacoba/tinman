@@ -167,7 +167,7 @@ y compilaremos el código.
 
 Primero, crearemos un fichero de texto llamado *main.cpp* con el siguiente código:
 
-.. code:: C++
+.. code:: c++
 
    #include <OgreRoot.h>
 
@@ -228,7 +228,7 @@ no sabe donde buscarlos.
 Una vez hecho esto, añadiremos el siguiente código que permite indicar
 a Ogre la configuración básica del sistema de renderizado:
 
-.. code:: C++
+.. code:: c++
 
    void check_config(Ogre::Root* root) {
       if (not (root->restoreConfig() || root->showConfigDialog())) {
@@ -272,7 +272,7 @@ Ogre::RenderWindow. La segunda, mas sencilla, es dejar que Ogre cree
 una por defecto, basándose en la configuración obtenida del paso
 anterior:
 
-.. code:: C++
+.. code:: c++
 
    #include <OgreRenderWindow.h>
    (...)
@@ -291,7 +291,7 @@ básica del sistema de renderizado.
 
 Tras esto, procederemos a inicializar el gestor de escena:
 
-.. code:: C++
+.. code:: c++
 
   (...)
 
@@ -354,7 +354,7 @@ fichero y cargar dichos recursos.
 Cargando los recursos
 **********************
 
-.. code:: C++
+.. code:: c++
 
    (...)
    #include <OgreResourceGroupManager.h>
@@ -415,7 +415,7 @@ El objeto Ogre::Camera define la cámara de la escena. Este objeto es
 imprescindible, pues sin él no podremos ver nada en nuestra
 ventana. Para ello, añadiremos el siguiente código:
 
-.. code:: C++
+.. code:: c++
 
    (...)
    #include <OgreCamera.h>
@@ -454,7 +454,7 @@ es decir, indica la región que sera renderizada.
 Una vez inicializada la cámara, es importante añadir una fuente de
 luz, ya que por defecto el mundo se haya en tinieblas:
 
-.. code:: C++
+.. code:: c++
 
    void create_light(Ogre::Root* root){
      Ogre::SceneManager* manager = root->getSceneManager("SceneManager");
@@ -496,7 +496,7 @@ operaciones de traslación, rotación, etc. A estos nodos hay que
 adjuntarles un contenido, típicamente un objeto de tipo Ogre::Entity,
 aunque se pueden adjuntar otros tipos de objetos. Veamos el código:
 
-.. code:: C++
+.. code:: c++
 
    (...)
    #include <OgreEntity.h>
@@ -557,7 +557,7 @@ Las funciones anteriores son funciones de alto nivel que encapsulan
 una funcionalidad relacionada con el nombre de la función. Aunque
 parezca mucho código, las sentencias mas importantes son:
 
-.. code:: C++
+.. code:: c++
 
   parent_node->createChildSceneNode(name);
 
@@ -568,7 +568,7 @@ transformaciones que sufra el padre tambien las sufrirá el hijo. De
 esta forma, podemos generar cuerpos compuestos y mover únicamente el
 nodo padre, sabiendo que los nodos hijos se moverán de igual forma.
 
-.. code:: C++
+.. code:: c++
 
   Ogre::Entity* entity = manager->createEntity(name, mesh);
 
@@ -581,7 +581,7 @@ el método *load_resources(std::string)*.
 Por último, utilizamos dos funciones muy similares para obtener la
 referencia a los SceneNode por su nombre:
 
-.. code:: C++
+.. code:: c++
 
    Ogre::SceneManager::getRootSceneNode();
    Ogre::SceneManager::getSceneNode(Ogre::String node_name);
@@ -597,7 +597,7 @@ clase Ogre::WindowEventListener, que cuenta con el método
 WindowClosing y windowClosed. Para ello crearemos una clase y haremos
 que herede de Ogre::WindowEventListener:
 
-.. code:: C++
+.. code:: c++
 
    #include <OgreWindowEventUtilities.h>
 
@@ -640,7 +640,7 @@ que herede de Ogre::WindowEventListener:
 La clase Ogre::WindowEventListener se encarga de gestionar todos los
 eventos relacionados con una ventana.
 
-.. code:: C++
+.. code:: c++
 
    Ogre::WindowEventUtilities::addWindowEventListener(window, this);
 

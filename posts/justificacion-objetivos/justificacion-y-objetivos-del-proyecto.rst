@@ -29,8 +29,8 @@ Por otra parte, no abundan proyectos libres en el mundo de los videojuegos y los
 
 Pero alguien podría estar preguntándose: ¿realmente un videojuego se justifica como trabajo fin de Grado?
 
-Según la "`Normativa sobre la elaboración y defensa del *Trabajo Fin
-de Grado* <http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs>`_"
+Según la "`Normativa sobre la elaboración y defensa del Trabajo Fin
+de Grado <http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs>`_"
 de la Escuela Superior de Informática de Ciudad Real, su artículo 2º
 *Naturaleza del Trabajo Fin de Grado*, estipula lo siguiente:
 
