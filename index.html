@@ -7,11 +7,7 @@
     <title>Tinman | Tinman</title>
 
     
-            <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/rst.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/code.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/colorbox.css" rel="stylesheet" type="text/css">
-        <link href="assets/css/theme.css" rel="stylesheet" type="text/css">
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
@@ -106,20 +102,22 @@ cumplir con el desarrollo del mismo.</p>
 <div class="section" id="que-es-tinman">
 <h2>¿Qué es Tinman?</h2>
 <p><em>Tinman</em> es el nombre corto de mi trabajo fin de Grado(TFG), que se titula: "Instrumentación de un videojuego 3D con fines docentes". El videojuego será un clon del famoso juego de carreras arcade "<a class="reference external" href="http://es.wikipedia.org/wiki/Super_Off_Road">Super Off Road</a>", y de aquí es de donde surge <em>Tinman</em> como nombre de mi proyecto, a modo de broma, dado que el juego original llevó el nombre de Ivan "Ironman" Stewart, un famoso piloto del estilo <em>Off-Road</em>.</p>
-<!-- Mi motivación principal para hacer este proyecto es mi pasión por los videojuegos. La razón por la que comencé a estudiar Ingeniería Informática no era otra que la de convertirme en programador de videojuegos, y creo que esto queda reflejado en la pasión con la que este proyecto se está desarrollando. -->
-<p>Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. No hace falta decir que se trata de un proyecto muy ambicioso, y es por esto que hay que acotar el alcance del mismo. Del título lo que más puede llevar a confusión sea la última parte "con fines docentes". Debido a que desarrollar un <em>Serius Game</em> específicamente orientado a desarrolladores escapa por mucho a lo que se pretende evaluar dentro de un TFG, e incluso en una tesis de Master, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o <a class="reference external" href="http://programmers.stackexchange.com/a/94567">idioms</a> en C++, por poner algunos ejemplos.</p>
-<p>Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3. La principal razón por la que se decidió usar una licencia libre, fue que si se pretendía dar facilidades a quien desease aprender sobre cómo fue creado el proyecto, la forma mas sencilla pasaba por darle la libertad tanto de leer el código, cómo de modificarlo, así como de distribuir tanto sus propias modificaciones del proyecto original como copias de este. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.</p>
-<p>Por otra parte, no abundan los proyectos libres en el mundo de los videojuegos y los que existen o bien no se ha dado al código fuente el mimo que merece , o los creadores son ingenieros con una larga experiencia, con lo cuál el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y mucho más si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones: no sólo ofrece tanto mecanismos de muy alto nivel, sino que permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece una flexibilidad al ingeniero que no ofrecen otros lenguajes, además al ser compilado permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.</p>
-<p>Pero alguien podría estar preguntandose ¿realmente un videojuego se justifica como trabajo fin de Grado?</p>
-<p>Según la "<a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs">normativa sobre la elaboración y defensa del trabajo fin de grado</a>" de la Escuela Superior de Informática de Ciudad Real, en sus artículos 2.1:</p>
-<p>Art. 2.1- "El TFG supone la realización por parte del estudiante, y de
-forma individual, de un proyecto, memoria o estudio bajo la
-supervisión de uno o más tutores/as, en el que se integren y
-desarrollen los contenidos formativos recibidos, capacidades,
-competencias y habilidades adquiridas durante el periodo de docencia
-del Grado en Ingeniería Informática"</p>
-<p>El artículo anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que ni siquiera se requiere implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta en el desarrollo(TDD), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla lo necesario para poder considerar este proyecto como un TFG.</p>
-<p>Por otra parte, todo proyecto debe tener en mente, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su <a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/">publicación</a> sobre la situación mundial del mercado del videojuego señalaba que de seguir la progresión de crecimiento actual, se espera que la cifra de facturación mundial ascienda de los 81.400 millones actuales en 2014 hasta los 102.900 millones en 2017. No hace falta ser economista para darse cuenta que el volumen de facturación es impresionante y, por sí sólo, justifica la creación de nuevos proyectos orientados a este sector.</p>
+<p>Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. Es obvio que se trata de un proyecto muy ambicioso y por ello se ha de acotar el alcance del mismo. Del título, lo que más puede llevar a confusión sea la última parte, con fines docentes. Debido a que desarrollar un <em>Serius Game</em> específicamente orientado a desarrolladores se desmarca del objeto de evaluación dentro de un TFG, e incluso en una tesis de máster, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o como <a class="reference external" href="http://programmers.stackexchange.com/a/94567">idioms</a> en C++, por poner algunos ejemplos.</p>
+<p>Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3.Se decidió usar una licencia libre porque si se pretendía enseñar a quien lo deseara cómo fue creado el proyecto, la forma mas sencilla pasaba por dar libertad para leer el código, modificarlo y distribuir tanto modificaciones del proyecto original como copias del mismo. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.</p>
+<p>Por otra parte, no abundan proyectos libres en el mundo de los videojuegos y los que existen, o bien no se ha dado al código fuente el mimo que merece, o los creadores son ingenieros con una larga trayectoria, por lo que el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y más complicado si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones. No sólo ofrece tanto mecanismos de muy alto nivel, tambien permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece al ingeniero una flexibilidad que no se encuentra en otros lenguajes. Además, al ser compilado, permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.</p>
+<p>Pero alguien podría estar preguntándose: ¿realmente un videojuego se justifica como trabajo fin de Grado?</p>
+<p>Según la "<a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs">Normativa sobre la elaboración y defensa del *Trabajo Fin
+de Grado*</a>"
+de la Escuela Superior de Informática de Ciudad Real, su artículo 2º
+<em>Naturaleza del Trabajo Fin de Grado</em>, estipula lo siguiente:</p>
+<p>"El Trabajo Fin de Grado supone la realización por parte del estudiante, y de forma
+individual, de un proyecto, memoria o estudio bajo la supervisión de
+uno o más tutores/as, en el que se integren y desarrollen los
+contenidos formativos recibidos, capacidades, competencias y
+habilidades adquiridas durante el periodo de docencia del Grado en
+Ingeniería Informática"</p>
+<p>El apaertado anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que no es requerida implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta de desarrollo (<em>desarrollo orientado por pruebas</em>), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla  lo previamente citado para considerar este proyecto como TFG.</p>
+<p>Por otra parte, en todo proyecto debe contemplarse, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su <a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/">publicación</a> sobre la situación mundial del mercado del videojuego señalaba que si la progresión de crecimiento actual se mantiene, se espera que la cifra de facturación mundial ascienda desde los 81.400 millones de dólares actuales en 2014 hasta los 102.900 millones en 2017. No hace es necesario ser economista para darse cuenta que el volumen de facturación es impresionante y que por sí sólo justifica la creación de nuevos proyectos orientados a este sector.</p>
 <img alt="mercado-videojuego.png" class="align-center" id="grafico-mercado" src="posts/justificacion-objetivos/mercado-videojuego.png">
 <p>Para finalizar, se listarán los objetivos que se pretenden cumplir.</p>
 </div>
@@ -294,13 +292,20 @@ está de más comprobar que todo haya ido bien. Para comprobar que Ogre
 se ha instalado correctamente, crearemos una instancia del objeto Root
 y compilaremos el código.</p>
 <p>Primero, crearemos un fichero de texto llamado <em>main.cpp</em> con el siguiente código:</p>
-<pre class="code C++ literal-block">
-<span class="cp">#include &lt;OgreRoot.h&gt;
-</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="n">argv</span><span class="o">*</span><span class="p">[])</span> <span class="p">{</span>
-   <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="p">(</span><span class="s">"config/plugins.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.log"</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 162)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+   #include &lt;OgreRoot.h&gt;
+
+   int main(int argc, char argv*[]) {
+      Ogre::Root* root = new Ogre::Root("config/plugins.cfg", "config/ogre.cfg", "config/ogre.log");
+   }
+
 </pre>
+</div>
 <p>Para poder compilarlo, crearemos un sencillo makefile con el siguiente
 código. Crea un fichero llamado Makefile y escribe el siguiente
 codigo:</p>
@@ -309,7 +314,7 @@ codigo:</p>
 <span class="nv">CXXFLAGS</span> <span class="o">=</span> -std<span class="o">=</span>c++11 -ggdb <span class="k">$(</span>shell pkg-config --cflags OGRE OIS<span class="k">)</span>
 <span class="nv">LDLIBS</span> <span class="o">=</span> <span class="k">$(</span>shell pkg-config --libs OGRE OIS<span class="k">)</span>
 
-<span class="nf">main</span><span class="o">:</span> <span class="n">main</span>.<span class="n">cpp</span>
+<span class="nf">main</span><span class="o">:</span> <span class="m">main.cpp</span>
 </pre>
 <p>Para compilarlo, abriremos un terminal en la carpeta donde
 tengamos el codigo fuente y ejecutaremos:</p>
@@ -343,21 +348,28 @@ fichero de plugins, hay que indicarle la ruta, ya que por defecto Ogre
 no sabe donde buscarlos.</p>
 <p>Una vez hecho esto, añadiremos el siguiente código que permite indicar
 a Ogre la configuración básica del sistema de renderizado:</p>
-<pre class="code C++ literal-block">
-<span class="kt">void</span> <span class="nf">check_config</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-   <span class="k">if</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">restoreConfig</span><span class="p">()</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">showConfigDialog</span><span class="p">()))</span> <span class="p">{</span>
-      <span class="n">Ogre</span><span class="o">::</span><span class="n">LogManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">logMessage</span><span class="p">(</span><span class="s">"Initialize::configure_ogre =&gt; "</span> <span class="o">+</span>
-      <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"ERROR: unable to configure Ogre"</span><span class="p">));</span>
-   <span class="p">}</span>
-<span class="p">}</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 223)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="p">(</span><span class="s">"config/plugins.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.log"</span><span class="p">);</span>
-  <span class="n">check_config</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+   void check_config(Ogre::Root* root) {
+      if (not (root-&gt;restoreConfig() || root-&gt;showConfigDialog())) {
+         Ogre::LogManager::getSingleton().logMessage("Initialize::configure_ogre =&gt; " +
+         std::string("ERROR: unable to configure Ogre"));
+      }
+   }
 
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+   int main(int argc, char *argv[]) {
+     Ogre::Root* root = new Ogre::Root("config/plugins.cfg", "config/ogre.cfg", "config/ogre.log");
+     check_config(root);
+
+     return 0;
+   }
+
 </pre>
+</div>
 <p>Al ejecutarlo por primera vez, debería aparecer una pantalla como la siguiente:</p>
 <div class="line-block">
 <div class="line"><br></div>
@@ -383,15 +395,22 @@ ventana: la primera es usando el constructor de la clase
 Ogre::RenderWindow. La segunda, mas sencilla, es dejar que Ogre cree
 una por defecto, basándose en la configuración obtenida del paso
 anterior:</p>
-<pre class="code C++ literal-block">
-<span class="cp">#include &lt;OgreRenderWindow.h&gt;
-</span><span class="p">(...)</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-   <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="p">(</span><span class="s">"config/plugins.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.cfg"</span><span class="p">,</span> <span class="s">"config/ogre.log"</span><span class="p">);</span>
-   <span class="n">check_config</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-   <span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">initialize</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span> <span class="s">"Titulo"</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 267)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+   #include &lt;OgreRenderWindow.h&gt;
+   (...)
+   int main(int argc, char *argv[]) {
+      Ogre::Root* root = new Ogre::Root("config/plugins.cfg", "config/ogre.cfg", "config/ogre.log");
+      check_config(root);
+      Ogre::RenderWindow* window = root-&gt;initialize(true, "Titulo");
+   }
+
 </pre>
+</div>
 <p>Añadimos el fichero de cabecera y creamos la ventana por defecto con el método
 Ogre::Root:initialize. El primer parámetro indica a Ogre que queremos que cree un
 Ogre::RenderWindow. Internamente se invocará al método
@@ -399,15 +418,22 @@ Ogre::Root::createRenderWindow. Es importante señalar que solo se
 puede invocar este método después de haber obtenido la configuración
 básica del sistema de renderizado.</p>
 <p>Tras esto, procederemos a inicializar el gestor de escena:</p>
-<pre class="code C++ literal-block">
-<span class="p">(...)</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 286)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
- <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+  (...)
 
- <span class="p">(...)</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">scene_manager</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">createSceneManager</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">ST_GENERIC</span><span class="p">);</span>
-<span class="p">}</span>
+   int main(int argc, char *argv[]) {
+
+   (...)
+      Ogre::SceneManager* scene_manager = root-&gt;createSceneManager(Ogre::ST_GENERIC);
+  }
+
 </pre>
+</div>
 <p>La clase Ogre::SceneManager se encarga de organizar el
 <em>culling</em> y el proceso de renderizado de la escena, junto con
 la clase Ogre::RenderQueue. Del mismo modo que antes, hacemos uso de
@@ -453,40 +479,48 @@ fichero y cargar dichos recursos.</p>
 </div>
 <div class="section" id="cargando-los-recursos">
 <h3>Cargando los recursos</h3>
-<pre class="code C++ literal-block">
-<span class="p">(...)</span>
-<span class="cp">#include &lt;OgreResourceGroupManager.h&gt;
-#include &lt;OgreConfigFile.h&gt;
-</span>
-<span class="kt">void</span> <span class="n">load_resources</span><span class="p">(</span><span class="n">string</span> <span class="n">resources_file</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">ConfigFile</span> <span class="n">cf</span><span class="p">;</span>
-    <span class="n">cf</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">resources_file</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 349)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">ConfigFile</span><span class="o">::</span><span class="n">SectionIterator</span> <span class="n">seci</span> <span class="o">=</span> <span class="n">cf</span><span class="p">.</span><span class="n">getSectionIterator</span><span class="p">();</span>
+   (...)
+   #include &lt;OgreResourceGroupManager.h&gt;
+   #include &lt;OgreConfigFile.h&gt;
 
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">secName</span><span class="p">,</span> <span class="n">typeName</span><span class="p">,</span> <span class="n">archName</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">seci</span><span class="p">.</span><span class="n">hasMoreElements</span><span class="p">())</span> <span class="p">{</span>
-      <span class="n">secName</span> <span class="o">=</span> <span class="n">seci</span><span class="p">.</span><span class="n">peekNextKey</span><span class="p">();</span>
-      <span class="n">Ogre</span><span class="o">::</span><span class="n">ConfigFile</span><span class="o">::</span><span class="n">SettingsMultiMap</span> <span class="o">*</span><span class="n">settings</span> <span class="o">=</span> <span class="n">seci</span><span class="p">.</span><span class="n">getNext</span><span class="p">();</span>
-      <span class="n">Ogre</span><span class="o">::</span><span class="n">ConfigFile</span><span class="o">::</span><span class="n">SettingsMultiMap</span><span class="o">::</span><span class="n">iterator</span> <span class="n">i</span><span class="p">;</span>
-      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">settings</span><span class="o">-&gt;</span><span class="n">begin</span><span class="p">();</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">settings</span><span class="o">-&gt;</span><span class="n">end</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">typeName</span> <span class="o">=</span> <span class="n">i</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
-        <span class="n">archName</span> <span class="o">=</span> <span class="n">i</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
-        <span class="n">Ogre</span><span class="o">::</span><span class="n">ResourceGroupManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">()</span>
-          <span class="p">.</span><span class="n">addResourceLocation</span><span class="p">(</span><span class="n">archName</span><span class="p">,</span> <span class="n">typeName</span><span class="p">,</span> <span class="n">secName</span><span class="p">);</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
+   void load_resources(string resources_file) {
+       Ogre::ConfigFile cf;
+       cf.load(resources_file);
 
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">ResourceGroupManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">()</span>
-      <span class="p">.</span><span class="n">initialiseAllResourceGroups</span><span class="p">();</span>
-<span class="p">}</span>
+       Ogre::ConfigFile::SectionIterator seci = cf.getSectionIterator();
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-  <span class="p">(...)</span>
-  <span class="n">load_resources</span><span class="p">(</span><span class="s">"config/resources.cfg"</span><span class="p">);</span>
-<span class="p">}</span>
+       Ogre::String secName, typeName, archName;
+       while (seci.hasMoreElements()) {
+         secName = seci.peekNextKey();
+         Ogre::ConfigFile::SettingsMultiMap *settings = seci.getNext();
+         Ogre::ConfigFile::SettingsMultiMap::iterator i;
+         for (i = settings-&gt;begin(); i != settings-&gt;end(); ++i) {
+           typeName = i-&gt;first;
+           archName = i-&gt;second;
+           Ogre::ResourceGroupManager::getSingleton()
+             .addResourceLocation(archName, typeName, secName);
+         }
+       }
+
+       Ogre::ResourceGroupManager::getSingleton()
+         .initialiseAllResourceGroups();
+   }
+
+   int main(int argc, char *argv[])
+   {
+     (...)
+     load_resources("config/resources.cfg");
+   }
+
+
 </pre>
+</div>
 <p>La función anterior abre el fichero y lo va
 recorriendo buscando claves. Cada clave indica el nombre de
 un directorio donde hay recursos multimedia. Estos directorios los
@@ -508,32 +542,40 @@ luz.</p>
 <p>El objeto Ogre::Camera define la cámara de la escena. Este objeto es
 imprescindible, pues sin él no podremos ver nada en nuestra
 ventana. Para ello, añadiremos el siguiente código:</p>
-<pre class="code C++ literal-block">
-<span class="p">(...)</span>
-<span class="cp">#include &lt;OgreCamera.h&gt;
-</span>
-<span class="n">Ogre</span><span class="o">::</span><span class="n">Camera</span><span class="o">*</span> <span class="n">create_camera</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Camera</span><span class="o">*</span> <span class="n">camera</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">getSceneManager</span><span class="p">(</span><span class="s">"SceneManager"</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">createCamera</span><span class="p">(</span><span class="s">"Camera"</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 410)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-  <span class="n">camera</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">160</span><span class="p">));</span>
-  <span class="n">camera</span><span class="o">-&gt;</span><span class="n">lookAt</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Vector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
-  <span class="n">camera</span><span class="o">-&gt;</span><span class="n">setNearClipDistance</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-  <span class="n">camera</span><span class="o">-&gt;</span><span class="n">setFarClipDistance</span><span class="p">(</span><span class="mi">10000</span><span class="p">);</span>
+   (...)
+   #include &lt;OgreCamera.h&gt;
+
+   Ogre::Camera* create_camera(Ogre::Root* root) {
+     Ogre::Camera* camera = root-&gt;getSceneManager("SceneManager")-&gt;createCamera("Camera");
+
+     camera-&gt;setPosition(Ogre::Vector3(0, 160, 160));
+     camera-&gt;lookAt(Ogre::Vector3(0,0,0));
+     camera-&gt;setNearClipDistance(5);
+     camera-&gt;setFarClipDistance(10000);
 
 
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Viewport</span><span class="o">*</span> <span class="n">viewport</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">getAutoCreatedWindow</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">addViewport</span><span class="p">(</span><span class="n">camera</span><span class="p">);</span>
-  <span class="n">viewport</span><span class="o">-&gt;</span><span class="n">setBackgroundColour</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">ColourValue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+     Ogre::Viewport* viewport = root-&gt;getAutoCreatedWindow()-&gt;addViewport(camera);
+     viewport-&gt;setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
-  <span class="n">camera</span><span class="o">-&gt;</span><span class="n">setAspectRatio</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Real</span><span class="p">(</span><span class="n">viewport</span><span class="o">-&gt;</span><span class="n">getActualWidth</span><span class="p">())</span> <span class="o">/</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Real</span><span class="p">(</span><span class="n">viewport</span><span class="o">-&gt;</span><span class="n">getActualHeight</span><span class="p">()));</span>
+     camera-&gt;setAspectRatio(Ogre::Real(viewport-&gt;getActualWidth()) / Ogre::Real(viewport-&gt;getActualHeight()));
 
-  <span class="k">return</span> <span class="n">camera</span><span class="p">;</span>
-<span class="p">}</span>
+     return camera;
+   }
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
- <span class="p">(...)</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Camera</span><span class="o">*</span> <span class="n">camera</span> <span class="o">=</span> <span class="n">create_camera</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-<span class="p">}</span>
+   int main(int argc, char *argv[]){
+    (...)
+     Ogre::Camera* camera = create_camera(root);
+   }
+
+
 </pre>
+</div>
 <p>En esta ocasión, utilizamos el gestor de escena para crear una cámara
 asociada a él. Ogre permite tener mas de un gestor de escena, e ir
 cambiando entre ellos. Es por esta razón que hay que asociar la cámara
@@ -542,25 +584,33 @@ a un gestor de escena.</p>
 es decir, indica la región que sera renderizada.</p>
 <p>Una vez inicializada la cámara, es importante añadir una fuente de
 luz, ya que por defecto el mundo se haya en tinieblas:</p>
-<pre class="code C++ literal-block">
-<span class="kt">void</span> <span class="nf">create_light</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">getSceneManager</span><span class="p">(</span><span class="s">"SceneManager"</span><span class="p">);</span>
-  <span class="n">manager</span><span class="o">-&gt;</span><span class="n">setShadowTechnique</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SHADOWTYPE_STENCIL_ADDITIVE</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 449)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-  <span class="n">manager</span><span class="o">-&gt;</span><span class="n">setAmbientLight</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">ColourValue</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">));</span>
+   void create_light(Ogre::Root* root){
+     Ogre::SceneManager* manager = root-&gt;getSceneManager("SceneManager");
+     manager-&gt;setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Light</span><span class="o">*</span> <span class="n">light</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">createLight</span><span class="p">(</span><span class="s">"MainLight"</span><span class="p">);</span>
-  <span class="n">light</span><span class="o">-&gt;</span><span class="n">setPosition</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-  <span class="n">light</span><span class="o">-&gt;</span><span class="n">setCastShadows</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+     manager-&gt;setAmbientLight(Ogre::ColourValue(0.25, 0.25, 0.25));
 
-<span class="p">}</span>
+     Ogre::Light* light = manager-&gt;createLight("MainLight");
+     light-&gt;setPosition(20, 80, 50);
+     light-&gt;setCastShadows(true);
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-  <span class="p">(...)</span>
-  <span class="n">create_light</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
-<span class="p">}</span>
+   }
+
+   int main(int argc, char *argv[])
+   {
+     (...)
+     create_light(root);
+   }
+
+
 </pre>
+</div>
 <p>El método Ogre::SceneManager:setShadowTechnique(Ogre::ShadowTechnique)
 asigna la técnica de generación de sombras que sera usada por este
 gestor de escena. El tipo <a class="reference external" href="http://www.ogre3d.org/docs/api/1.9/group___general.html#ga79dcd426d291c31072c1ad6f183715d6">Ogre::ShadowTechnique</a>
@@ -577,85 +627,117 @@ son los cuerpos gráficos genéricos sobre los que se realizarán las
 operaciones de traslación, rotación, etc. A estos nodos hay que
 adjuntarles un contenido, típicamente un objeto de tipo Ogre::Entity,
 aunque se pueden adjuntar otros tipos de objetos. Veamos el código:</p>
-<pre class="code C++ literal-block">
-<span class="p">(...)</span>
-<span class="cp">#include &lt;OgreEntity.h&gt;
-#include &lt;OgreVector3.h&gt;
-#include &lt;OgreMath.h&gt;
-#include &lt;OgreMeshManager.h&gt;
-</span>
-<span class="p">(...)</span>
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">get_node_by_name</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span><span class="p">,</span>
-                                 <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">node_name</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">node</span><span class="p">;</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">node_name</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
-    <span class="n">node</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">getRootSceneNode</span><span class="p">();</span>
-  <span class="k">else</span>
-    <span class="n">node</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">getSceneNode</span><span class="p">(</span><span class="n">node_name</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 491)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-  <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
-<span class="p">}</span>
+   (...)
+   #include &lt;OgreEntity.h&gt;
+   #include &lt;OgreVector3.h&gt;
+   #include &lt;OgreMath.h&gt;
+   #include &lt;OgreMeshManager.h&gt;
 
-<span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">create_entity_and_attach</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span><span class="p">,</span>
-                                       <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">name</span><span class="p">,</span>
-                                       <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">mesh</span><span class="p">,</span>
-                                       <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">target_node</span><span class="o">=</span><span class="s">""</span><span class="p">,</span>
-                                       <span class="kt">bool</span> <span class="n">cast_shadows</span><span class="o">=</span><span class="nb">true</span><span class="p">){</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">get_node_by_name</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">target_node</span><span class="p">);</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">createEntity</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mesh</span><span class="p">);</span>
-  <span class="n">entity</span><span class="o">-&gt;</span><span class="n">setCastShadows</span><span class="p">(</span><span class="n">cast_shadows</span><span class="p">);</span>
+   (...)
+   Ogre::SceneNode* get_node_by_name(Ogre::SceneManager* manager,
+                                    Ogre::String node_name="") {
+     Ogre::SceneNode* node;
+     if (node_name.empty())
+       node = manager-&gt;getRootSceneNode();
+     else
+       node = manager-&gt;getSceneNode(node_name);
 
-  <span class="n">node</span><span class="o">-&gt;</span><span class="n">attachObject</span><span class="p">(</span><span class="n">entity</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">entity</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">create_node</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span><span class="p">,</span>
-                             <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">name</span><span class="p">,</span>
-                             <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">parent</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">parent_node</span> <span class="o">=</span> <span class="n">get_node_by_name</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">parent</span><span class="p">);</span>
+     return node;
+   }
 
-    <span class="k">return</span> <span class="n">parent_node</span><span class="o">-&gt;</span><span class="n">createChildSceneNode</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
-<span class="p">}</span>
+   Ogre::Entity* create_entity_and_attach(Ogre::SceneManager* manager,
+                                          Ogre::String name,
+                                          Ogre::String mesh,
+                                          Ogre::String target_node="",
+                                          bool cast_shadows=true){
+     Ogre::SceneNode* node = get_node_by_name(manager, target_node);
+     Ogre::Entity* entity = manager-&gt;createEntity(name, mesh);
+     entity-&gt;setCastShadows(cast_shadows);
+
+     node-&gt;attachObject(entity);
+     return entity;
+   }
+   Ogre::SceneNode* create_node(Ogre::SceneManager* manager,
+                                Ogre::String name,
+                                Ogre::String parent="") {
+     Ogre::SceneNode* parent_node = get_node_by_name(manager, parent);
+
+       return parent_node-&gt;createChildSceneNode(name);
+   }
 
 
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">create_node_and_entity</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span><span class="p">,</span>
-                                        <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">name</span><span class="p">,</span>
-                                        <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">mesh</span><span class="p">,</span>
-                                        <span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">parent</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">create_node</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parent</span><span class="p">);</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">create_entity_and_attach</span><span class="p">(</span><span class="n">manager</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">name</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
-<span class="p">}</span>
+   Ogre::SceneNode* create_node_and_entity(Ogre::SceneManager* manager,
+                                           Ogre::String name,
+                                           Ogre::String mesh,
+                                           Ogre::String parent="") {
+     Ogre::SceneNode* node = create_node(manager, name, parent);
+     Ogre::Entity* entity = create_entity_and_attach(manager, name, mesh, name);
+       return node;
+   }
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
-<span class="p">(...)</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">create_node_and_entity</span><span class="p">(</span><span class="n">scene_manager</span><span class="p">,</span> <span class="s">"SinbadNode"</span><span class="p">,</span> <span class="s">"Sinbad.mesh"</span><span class="p">);</span>
+   int main(int argc, char *argv[]) {
+   (...)
+     Ogre::SceneNode* node = create_node_and_entity(scene_manager, "SinbadNode", "Sinbad.mesh");
 
-<span class="p">}</span>
+   }
+
+
 </pre>
+</div>
 <p>Las funciones anteriores son funciones de alto nivel que encapsulan
 una funcionalidad relacionada con el nombre de la función. Aunque
 parezca mucho código, las sentencias mas importantes son:</p>
-<pre class="code C++ literal-block">
-<span class="n">parent_node</span><span class="o">-&gt;</span><span class="n">createChildSceneNode</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 552)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+  parent_node-&gt;createChildSceneNode(name);
+
+
 </pre>
+</div>
 <p>La sentencia anterior genera un nodo hijo cuyo nodo raíz es el nodo
 padre(<em>parent_node</em>). Esto es muy útil, ya que todas las
 transformaciones que sufra el padre tambien las sufrirá el hijo. De
 esta forma, podemos generar cuerpos compuestos y mover únicamente el
 nodo padre, sabiendo que los nodos hijos se moverán de igual forma.</p>
-<pre class="code C++ literal-block">
-<span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">createEntity</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mesh</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 563)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+  Ogre::Entity* entity = manager-&gt;createEntity(name, mesh);
+
+
 </pre>
+</div>
 <p>Esta sentencia crea una instancia de un objeto tipo Ogre::Mesh. La
 clase Ogre::Mesh almacena los datos necesarios para representar un
 objeto tridimensional. Dicha malla la hemos cargado anteriormente en
 el método <em>load_resources(std::string)</em>.</p>
 <p>Por último, utilizamos dos funciones muy similares para obtener la
 referencia a los SceneNode por su nombre:</p>
-<pre class="code C++ literal-block">
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">::</span><span class="n">getRootSceneNode</span><span class="p">();</span>
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">::</span><span class="n">getSceneNode</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">node_name</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 576)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+   Ogre::SceneManager::getRootSceneNode();
+   Ogre::SceneManager::getSceneNode(Ogre::String node_name);
+
+
 </pre>
+</div>
 <p>El primero devuelve la referencia al nodo raíz del grafo de escena y
 el segundo al nodo que coincida con el nombre que se le pase por
 argumentos.</p>
@@ -664,49 +746,64 @@ poder parar nuestra aplicación, en este documento se hará uso de la
 clase Ogre::WindowEventListener, que cuenta con el método
 WindowClosing y windowClosed. Para ello crearemos una clase y haremos
 que herede de Ogre::WindowEventListener:</p>
-<pre class="code C++ literal-block">
-<span class="cp">#include &lt;OgreWindowEventUtilities.h&gt;
-</span>
-<span class="k">class</span> <span class="nc">WindowManager</span><span class="o">:</span> <span class="k">public</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventListener</span><span class="p">{</span>
-  <span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window_</span><span class="p">;</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 592)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
 
-<span class="k">public</span><span class="o">:</span>
-  <span class="kt">bool</span> <span class="n">exit</span><span class="p">;</span>
+   #include &lt;OgreWindowEventUtilities.h&gt;
 
-  <span class="n">WindowManager</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window</span><span class="p">){</span>
-    <span class="n">window_</span> <span class="o">=</span> <span class="n">window</span><span class="p">;</span>
-    <span class="n">exit</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventUtilities</span><span class="o">::</span><span class="n">addWindowEventListener</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-  <span class="p">}</span>
+   class WindowManager: public Ogre::WindowEventListener{
+     Ogre::RenderWindow* window_;
 
-  <span class="kt">bool</span> <span class="n">windowClosing</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window</span><span class="p">){</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">LogManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">logMessage</span><span class="p">(</span><span class="s">"Closing window..."</span><span class="p">);</span>
-    <span class="n">exit</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
+   public:
+     bool exit;
 
-  <span class="kt">void</span> <span class="n">windowClosed</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">LogManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">logMessage</span><span class="p">(</span><span class="s">"Window closed."</span><span class="p">);</span>
-    <span class="n">exit</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
+     WindowManager(Ogre::RenderWindow* window){
+       window_ = window;
+       exit = false;
+       Ogre::WindowEventUtilities::addWindowEventListener(window, this);
+     }
 
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-<span class="p">{</span>
-  <span class="p">(...)</span>
-  <span class="n">WindowManager</span> <span class="n">windowManager</span><span class="p">(</span><span class="n">window</span><span class="p">);</span>
+     bool windowClosing(Ogre::RenderWindow* window){
+       Ogre::LogManager::getSingleton().logMessage("Closing window...");
+       exit = true;
+       return true;
+     }
 
-  <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">windowManager</span><span class="p">.</span><span class="n">exit</span><span class="p">){</span>
-    <span class="n">root</span><span class="o">-&gt;</span><span class="n">renderOneFrame</span><span class="p">();</span>
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventUtilities</span><span class="o">::</span><span class="n">messagePump</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-<span class="p">};</span>
+     void windowClosed(Ogre::RenderWindow* window) {
+       Ogre::LogManager::getSingleton().logMessage("Window closed.");
+       exit = true;
+     }
+
+   int main(int argc, char *argv[])
+   {
+     (...)
+     WindowManager windowManager(window);
+
+     while(!windowManager.exit){
+       root-&gt;renderOneFrame();
+       Ogre::WindowEventUtilities::messagePump();
+     }
+   }
+   };
+
+
 </pre>
+</div>
 <p>La clase Ogre::WindowEventListener se encarga de gestionar todos los
 eventos relacionados con una ventana.</p>
-<pre class="code C++ literal-block">
-<span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventUtilities</span><span class="o">::</span><span class="n">addWindowEventListener</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 635)</p>
+<p>Cannot analyze code. No Pygments lexer found for "C++".</p>
+<pre class="literal-block">
+.. code:: C++
+
+   Ogre::WindowEventUtilities::addWindowEventListener(window, this);
+
 </pre>
+</div>
 <p>La sentencia anterior se encarga de registrar la instancia de la clase
 WindowManager como gestor de todos los eventos producidos en
 <em>window</em>. Los métodos <em>windowClosed</em> y
@@ -783,11 +880,7 @@ como lugar donde alojarlo, en lugar de las miles de soluciones existentes que te
 </div>
 
 
-            <script src="assets/js/jquery.min.js"></script>
-            <script src="assets/js/bootstrap.min.js"></script>
-            <script src="assets/js/moment-with-locales.min.js"></script>
-            <script src="assets/js/fancydates.js"></script>
-        <script src="assets/js/jquery.colorbox-min.js"></script>
+            <script src="assets/js/all-nocdn.js"></script>
         <script src="assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
     
 <!-- Social buttons -->
