@@ -1,5 +1,374 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Tue, 27 Jan 2015 09:29:07 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Justificación y objetivos del proyecto</title><link>http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/justificacion-y-objetivos-del-proyecto.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;img alt="tinman.jpg" class="align-center" id="logo-tinman" src="http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/tinman.jpg"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Sat, 07 Feb 2015 23:13:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Introducción a Bullet Physics</title><link>http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/introduccion-a-bullet-physics.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;img alt="bullet_logo.png" class="align-center" src="http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/bullet_logo.png"&gt;
+&lt;p&gt;En esta nueva entrada se va a hablar de Bullet Physics, el motor de
+físicas y detección de colisiones usado en el proyecto Tinman.Se va a
+explicar brevemente la razón de la elección, se enumerarán las
+características principales y, a continuación, se mostrará un breve
+programa que ilustrará cómo integrar Bullet junto a &lt;a class="reference external" href="http://isaaclacoba.github.io/tinman/posts/introduccion-ogre3d/introduccion-a-ogre3d.html"&gt;Ogre3D&lt;/a&gt;,
+la biblioteca de renderizado usada en este proyecto.&lt;/p&gt;
+&lt;div class="section" id="que-es-bullet-physics"&gt;
+&lt;h2&gt;¿Qué es Bullet Physics?&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://bulletphysics.org/wordpress/"&gt;Bullet Physics&lt;/a&gt; es una
+biblioteca de físicas y detección de colisiones. Se distribuye bajo
+licencia ZLib y está desarrollada usando el lenguaje de programación
+C++. El código fuente se encuentra disponible en el &lt;a class="reference external" href="https://github.com/bulletphysics/bullet3"&gt;repositorio&lt;/a&gt;
+oficial del proyecto.&lt;/p&gt;
+&lt;p&gt;Bullet ha sido usado en multitud de películas, tales como Hancock o
+Sherlock Holmes, así como videojuegos comerciales AAA, entre los que
+destacan Grand Theft auto IV, Grand Theft auto V o Red Dead
+Redemption. Como curiosidadw, la NASA está utilizando Bullet en un
+&lt;a class="reference external" href="http://bulletphysics.org/wordpress/?p=413"&gt;framework&lt;/a&gt; de desarrollo
+propio que tiene como propósito el cálculo de integridad tensional en
+robots.&lt;/p&gt;
+&lt;p&gt;Entre las principales característica de Bullet podemos enumerar las siguientes:
+- Soporte para una gran multitud de plataformas, tales
+como PlayStation 3 y 4, Xbox 360 y One, Wii, Gnu/Linux, Windows,
+MacOSX, iPhone, Android y &lt;a class="reference external" href="http://bulletphysics.org/wordpress/?p=333"&gt;navegador web&lt;/a&gt;.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Elección entre precisión simple y doble en operaciones de punto flotante.&lt;/li&gt;
+&lt;li&gt;Detección de colisiones, tanto continua como discreta, incluyendo rayqueries y tests de colisión de formas convexas (&lt;em&gt;sweep test&lt;/em&gt;). Permite realizar test de colisión con mallas convexas y cóncavas, además de con todo tipo de formas primitivas: cubos, esferas, planos, etcétera.&lt;/li&gt;
+&lt;li&gt;Dinámica de cuerpos rígidos, de vehículos, controladores de personajes, creación de &lt;a class="reference external" href="http://es.wikipedia.org/wiki/F%C3%ADsica_ragdoll"&gt;ragdolls&lt;/a&gt;, restricciones de tipo slider, bisagra y 6DOF (6 grados de libertad).&lt;/li&gt;
+&lt;li&gt;Dinámica de cuerpos fluidos que permite modelar ropa, tela y volumenes deformables, permitiendo interacción con cuerpos rígidos.&lt;/li&gt;
+&lt;li&gt;Existen plugins para dar soporte a Maya, Cinema 4D, está integrado con Blender, soporta ficheros COLLADA.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="section" id="porque-es-necesario-utilizar-un-motor-de-fisicas"&gt;
+&lt;h3&gt;¿Porqué es necesario utilizar un motor de físicas?&lt;/h3&gt;
+&lt;p&gt;Como se explicó en el &lt;a class="reference external" href="http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/justificacion-y-objetivos-del-proyecto.html"&gt;post anterior&lt;/a&gt;,
+uno de los objetivos de este proyecto es desarrollar un videojuego de
+carreras 3D. Aunque se trata de un videojuego arcade, es necesario
+modelar el comportamiento del coche de una forma mínimamente realista,
+además de poder detectar y gestionar colisiones entre los coches y el
+escenario.&lt;/p&gt;
+&lt;p&gt;Como puede verse en este &lt;a class="reference external" href="http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html"&gt;artículo&lt;/a&gt;
+modelar el comportamiento de un coche presenta algunos problemas,
+entre los que podemos destacar la distribución de la carga del coche
+derivada de la aceleración y frenado de este o la gran cantidad de
+propiedades físicas que intervienen en el movimiento del coche, como
+la tracción, el par motor que se ejerce sobre las ruedas a través de
+la transmisión, la inercia del coche, etcétera.&lt;/p&gt;
+&lt;p&gt;El uso de un motor de físicas nos permite juegos mas realistas, al
+tiempo que abstrae al desarrollador de los detalles de bajo nivel, ofreciéndonos una implementación bien probada y eficiente.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="porque-elegir-bullet-antes-que-otras-bibliotecas-de-fisicas"&gt;
+&lt;h3&gt;¿Porqué elegir Bullet antes que otras bibliotecas de físicas?&lt;/h3&gt;
+&lt;p&gt;Unas de los requisitos que existen en este proyecto es el uso de
+tecnologías de código libre. A la hora de elegir un motor de físicas se descartaron por defecto los motores comerciales privativos, entre los que se pueden destacar Havok y PhysX. Entre los motores libres, se encontraron tres que podrían competir en calidad con los dos mencionados anteriormente: Bullet Physics, Open Dynamics Engine (mas conocido como ODE) y Newton Physics.&lt;/p&gt;
+&lt;p&gt;Se eligió Bullet debido a que de los tres motores anteriores, era el que mas facilidades daba a la hora de integrarlo con OGRE3D, ofrece dinámica de vehículos basada en rayqueries, es un proyecto mas moderno y mirando a largo plazo, el equipo de desarrollo de Bullet está actualmente implementando soporte sobre GPU sin necesidad de usar OpenCL ni Cuda. Bullet en su versión 2.8 ofrece soporte para las dos bibliotecas anteriores. Por último, el hecho de que existan proyectos comerciales de gran renombre, como es la saga &lt;em&gt;Grand Thef Auto&lt;/em&gt;, terminaron de decantar la balanza a favor de esta biblioteca.&lt;/p&gt;
+&lt;p&gt;Aunque es cierto que los tres motores de físicas ofrecen
+implementaciones de dinámica de cuerpos rígidos muy eficientes, una
+búsqueda por las páginas oficiales de los proyectos revela que Bullet
+es el más activo de los tres, disponiendo de una mayor cantidad de
+documentación, teniendo como único punto negativo que la documentación
+del &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/annotated.html"&gt;API&lt;/a&gt;
+no ofrece información acerca del uso de los métodos, mas allá del
+nombre del mismo y una referencia a la línea en la que se encuentra la
+definición de dicho método dentro del fichero fuente donde se haya
+implementado.&lt;/p&gt;
+&lt;p&gt;Todas estas razones sumadas han hecho que se elija Bullet Physics como motor de físicas en este proyecto.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="arquitectura"&gt;
+&lt;h2&gt;Arquitectura&lt;/h2&gt;
+&lt;p&gt;Bullet ha sido diseñado para ser modular y adaptable. La biblioteca da
+la libertad al desarrollador de usar los componentes que necesite en
+cada momento, ignorando los demás. Por ejemplo, se podría hacer uso de
+la capa de detección de colisiones sin hacer uso de las capas
+superiores. En la siguiente figura se puede observar un esquema
+general de la organización por capas de la biblioteca.&lt;/p&gt;
+&lt;img alt="organizacion-bullet.png" class="align-center" src="http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/organizacion-bullet.png"&gt;
+&lt;div class="section" id="pipeline-de-simulacion-de-cuerpos-rigidos"&gt;
+&lt;h3&gt;Pipeline de simulación de cuerpos rígidos&lt;/h3&gt;
+&lt;p&gt;El siguiente diagrama muestra las estructuras de datos mas
+importantes, así como las etapas del encauzamiento dentro de
+Bullet. Este encauzamiento se ejecuta de izquierda a derecha,
+comenzando por aplicar la gravedad y terminando por integrar las
+posiciones de los cuerpos.&lt;/p&gt;
+&lt;img alt="pipeline-bullet.png" class="align-center" src="http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/pipeline-bullet.png"&gt;
+&lt;p&gt;El encauzamiento y las estructuras de datos están representados en
+Bullet a través de la clase DynamicsWorld. Cuando se ejecuta el método
+"stepSimulation de dicha clase, en realidad se está ejecutando el
+encauzamiento anterior. La implementación por defecto se encuentra en
+la clase btDiscreteDynamicsWorld.&lt;/p&gt;
+&lt;p&gt;Bullet permite trabajar al desarrollador con subfases del
+encauzamiento, como la de detección de colisiones, la fase en la que
+se aplican los efectos de las colisiones a los cuerpos
+físicos(narrowphase) o la fase de resolución de restricciones.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="veamos-algo-de-codigo"&gt;
+&lt;h2&gt;Veamos algo de código&lt;/h2&gt;
+&lt;p&gt;A continuación veremos un sencillo ejemplo en el que generaremos
+esferas que rebotarán contra el suelo. Estas esferas se crearán
+dinámicamente al pulsar la tecla 'B'.&lt;/p&gt;
+&lt;p&gt;Usaremos la biblioteca &lt;a class="reference external" href="http://sourceforge.net/projects/wgois/"&gt;OIS&lt;/a&gt;
+para gestionar los eventos de teclado y Ogre3D como motor de
+renderizado, que nos permitirá representar la escena. En este post se
+dará por supuesto los conceptos básicos de Ogre3D. Para el lector que
+no esté acostumbrado a trabajar con esta biblioteca, se aconseja
+conocer al menos como inicializar el motor de renderizado, así como
+gestionar nodos de escena y entidades. El código fuente se puede
+encontrar en el repositorio de este &lt;a class="reference external" href="https://bitbucket.org/IsaacLacoba/intro-bullet"&gt;tutorial&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="section" id="instalacion"&gt;
+&lt;h3&gt;Instalación&lt;/h3&gt;
+&lt;p&gt;Las explicaciones dadas en este post están orientadas a un sistema operativo GNU/Linux. En el repositorio anterior podemos encontrar un fichero &lt;a class="reference external" href="http://goo.gl/cKHhq9"&gt;DEPENDS&lt;/a&gt; donde se listan los paquetes necesarios. Para instalar dichos paquetes tan sólo tenemos que ejecutar en un terminal los siguientes comandos. Para instalar Ogre, así como algunas dependencias de OpenGL y el driver gráfico mesa:&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+sudo apt-get install libogre-1.8.0 libogre-1.8-dev freeglut3-dev libfreetype6 libfreetype6-dev libgl1-mesa-dev libgl1-mesa-glx
+&lt;/pre&gt;
+&lt;p&gt;En el caso de OIS:&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+sudo apt-get install libois-1.3.0 libois-dev
+&lt;/pre&gt;
+&lt;p&gt;Y en el de Bullet:&lt;/p&gt;
+&lt;pre class="code bash literal-block"&gt;
+sudo apt-get install libbullet-dev libbullet2.82-dbg libbullet-extras-dev
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div class="section" id="inicializacion"&gt;
+&lt;h3&gt;Inicialización&lt;/h3&gt;
+&lt;p&gt;En este ejemplo, todo lo relativo a la inicialización de Bullet se
+puede encontrar en los ficheros &lt;a class="reference external" href="https://bitbucket.org/IsaacLacoba/intro-bullet/src/ed9787be35bf81cb7cc61246e73729d96a42d374/src/managers/physics.cpp?at=master"&gt;physics.cpp&lt;/a&gt; y
+&lt;a class="reference external" href="https://bitbucket.org/IsaacLacoba/intro-bullet/src/ed9787be35bf81cb7cc61246e73729d96a42d374/src/managers/physics.h?at=master"&gt;physics.h&lt;/a&gt;. En él, se van a modelar las esferas usando cuerpos
+rígidos. Los cuerpos rígidos tienen como principal característica que
+no se deforman; es decir, la distancia entre cualquier par de vértices
+que forman la malla nunca varía. Por el contrario, los cuerpos fluidos
+son aquellos que permiten deformaciones. En este post se va a
+intentar obviar toda la base matemática y se va a centrar la
+explicación en los aspectos referentes a la biblioteca.&lt;/p&gt;
+&lt;p&gt;El elemento mas importante en Bullet es el &lt;em&gt;Mundo&lt;/em&gt;. El &lt;em&gt;Mundo&lt;/em&gt;
+dentro de Bullet tiene varias responsabilidades, entre las que
+podemos destacar:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;servir como estructura de datos donde almacenar los cuerpos
+físicos que lo conforman.&lt;/li&gt;
+&lt;li&gt;aplicar una serie de restricciones a estos cuerpos, como la
+fuerza de la gravedad, detectar y aplicar colisiones entre estos
+cuerpos y actualizar su posición automáticamente cuando se aplique
+cualquier tipo de fuerza sobre estos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;El &lt;em&gt;Mundo&lt;/em&gt; tiene diversas implementaciones dentro de la bibilioteca,
+dependiendo de si utilizamos cuerpos rígidos o fluidos.  En este caso
+se están usando cuerpos rígidos, de modo que la clase que se utilizará
+será &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtDiscreteDynamicsWorld.html"&gt;btDiscreteDynamicsWorld&lt;/a&gt;. En el siguiente listado de código se muestra el constructor del gestor de
+físicas, que inicializa el objeto &lt;em&gt;btDiscreteDynamicsWorld&lt;/em&gt;:&lt;/p&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="n"&gt;Physics&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Physics&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;btVector3&lt;/span&gt; &lt;span class="n"&gt;gravity&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+       &lt;span class="n"&gt;gravity_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;gravity&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+       &lt;span class="n"&gt;broadphase_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btDbvtBroadphase&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+
+       &lt;span class="n"&gt;solver_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btSequentialImpulseConstraintSolver&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+       &lt;span class="n"&gt;collision_configuration_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btDefaultCollisionConfiguration&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+       &lt;span class="n"&gt;dispatcher_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btCollisionDispatcher&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;collision_configuration_&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="n"&gt;dynamics_world_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btDiscreteDynamicsWorld&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dispatcher_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="n"&gt;broadphase_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;solver_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;collision_configuration_&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+       &lt;span class="n"&gt;dynamics_world_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setGravity&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gravity_&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;Cada uno de los objetos que recibe el constructor de la clase
+&lt;em&gt;btDiscreteDynamicsWorld&lt;/em&gt; corresponde con una de las fases del
+pipeline físico. El objeto broadphase corresponde a la fase de
+detección de colisiones. Existen tres implementaciones de esta fase
+que trabajan con diferentes estructuras de datos, lo que permite
+acelerar la búsqueda de pares de colisión dependiendo de nuestras
+necesidades:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/structbtDbvtBroadphase.html"&gt;btDbvtBroadphase&lt;/a&gt; usa una jerarquía de volumenes delimitantes
+basada en un arbol AABB.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://www.bulletphysics.com/Bullet/BulletFull/classbtAxisSweep3.html"&gt;btAxisSweep3&lt;/a&gt; y &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbt32BitAxisSweep3.html"&gt;bt32BitAxisSweep3&lt;/a&gt; implementa  un algoritmo 3d de barrido y poda.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bullet.googlecode.com/svn/trunk/Extras/CUDA/btCudaBroadphase.h"&gt;btCudaBroadphase&lt;/a&gt; implementa un grid usando el hardware de la
+GPU. Hace uso de Cuda, una tecnología para tarjetas gráficas Nvidia.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;La fase de detección de colisiones hace uso de una serie de estructuras de datos:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCollisionObject.html"&gt;btCollisionObject&lt;/a&gt;:
+almacena formas de colisión y las transformaciones de éstas.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCollisionShape.html"&gt;btCollisionShape&lt;/a&gt;:
+describe la forma de colisión de un objeto de colisión, tal como una
+caja, una esfera, una forma convexa(convex hull) o una malla de
+triángulos. Una forma de colisión puede ser compartida entre
+múltiples objetos de colisión.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtGhostObject.html"&gt;btGhostObject&lt;/a&gt;: es un
+caso especial de cuerpo de colisión útil para realizar consultas de
+colisión de una forma rápida.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCollisionWorld.html"&gt;btCollisionWorld&lt;/a&gt;:
+almacena todos los objetos de colisión y proporciona una interfaz
+que permite realizar peticiones de forma eficiente. Nuestro objeto
+dynamics_world_ es de tipo btDiscreteDynamicsWorld, que es una
+subclase de ésta.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;El objeto dispatcher_ pertenece a la clase &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCollisionDispatcher.html"&gt;btCollisionDispatcher&lt;/a&gt;, la
+cuál ofrece algoritmos que manejan pares de colisión ConvexConvex y
+ConvexConcave. Esta clase corresponde a la etapa &lt;em&gt;Narrowphase&lt;/em&gt;, usando
+los pares de colisión generados en la fase &lt;em&gt;Broadphase&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;El objeto collisionConfiguration_, de la clase
+&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtDefaultCollisionConfiguration.html"&gt;btDefaultCollisionConfiguration&lt;/a&gt;,
+ofrece una configuración por defecto que define aspectos internos del
+asignador de la pila de detección de colisiones, del asignador de la
+pila de memoria de bullet, etcétera.&lt;/p&gt;
+&lt;p&gt;Por último, el objeto solver_, de la clase
+&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtSequentialImpulseConstraintSolver.html"&gt;btSequentialImpulseConstraintSolver&lt;/a&gt;, ofrece una implementación del
+método &lt;a class="reference external" href="http://es.wikipedia.org/wiki/M%C3%A9todo_de_Gauss-Seidel"&gt;Gauss-Seidel&lt;/a&gt; usado en analisis numérico para resolución de
+sistemas de ecuaciones lineales. Esta clase está implementada usando paralelización SIMD(&lt;em&gt;Single Instruction, Multiple Data&lt;/em&gt;), una técnica
+utilizada para conseguir paralelismo a nivel de datos. Sin entrar en
+detalles, consiste en aplicar una misma operación sobre un conjunto de
+datos.&lt;/p&gt;
+&lt;p&gt;Tras inicializar la biblioteca, el siguiente paso consiste en crear
+cuerpos y formas de colisión.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="creando-los-cuerpos-rigidos-de-las-esferas"&gt;
+&lt;h3&gt;Creando los cuerpos rígidos de las esferas&lt;/h3&gt;
+&lt;p&gt;El siguiente listado de código muestra cómo se crean los cuerpos
+rígidos en nuestro ejemplo:&lt;/p&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="n"&gt;Physics&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;create_rigid_body&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;worldTransform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneNode&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;btCollisionShape&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                  &lt;span class="n"&gt;btScalar&lt;/span&gt; &lt;span class="n"&gt;mass&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+  &lt;span class="n"&gt;btVector3&lt;/span&gt; &lt;span class="n"&gt;inertia&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mass&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;calculateLocalInertia&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inertia&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="n"&gt;MotionState&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;motionState&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;MotionState&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;worldTransform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;btRigidBodyConstructionInfo&lt;/span&gt;
+    &lt;span class="n"&gt;rigidBodyCI&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;motionState&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inertia&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;rigidBody&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rigidBodyCI&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;dynamics_world_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;addRigidBody&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rigidBody&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;rigidBody&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;El constructor de la clase &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRigidBody.html"&gt;btRigidBody&lt;/a&gt; recibe un objeto &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/structbtRigidBody_1_1btRigidBodyConstructionInfo.html"&gt;btRigidBody::btRigidBodyConstructionInfo&lt;/a&gt;. Este objeto sirve para inyectar al constructor de la clase información relativa al cuerpo rígido que se va a crear . Los argumentos que recibe son la masa del objeto, el estado del cuerpo(&lt;em&gt;Motion State&lt;/em&gt; del cuál
+hablaremos mas adelante), la forma física del cuerpo(&lt;em&gt;btCollisionShape&lt;/em&gt;) y el vector de inercia.&lt;/p&gt;
+&lt;p&gt;En el método &lt;em&gt;Physics::create_rigid_body&lt;/em&gt;, listado anteriormente, se
+comprueba que la masa del cuerpo sea distinta de cero, ya que Bullet
+interpreta que un cuerpo sin masa es equivalente a uno con masa
+infinita; es decir, es inamovible. A partir de la forma del cuerpo y
+de la masa de este, Bullet calcula la inercia del cuerpo físico que
+estamos construyendo a través del método
+&lt;em&gt;btCollisionShape::calculateLocalInertia&lt;/em&gt;. Una vez creado el cuerpo, hay que
+añadirlo al mundo a través del método btDiscreteDynamicsWorld::addRigidBody.&lt;/p&gt;
+&lt;p&gt;Bullet ofrece una gran variedad de formas primitivas de colisión, entre las que podemos listar:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtBoxShape.html"&gt;btBoxShape&lt;/a&gt;: caja definida por el tamaño de sus lados.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtSphereShape.html"&gt;btSphereShape&lt;/a&gt;: esfera definida por su radio.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCapsuleShape.html"&gt;btCapsuleShape&lt;/a&gt;: capsula alrededor del eje Y. Tambien existen btCapsuleShapeX/Z.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCylinderShape.html"&gt;btCylinderShape&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtConeShape.html"&gt;btConeShape&lt;/a&gt;: cono alrededor del eje Y. Tambien existen btConeShapeX/Z.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtMultiSphereShape.html"&gt;btMultiSphereShap&lt;/a&gt;: cascarón convexo formado a partir de varias esferas que puede ser usado para crear una capsula( a partir de dos esferas) u otras formas convexas.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bullet tambien ofrece formas compuestas, pudiendo combinar múltiples
+formas convexas en una única usando la clase &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtCompoundShape.html"&gt;btCompoundShape&lt;/a&gt;. Cada una de las formas que dan lugar a la malla principal se llama &lt;em&gt;forma hija&lt;/em&gt;. Cada &lt;em&gt;forma hija&lt;/em&gt; tiene sus propias transformaciones locales, relativas a la forma compuesta. Existen algunas formas de colisión mas avanzadas que
+permiten ajustarse a geometrías que no corresponden con formas
+primitivas. Para mas información, se aconseja consultar el &lt;a class="reference external" href="http://www.cs.uu.nl/docs/vakken/mgp/assignment/Bullet%20-%20User%20Manual.pdf"&gt;manual
+oficial&lt;/a&gt; de Bullet. En la figura siguiente se muestra que ayuda en la elección de la forma  de colisión adecuada dependiendo de la situación.&lt;/p&gt;
+&lt;img alt="esquema-formas.png" class="align-center" src="http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/esquema-formas.png"&gt;
+&lt;p&gt;Ya se ha visto la lógica que permite crear cuerpos rígidos, de modo que sólo queda crear nuestras esferas:&lt;/p&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;
+&lt;span class="n"&gt;Game&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;create_sphere&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="n"&gt;create_graphic_element&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;//crea un nodo y una entidad de Ogre
+&lt;/span&gt;  &lt;span class="n"&gt;create_physic_element&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;void&lt;/span&gt;
+&lt;span class="n"&gt;Game&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;create_physic_element&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;btQuaternion&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;btQuaternion&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;btVector3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                                             &lt;span class="n"&gt;random_&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;real&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;90.f&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="n"&gt;btVector3&lt;/span&gt; &lt;span class="n"&gt;translation&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;btVector3&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="n"&gt;transform&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;btTransform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;translation&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+        &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;mass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="n"&gt;btScalar&lt;/span&gt; &lt;span class="nf"&gt;radio&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;btSphereShape&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;sphere_shape&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+              &lt;span class="n"&gt;physics_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;create_shape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;radio&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+        &lt;span class="n"&gt;ball_bodies&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;push_back&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;physics_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;
+          &lt;span class="n"&gt;create_rigid_body&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ball_nodes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;sphere_shape&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mass&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+        &lt;span class="n"&gt;ball_bodies&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setRestitution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.8f&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="n"&gt;ball_bodies&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;back&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setFriction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;1.5f&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;En el listado anterior se crea el cuerpo rígido y la forma de colisión de la esfera. Para construir el cuerpo rígido, se crea un &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtTransform.html"&gt;btTransform&lt;/a&gt; que recibe un cuaternio y un vector. El cuaternio recibe un vector, mediante el cuál le indicamos en qué ejes sufrirá rotaciones nuestra esfera, y un float aleatorio entre 0 y 90, con el que indicamos los grados de rotación. Esto lo hacemos así para que cada bola que creamos rebote de una forma ligeramente distinta contra el suelo. El segundo parámetro de la transformación es el vector de traslación, que indica el lugar donde se creará la esfera. En este caso a 100 unidades sobre el eje Y.&lt;/p&gt;
+&lt;p&gt;Para crear la forma de colisión esférica, se hace uso de una factoría de btCollisionShape implementada en el gestor de físicas. Lo único que hay que hacer es pasarle el radio de la esfera, en metros, y se creará la forma de colisión.&lt;/p&gt;
+&lt;p&gt;Con estos parámetros se crea un cuerpo rígido haciendo uso del gestor de físicas. Una vez creado el cuerpo rígido, se configuran el &lt;a class="reference external" href="http://es.wikipedia.org/wiki/Coeficiente_de_restituci%C3%B3n"&gt;coeficiente de restitución&lt;/a&gt;, que indica una medida del grado de conservación de la energía cinética en un choque entre partículas clásicas, y el &lt;a class="reference external" href="http://es.wikipedia.org/wiki/Coeficiente_de_rozamiento"&gt;coeficiente de fricción&lt;/a&gt;, que indica la oposición al deslizamiento que ofrecen dos superficies en contacto.&lt;/p&gt;
+&lt;p&gt;Por último, falta integrar el cuerpo físico de Bullet con el cuerpo gráfico de Ogre.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="integrar-ogre3d-con-bullet"&gt;
+&lt;h3&gt;Integrar Ogre3D con Bullet&lt;/h3&gt;
+&lt;p&gt;Primero de todo, hay que entender que los cuerpos gráficos de Ogre3D y
+los cuerpos físicos de Bullet son entidades completamente distintas y
+separadas. Si no se implementa algún mecanismos mediante el cuál
+Bullet actualice la posición y rotación de dicho cuerpo gráfico, se creará una situación de incoherencia en la cuál la posición del cuerpo gráfico permanecerá estática, al contrario que la del cuerpo físico que se verá actualizada. Esto provocará que el vídeo asociado a nuestro juego no se actualice, ya que Ogre es el encargado de crear las imágenes, mientras que Bullet tiene la responsabilidad de modelar un comportamiento realista sobre los cuerpos.&lt;/p&gt;
+&lt;p&gt;Para solucionar este problema se crea la clase MotionState. Podemos ver su implementación en el siguiente listado:&lt;/p&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyMotionState&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;btMotionState&lt;/span&gt;
+      &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="k"&gt;protected&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+          &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneNode&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;mSceneNode&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="n"&gt;mInitialPosition&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+      &lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+          &lt;span class="n"&gt;MyMotionState&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;initialPosition&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneNode&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="n"&gt;mSceneNode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+              &lt;span class="n"&gt;mInitialPosition&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;initialPosition&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="p"&gt;}&lt;/span&gt;
+
+          &lt;span class="k"&gt;virtual&lt;/span&gt; &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;MyMotionState&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+          &lt;span class="p"&gt;{&lt;/span&gt;
+          &lt;span class="p"&gt;}&lt;/span&gt;
+
+          &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;setNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneNode&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="n"&gt;mSceneNode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;node&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="p"&gt;}&lt;/span&gt;
+
+          &lt;span class="k"&gt;virtual&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;getWorldTransform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;worldTrans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt;
+          &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="n"&gt;worldTrans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mInitialPosition&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+          &lt;span class="p"&gt;}&lt;/span&gt;
+
+          &lt;span class="k"&gt;virtual&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;setWorldTransform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;btTransform&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;worldTrans&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;{&lt;/span&gt;
+              &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mSceneNode&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="k"&gt;nullptr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                  &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// silently return before we set a node
+&lt;/span&gt;
+              &lt;span class="n"&gt;btQuaternion&lt;/span&gt; &lt;span class="n"&gt;rot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;worldTrans&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getRotation&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+              &lt;span class="n"&gt;mSceneNode&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setOrientation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;rot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;rot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;rot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+              &lt;span class="n"&gt;btVector3&lt;/span&gt; &lt;span class="n"&gt;pos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;worldTrans&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getOrigin&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+              &lt;span class="n"&gt;mSceneNode&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setPosition&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;pos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;z&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+          &lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;En el constructor de la clase se le pasa un nodo de escena de Ogre y la transformación inicial de dicho nodo. Es en el constructor de la clase btRigidBody donde se le pasa dicho objeto MotionState, que en nuestro caso se crea dentro del método &lt;em&gt;Physics::create_rigid_body&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Hecho esto, el método que se encarga de sincronizar la posición del nodo de ogre asociado a un cuerpo rígido es el método &lt;em&gt;setWorldTransform&lt;/em&gt;. Este método se invoca de forma interna por parte Bullet cada vez que el cuerpo rígido ve modificado su estado en el transcurso normal de la simulación física del &lt;em&gt;Mundo&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Por último, sólo queda invocar el método btDiscreteDynamicsWorld::stepSimulation en cada iteración del bucle principal de juego, indicándole el tiempo transcurrido entre la llamada anterior y la siguiente. Dicho método implementa el pipeline físico donde se ejecuta la simulación. En el siguiente listado de código podemos ver el bucle principal del ejemplo:&lt;/p&gt;
+&lt;pre class="code c++ literal-block"&gt;
+&lt;span class="kt"&gt;void&lt;/span&gt;
+&lt;span class="n"&gt;Game&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;game_loop&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;float&lt;/span&gt; &lt;span class="n"&gt;delta_time&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="n"&gt;input_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;exit_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;delta_time&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;timer_&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_delta_time&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;input_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;capture&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;delta_time&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="n"&gt;input_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;check_events&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+      &lt;span class="n"&gt;physics_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;step_simulation&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;delta_time&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+      &lt;span class="n"&gt;scene_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;render_one_frame&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+      &lt;span class="n"&gt;delta_time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;0.f&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;
+&lt;p&gt;El método step_simulation  del gestor de físicas simplemente encapsula la misma llamada al objeto &lt;em&gt;btDiscreteDynamicsWorld&lt;/em&gt;, que recibe como parámetros el delta time que hemos indicado y un entero que indica el número de subpasos que debe realizar dentro de la simulación física a la hora de interpolar la posición de los objetos físicos.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="aclaraciones-del-autor"&gt;
+&lt;h2&gt;Aclaraciones del autor&lt;/h2&gt;
+&lt;p&gt;En este post he intentado llegar a un equilibrio entre el nivel de profundidad de la explicación de los aspectos relacionados con Bullet y la sencillez del código fuente que ejemplifica dichos conceptos. He intentado que el ejemplo sea lo mas sencillo posible pero con la funcionalidad mínima que permita ver una utilidad real por parte del motor de físicas. Aún así el nivel de complejidad del ejemplo no es todo lo bajo que yo hubiese querido en un principio, pero creo que lo que presento aquí es el ejemplo mínimo de cómo integrar rápidamente Ogre3D con Bullet, de modo que pueda verse reflejado una de las primeras etapas que yo tuve que pasar en el proceso de aprendizaje que he sufrido a lo largo del desarrollo de mi proyecto.&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>http://isaaclacoba.github.io/tinman/posts/introduccion-bullet/introduccion-a-bullet-physics.html</guid><pubDate>Sat, 07 Feb 2015 16:21:22 GMT</pubDate></item><item><title>Justificación y objetivos del proyecto</title><link>http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/justificacion-y-objetivos-del-proyecto.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;img alt="tinman.jpg" class="align-center" id="logo-tinman" src="http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/tinman.jpg"&gt;
 &lt;p&gt;En esta entrada se explicará brevemente qué es el proyecto Tinman, se
 justificarán las razones por las cuales se está realizando este
 proyecto, y por último, se listarán los objetivos que se pretenden
@@ -7,22 +376,20 @@ cumplir con el desarrollo del mismo.&lt;/p&gt;
 &lt;div class="section" id="que-es-tinman"&gt;
 &lt;h2&gt;¿Qué es Tinman?&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;Tinman&lt;/em&gt; es el nombre corto de mi trabajo fin de Grado(TFG), que se titula: "Instrumentación de un videojuego 3D con fines docentes". El videojuego será un clon del famoso juego de carreras arcade "&lt;a class="reference external" href="http://es.wikipedia.org/wiki/Super_Off_Road"&gt;Super Off Road&lt;/a&gt;", y de aquí es de donde surge &lt;em&gt;Tinman&lt;/em&gt; como nombre de mi proyecto, a modo de broma, dado que el juego original llevó el nombre de Ivan "Ironman" Stewart, un famoso piloto del estilo &lt;em&gt;Off-Road&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. Es obvio que se trata de un proyecto muy ambicioso y por ello se ha de acotar el alcance del mismo. Del título, lo que más puede llevar a confusión sea la última parte, con fines docentes. Debido a que desarrollar un &lt;em&gt;Serius Game&lt;/em&gt; específicamente orientado a desarrolladores se desmarca del objeto de evaluación dentro de un TFG, e incluso en una tesis de máster, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o como &lt;a class="reference external" href="http://programmers.stackexchange.com/a/94567"&gt;idioms&lt;/a&gt; en C++, por poner algunos ejemplos.&lt;/p&gt;
-&lt;p&gt;Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3.Se decidió usar una licencia libre porque si se pretendía enseñar a quien lo deseara cómo fue creado el proyecto, la forma mas sencilla pasaba por dar libertad para leer el código, modificarlo y distribuir tanto modificaciones del proyecto original como copias del mismo. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.&lt;/p&gt;
-&lt;p&gt;Por otra parte, no abundan proyectos libres en el mundo de los videojuegos y los que existen, o bien no se ha dado al código fuente el mimo que merece, o los creadores son ingenieros con una larga trayectoria, por lo que el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y más complicado si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones. No sólo ofrece tanto mecanismos de muy alto nivel, tambien permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece al ingeniero una flexibilidad que no se encuentra en otros lenguajes. Además, al ser compilado, permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.&lt;/p&gt;
-&lt;p&gt;Pero alguien podría estar preguntándose: ¿realmente un videojuego se justifica como trabajo fin de Grado?&lt;/p&gt;
-&lt;p&gt;Según la "&lt;a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs"&gt;Normativa sobre la elaboración y defensa del Trabajo Fin
-de Grado&lt;/a&gt;"
-de la Escuela Superior de Informática de Ciudad Real, su artículo 2º
-&lt;em&gt;Naturaleza del Trabajo Fin de Grado&lt;/em&gt;, estipula lo siguiente:&lt;/p&gt;
-&lt;p&gt;"El Trabajo Fin de Grado supone la realización por parte del estudiante, y de forma
-individual, de un proyecto, memoria o estudio bajo la supervisión de
-uno o más tutores/as, en el que se integren y desarrollen los
-contenidos formativos recibidos, capacidades, competencias y
-habilidades adquiridas durante el periodo de docencia del Grado en
-Ingeniería Informática"&lt;/p&gt;
-&lt;p&gt;El apaertado anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que no es requerida implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta de desarrollo (&lt;em&gt;desarrollo orientado por pruebas&lt;/em&gt;), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla  lo previamente citado para considerar este proyecto como TFG.&lt;/p&gt;
-&lt;p&gt;Por otra parte, en todo proyecto debe contemplarse, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su &lt;a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/"&gt;publicación&lt;/a&gt; sobre la situación mundial del mercado del videojuego señalaba que si la progresión de crecimiento actual se mantiene, se espera que la cifra de facturación mundial ascienda desde los 81.400 millones de dólares actuales en 2014 hasta los 102.900 millones en 2017. No hace es necesario ser economista para darse cuenta que el volumen de facturación es impresionante y que por sí sólo justifica la creación de nuevos proyectos orientados a este sector.&lt;/p&gt;
+&lt;!-- Mi motivación principal para hacer este proyecto es mi pasión por los videojuegos. La razón por la que comencé a estudiar Ingeniería Informática no era otra que la de convertirme en programador de videojuegos, y creo que esto queda reflejado en la pasión con la que este proyecto se está desarrollando. --&gt;
+&lt;p&gt;Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. No hace falta decir que se trata de un proyecto muy ambicioso, y es por esto que hay que acotar el alcance del mismo. Del título lo que más puede llevar a confusión sea la última parte "con fines docentes". Debido a que desarrollar un &lt;em&gt;Serius Game&lt;/em&gt; específicamente orientado a desarrolladores escapa por mucho a lo que se pretende evaluar dentro de un TFG, e incluso en una tesis de Master, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o &lt;a class="reference external" href="http://programmers.stackexchange.com/a/94567"&gt;idioms&lt;/a&gt; en C++, por poner algunos ejemplos.&lt;/p&gt;
+&lt;p&gt;Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3. La principal razón por la que se decidió usar una licencia libre, fue que si se pretendía dar facilidades a quien desease aprender sobre cómo fue creado el proyecto, la forma mas sencilla pasaba por darle la libertad tanto de leer el código, cómo de modificarlo, así como de distribuir tanto sus propias modificaciones del proyecto original como copias de este. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.&lt;/p&gt;
+&lt;p&gt;Por otra parte, no abundan los proyectos libres en el mundo de los videojuegos y los que existen o bien no se ha dado al código fuente el mimo que merece , o los creadores son ingenieros con una larga experiencia, con lo cuál el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y mucho más si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones: no sólo ofrece tanto mecanismos de muy alto nivel, sino que permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece una flexibilidad al ingeniero que no ofrecen otros lenguajes, además al ser compilado permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.&lt;/p&gt;
+&lt;p&gt;Pero alguien podría estar preguntandose ¿realmente un videojuego se justifica como trabajo fin de Grado?&lt;/p&gt;
+&lt;p&gt;Según la "&lt;a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs"&gt;normativa sobre la elaboración y defensa del trabajo fin de grado&lt;/a&gt;" de la Escuela Superior de Informática de Ciudad Real, en sus artículos 2.1:&lt;/p&gt;
+&lt;p&gt;Art. 2.1- "El TFG supone la realización por parte del estudiante, y de
+forma individual, de un proyecto, memoria o estudio bajo la
+supervisión de uno o más tutores/as, en el que se integren y
+desarrollen los contenidos formativos recibidos, capacidades,
+competencias y habilidades adquiridas durante el periodo de docencia
+del Grado en Ingeniería Informática"&lt;/p&gt;
+&lt;p&gt;El artículo anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que ni siquiera se requiere implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta en el desarrollo(TDD), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla lo necesario para poder considerar este proyecto como un TFG.&lt;/p&gt;
+&lt;p&gt;Por otra parte, todo proyecto debe tener en mente, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su &lt;a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/"&gt;publicación&lt;/a&gt; sobre la situación mundial del mercado del videojuego señalaba que de seguir la progresión de crecimiento actual, se espera que la cifra de facturación mundial ascienda de los 81.400 millones actuales en 2014 hasta los 102.900 millones en 2017. No hace falta ser economista para darse cuenta que el volumen de facturación es impresionante y, por sí sólo, justifica la creación de nuevos proyectos orientados a este sector.&lt;/p&gt;
 &lt;img alt="mercado-videojuego.png" class="align-center" id="grafico-mercado" src="http://isaaclacoba.github.io/tinman/posts/justificacion-objetivos/mercado-videojuego.png"&gt;
 &lt;p&gt;Para finalizar, se listarán los objetivos que se pretenden cumplir.&lt;/p&gt;
 &lt;/div&gt;
@@ -173,7 +540,7 @@ está de más comprobar que todo haya ido bien. Para comprobar que Ogre
 se ha instalado correctamente, crearemos una instancia del objeto Root
 y compilaremos el código.&lt;/p&gt;
 &lt;p&gt;Primero, crearemos un fichero de texto llamado &lt;em&gt;main.cpp&lt;/em&gt; con el siguiente código:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreRoot.h&amp;gt;
 &lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -188,7 +555,7 @@ codigo:&lt;/p&gt;
 &lt;span class="nv"&gt;CXXFLAGS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; -std&lt;span class="o"&gt;=&lt;/span&gt;c++11 -ggdb &lt;span class="k"&gt;$(&lt;/span&gt;shell pkg-config --cflags OGRE OIS&lt;span class="k"&gt;)&lt;/span&gt;
 &lt;span class="nv"&gt;LDLIBS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;shell pkg-config --libs OGRE OIS&lt;span class="k"&gt;)&lt;/span&gt;
 
-&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="m"&gt;main.cpp&lt;/span&gt;
+&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;.&lt;span class="n"&gt;cpp&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Para compilarlo, abriremos un terminal en la carpeta donde
 tengamos el codigo fuente y ejecutaremos:&lt;/p&gt;
@@ -222,7 +589,7 @@ fichero de plugins, hay que indicarle la ruta, ya que por defecto Ogre
 no sabe donde buscarlos.&lt;/p&gt;
 &lt;p&gt;Una vez hecho esto, añadiremos el siguiente código que permite indicar
 a Ogre la configuración básica del sistema de renderizado:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;check_config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Root&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;restoreConfig&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;showConfigDialog&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
       &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;LogManager&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getSingleton&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;logMessage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"Initialize::configure_ogre =&amp;gt; "&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;
@@ -262,7 +629,7 @@ ventana: la primera es usando el constructor de la clase
 Ogre::RenderWindow. La segunda, mas sencilla, es dejar que Ogre cree
 una por defecto, basándose en la configuración obtenida del paso
 anterior:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreRenderWindow.h&amp;gt;
 &lt;/span&gt;&lt;span class="p"&gt;(...)&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -278,7 +645,7 @@ Ogre::Root::createRenderWindow. Es importante señalar que solo se
 puede invocar este método después de haber obtenido la configuración
 básica del sistema de renderizado.&lt;/p&gt;
 &lt;p&gt;Tras esto, procederemos a inicializar el gestor de escena:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="p"&gt;(...)&lt;/span&gt;
 
  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[])&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -332,7 +699,7 @@ fichero y cargar dichos recursos.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="cargando-los-recursos"&gt;
 &lt;h3&gt;Cargando los recursos&lt;/h3&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="p"&gt;(...)&lt;/span&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreResourceGroupManager.h&amp;gt;
 #include &amp;lt;OgreConfigFile.h&amp;gt;
@@ -387,7 +754,7 @@ luz.&lt;/p&gt;
 &lt;p&gt;El objeto Ogre::Camera define la cámara de la escena. Este objeto es
 imprescindible, pues sin él no podremos ver nada en nuestra
 ventana. Para ello, añadiremos el siguiente código:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="p"&gt;(...)&lt;/span&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreCamera.h&amp;gt;
 &lt;/span&gt;
@@ -421,7 +788,7 @@ a un gestor de escena.&lt;/p&gt;
 es decir, indica la región que sera renderizada.&lt;/p&gt;
 &lt;p&gt;Una vez inicializada la cámara, es importante añadir una fuente de
 luz, ya que por defecto el mundo se haya en tinieblas:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;create_light&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Root&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
   &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneManager&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;getSceneManager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"SceneManager"&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
   &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setShadowTechnique&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SHADOWTYPE_STENCIL_ADDITIVE&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -456,7 +823,7 @@ son los cuerpos gráficos genéricos sobre los que se realizarán las
 operaciones de traslación, rotación, etc. A estos nodos hay que
 adjuntarles un contenido, típicamente un objeto de tipo Ogre::Entity,
 aunque se pueden adjuntar otros tipos de objetos. Veamos el código:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="p"&gt;(...)&lt;/span&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreEntity.h&amp;gt;
 #include &amp;lt;OgreVector3.h&amp;gt;
@@ -514,7 +881,7 @@ aunque se pueden adjuntar otros tipos de objetos. Veamos el código:&lt;/p&gt;
 &lt;p&gt;Las funciones anteriores son funciones de alto nivel que encapsulan
 una funcionalidad relacionada con el nombre de la función. Aunque
 parezca mucho código, las sentencias mas importantes son:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="n"&gt;parent_node&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;createChildSceneNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;La sentencia anterior genera un nodo hijo cuyo nodo raíz es el nodo
@@ -522,7 +889,7 @@ padre(&lt;em&gt;parent_node&lt;/em&gt;). Esto es muy útil, ya que todas las
 transformaciones que sufra el padre tambien las sufrirá el hijo. De
 esta forma, podemos generar cuerpos compuestos y mover únicamente el
 nodo padre, sabiendo que los nodos hijos se moverán de igual forma.&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;Entity&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;entity&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;manager&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;createEntity&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mesh&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Esta sentencia crea una instancia de un objeto tipo Ogre::Mesh. La
@@ -531,7 +898,7 @@ objeto tridimensional. Dicha malla la hemos cargado anteriormente en
 el método &lt;em&gt;load_resources(std::string)&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Por último, utilizamos dos funciones muy similares para obtener la
 referencia a los SceneNode por su nombre:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneManager&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getRootSceneNode&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
 &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;SceneManager&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getSceneNode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;node_name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
@@ -543,13 +910,13 @@ poder parar nuestra aplicación, en este documento se hará uso de la
 clase Ogre::WindowEventListener, que cuenta con el método
 WindowClosing y windowClosed. Para ello crearemos una clase y haremos
 que herede de Ogre::WindowEventListener:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="cp"&gt;#include &amp;lt;OgreWindowEventUtilities.h&amp;gt;
 &lt;/span&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;WindowManager&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;WindowEventListener&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;RenderWindow&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;window_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;span class="nl"&gt;public:&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
   &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
   &lt;span class="n"&gt;WindowManager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;RenderWindow&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
@@ -583,7 +950,7 @@ que herede de Ogre::WindowEventListener:&lt;/p&gt;
 &lt;/pre&gt;
 &lt;p&gt;La clase Ogre::WindowEventListener se encarga de gestionar todos los
 eventos relacionados con una ventana.&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
+&lt;pre class="code C++ literal-block"&gt;
 &lt;span class="n"&gt;Ogre&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;WindowEventUtilities&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;addWindowEventListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;La sentencia anterior se encarga de registrar la instancia de la clase

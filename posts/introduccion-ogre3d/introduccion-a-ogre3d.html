@@ -6,7 +6,11 @@
     <title>Introducción a Ogre3D | Tinman</title>
 
     
-            <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+            <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
 
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
@@ -263,7 +267,7 @@ está de más comprobar que todo haya ido bien. Para comprobar que Ogre
 se ha instalado correctamente, crearemos una instancia del objeto Root
 y compilaremos el código.</p>
 <p>Primero, crearemos un fichero de texto llamado <em>main.cpp</em> con el siguiente código:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="cp">#include &lt;OgreRoot.h&gt;
 </span>
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="n">argv</span><span class="o">*</span><span class="p">[])</span> <span class="p">{</span>
@@ -278,7 +282,7 @@ codigo:</p>
 <span class="nv">CXXFLAGS</span> <span class="o">=</span> -std<span class="o">=</span>c++11 -ggdb <span class="k">$(</span>shell pkg-config --cflags OGRE OIS<span class="k">)</span>
 <span class="nv">LDLIBS</span> <span class="o">=</span> <span class="k">$(</span>shell pkg-config --libs OGRE OIS<span class="k">)</span>
 
-<span class="nf">main</span><span class="o">:</span> <span class="m">main.cpp</span>
+<span class="nf">main</span><span class="o">:</span> <span class="n">main</span>.<span class="n">cpp</span>
 </pre>
 <p>Para compilarlo, abriremos un terminal en la carpeta donde
 tengamos el codigo fuente y ejecutaremos:</p>
@@ -312,7 +316,7 @@ fichero de plugins, hay que indicarle la ruta, ya que por defecto Ogre
 no sabe donde buscarlos.</p>
 <p>Una vez hecho esto, añadiremos el siguiente código que permite indicar
 a Ogre la configuración básica del sistema de renderizado:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="kt">void</span> <span class="nf">check_config</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
    <span class="k">if</span> <span class="p">(</span><span class="n">not</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">restoreConfig</span><span class="p">()</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">showConfigDialog</span><span class="p">()))</span> <span class="p">{</span>
       <span class="n">Ogre</span><span class="o">::</span><span class="n">LogManager</span><span class="o">::</span><span class="n">getSingleton</span><span class="p">().</span><span class="n">logMessage</span><span class="p">(</span><span class="s">"Initialize::configure_ogre =&gt; "</span> <span class="o">+</span>
@@ -352,7 +356,7 @@ ventana: la primera es usando el constructor de la clase
 Ogre::RenderWindow. La segunda, mas sencilla, es dejar que Ogre cree
 una por defecto, basándose en la configuración obtenida del paso
 anterior:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="cp">#include &lt;OgreRenderWindow.h&gt;
 </span><span class="p">(...)</span>
 <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
@@ -368,7 +372,7 @@ Ogre::Root::createRenderWindow. Es importante señalar que solo se
 puede invocar este método después de haber obtenido la configuración
 básica del sistema de renderizado.</p>
 <p>Tras esto, procederemos a inicializar el gestor de escena:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="p">(...)</span>
 
  <span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
@@ -422,7 +426,7 @@ fichero y cargar dichos recursos.</p>
 </div>
 <div class="section" id="cargando-los-recursos">
 <h3>Cargando los recursos</h3>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="p">(...)</span>
 <span class="cp">#include &lt;OgreResourceGroupManager.h&gt;
 #include &lt;OgreConfigFile.h&gt;
@@ -477,7 +481,7 @@ luz.</p>
 <p>El objeto Ogre::Camera define la cámara de la escena. Este objeto es
 imprescindible, pues sin él no podremos ver nada en nuestra
 ventana. Para ello, añadiremos el siguiente código:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="p">(...)</span>
 <span class="cp">#include &lt;OgreCamera.h&gt;
 </span>
@@ -511,7 +515,7 @@ a un gestor de escena.</p>
 es decir, indica la región que sera renderizada.</p>
 <p>Una vez inicializada la cámara, es importante añadir una fuente de
 luz, ya que por defecto el mundo se haya en tinieblas:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="kt">void</span> <span class="nf">create_light</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
   <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">manager</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">getSceneManager</span><span class="p">(</span><span class="s">"SceneManager"</span><span class="p">);</span>
   <span class="n">manager</span><span class="o">-&gt;</span><span class="n">setShadowTechnique</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">SHADOWTYPE_STENCIL_ADDITIVE</span><span class="p">);</span>
@@ -546,7 +550,7 @@ son los cuerpos gráficos genéricos sobre los que se realizarán las
 operaciones de traslación, rotación, etc. A estos nodos hay que
 adjuntarles un contenido, típicamente un objeto de tipo Ogre::Entity,
 aunque se pueden adjuntar otros tipos de objetos. Veamos el código:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="p">(...)</span>
 <span class="cp">#include &lt;OgreEntity.h&gt;
 #include &lt;OgreVector3.h&gt;
@@ -604,7 +608,7 @@ aunque se pueden adjuntar otros tipos de objetos. Veamos el código:</p>
 <p>Las funciones anteriores son funciones de alto nivel que encapsulan
 una funcionalidad relacionada con el nombre de la función. Aunque
 parezca mucho código, las sentencias mas importantes son:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="n">parent_node</span><span class="o">-&gt;</span><span class="n">createChildSceneNode</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
 </pre>
 <p>La sentencia anterior genera un nodo hijo cuyo nodo raíz es el nodo
@@ -612,7 +616,7 @@ padre(<em>parent_node</em>). Esto es muy útil, ya que todas las
 transformaciones que sufra el padre tambien las sufrirá el hijo. De
 esta forma, podemos generar cuerpos compuestos y mover únicamente el
 nodo padre, sabiendo que los nodos hijos se moverán de igual forma.</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">manager</span><span class="o">-&gt;</span><span class="n">createEntity</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mesh</span><span class="p">);</span>
 </pre>
 <p>Esta sentencia crea una instancia de un objeto tipo Ogre::Mesh. La
@@ -621,7 +625,7 @@ objeto tridimensional. Dicha malla la hemos cargado anteriormente en
 el método <em>load_resources(std::string)</em>.</p>
 <p>Por último, utilizamos dos funciones muy similares para obtener la
 referencia a los SceneNode por su nombre:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">::</span><span class="n">getRootSceneNode</span><span class="p">();</span>
 <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">::</span><span class="n">getSceneNode</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">String</span> <span class="n">node_name</span><span class="p">);</span>
 </pre>
@@ -633,13 +637,13 @@ poder parar nuestra aplicación, en este documento se hará uso de la
 clase Ogre::WindowEventListener, que cuenta con el método
 WindowClosing y windowClosed. Para ello crearemos una clase y haremos
 que herede de Ogre::WindowEventListener:</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="cp">#include &lt;OgreWindowEventUtilities.h&gt;
 </span>
 <span class="k">class</span> <span class="nc">WindowManager</span><span class="o">:</span> <span class="k">public</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventListener</span><span class="p">{</span>
   <span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window_</span><span class="p">;</span>
 
-<span class="nl">public:</span>
+<span class="k">public</span><span class="o">:</span>
   <span class="kt">bool</span> <span class="n">exit</span><span class="p">;</span>
 
   <span class="n">WindowManager</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">RenderWindow</span><span class="o">*</span> <span class="n">window</span><span class="p">){</span>
@@ -673,7 +677,7 @@ que herede de Ogre::WindowEventListener:</p>
 </pre>
 <p>La clase Ogre::WindowEventListener se encarga de gestionar todos los
 eventos relacionados con una ventana.</p>
-<pre class="code c++ literal-block">
+<pre class="code C++ literal-block">
 <span class="n">Ogre</span><span class="o">::</span><span class="n">WindowEventUtilities</span><span class="o">::</span><span class="n">addWindowEventListener</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
 </pre>
 <p>La sentencia anterior se encarga de registrar la instancia de la clase
@@ -739,7 +743,11 @@ en el <a class="reference external" href="https://bitbucket.org/IsaacLacoba/intr
 </div>
 
 
-            <script src="../../assets/js/all-nocdn.js"></script>
+            <script src="../../assets/js/jquery.min.js"></script>
+            <script src="../../assets/js/bootstrap.min.js"></script>
+            <script src="../../assets/js/moment-with-locales.min.js"></script>
+            <script src="../../assets/js/fancydates.js"></script>
+        <script src="../../assets/js/jquery.colorbox-min.js"></script>
         <script src="../../assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
     
 <!-- Social buttons -->
