@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Sun, 22 Feb 2015 18:12:13 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Roadmap del proyecto</title><link>http://isaaclacoba.github.io/tinman/posts/roadmap/roadmap-del-proyecto.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;p&gt;En esta entrada se va a mostrar cuál es el estado actual del proyecto, qué objetivos se han cumplido y en qué porcentaje. Además se hablará en qué se está trabajando actualmente.&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Sun, 22 Feb 2015 18:29:56 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Roadmap del proyecto</title><link>http://isaaclacoba.github.io/tinman/posts/roadmap/roadmap-del-proyecto.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;p&gt;En esta entrada se va a mostrar cuál es el estado actual del proyecto, qué objetivos se han cumplido y en qué porcentaje. Además se hablará en qué se está trabajando actualmente.&lt;/p&gt;
 &lt;div class="section" id="estado-del-proyecto"&gt;
 &lt;h2&gt;Estado del proyecto&lt;/h2&gt;
 &lt;p&gt;En primer lugar, recordemos cuál es la lista de hitos que se pretenden cumplir en este proyecto:&lt;/p&gt;
-&lt;p&gt;-Desarrollar un videojuego utilizando gráficos 3D.
--Implementar mecanismos de instrumentación que permitan aplicar técnicas de testing automático.
--Diseñar e implementar un modelo de red para permitir modo multijugador.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Desarrollar un videojuego utilizando gráficos 3D.&lt;/li&gt;
+&lt;li&gt;Implementar mecanismos de instrumentación que permitan aplicar técnicas de testing automático.&lt;/li&gt;
+&lt;li&gt;Diseñar e implementar un modelo de red para permitir modo multijugador.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Como subobjetivo, se pretende que dicho videojuego pueda servir a futuros programadores para aprender técnicas básicas y fundamentos esenciales del desarrollo de un videojuego. Por esta razón se hará énfasis en los siguientes aspectos:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Claridad del código.&lt;/li&gt;

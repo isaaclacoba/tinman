@@ -14,9 +14,9 @@ Estado del proyecto
 
 En primer lugar, recordemos cuál es la lista de hitos que se pretenden cumplir en este proyecto:
 
--Desarrollar un videojuego utilizando gráficos 3D.
--Implementar mecanismos de instrumentación que permitan aplicar técnicas de testing automático.
--Diseñar e implementar un modelo de red para permitir modo multijugador.
+- Desarrollar un videojuego utilizando gráficos 3D.
+- Implementar mecanismos de instrumentación que permitan aplicar técnicas de testing automático.
+- Diseñar e implementar un modelo de red para permitir modo multijugador.
 
 Como subobjetivo, se pretende que dicho videojuego pueda servir a futuros programadores para aprender técnicas básicas y fundamentos esenciales del desarrollo de un videojuego. Por esta razón se hará énfasis en los siguientes aspectos:
 
