@@ -27,59 +27,141 @@ Un poco de teoría
 ******************
 
 A grandes rasgos, el movimiento de un coche radica en un conjunto de
-fuerzas que se aplican sobre las ruedas y el chasis del vehículo. En la dirección del movimiento del coche se aplica una fuerza longitudinal, compuesta por la fuerza que aplican las ruedas, la fuerza de frenado, la resistencia que oponen los neumáticos y la resistencia del aire. Por otro lado, en giros existen fuerzas laterales causadas por la fricción lateral de las ruedas, además del momento angular del coche y el esfuerzo de torsión causado por las fuerzas laterales.
+fuerzas que se aplican sobre las ruedas y el chasis del vehículo. En
+la dirección del movimiento del coche se aplica una fuerza
+longitudinal, compuesta por la fuerza que aplican las ruedas, la
+fuerza de frenado, la resistencia que oponen los neumáticos y la
+resistencia del aire. Por otro lado, en giros existen fuerzas
+laterales causadas por la fricción lateral de las ruedas, además del
+momento angular del coche y el esfuerzo de torsión causado por las
+fuerzas laterales.
+
+*Nota:* este apartado es un resume del siguiente `artículo <http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games.html>`_
 
 ==============================
 Movimientos rectilíneos
 ==============================
-La primera fuerza que influye en el movimiento de un coche es el momento torsor (o par motor) ejercido por el motor a las ruedas, expresado en N.m. El momento torsor que puede entregar el motor depende de la velocidad
-a la cuál este gira, típicamente expresada en rpm. La relación momento
-torsor/rpm no es lineal, pero se representa normalmente como una curva
-llamada función del momento torsor (La curva exacta de cada motor
-viene determinada por los test a los que son sometidos estos
-motores). Aquí vemos un ejemplo para el motor de un Corvette de 1997 a
-2000: el LS1(5.7 litros V8)
 
-.. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cttorq.gif
+La primera fuerza que entra en juego es la fuerza de tracción. La
+fuerza de tracción es ocasionada por la fricción del neumático contra
+la superficie del asfalto, que es ocasinada por el desplazamiento
+del neumático contra el asfalto debido al par motor aplicado por este.
+
+El par motor es el momento de fuerza que ejerce el motor del coche
+sobre el eje de transmisión, expresado en N.m. El par motor que
+puede entregar depende de la velocidad a la cuál este gira,
+típicamente expresada en rpm. La relación momento torsor/rpm no es
+lineal, pero se representa normalmente como una curva llamada función
+del momento torsor (La curva exacta de cada motor viene determinada
+por los test que los fabricantes los someten estos motores). Aquí
+vemos un ejemplo para el motor del Corvette LS1(5.7 litros V8).
+
+.. figure:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cttorq.gif
    :align: center
-   :alt:
+
+   Curva de par motor/potencia del Corvette LS1
+
+El eje de abscisas está expresado en revoluciones por minuto(rpm) y el
+de ordenadas en Caballos de potencia. La curva anterior sólo esta
+definida en el rango de rpm en el que trabaja el motor, que para el
+ejemplo es en el intervalo 1000 y 6000 rpm. La curva de par motor
+representa la máxima potencia que puede entregar el motor para unas
+rpm dadas.
+
+El par motor se transmite a través de los engranajes hasta llegar a
+las ruedas, que se acaba conviertiendo en una fuerza a través del giro
+de esta sobre la carretera, dividido por el radio.  La siguiente
+imagen ilustra el proceso:
+
+.. figure:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/tc_torques.png
+   :align: center
+
+   Par motor aplicado sobre el eje de tracción
+
+A continuación podemos ver la formula que convierte el par motor
+proporcionado por el motor en fuerza de "conducción"; es decir, la
+fuerza longitudinal que ejercen las ruedas del eje de tracción sobre la
+carretera:
 
 .. math::
-   Flongitudinal = Ftracción + Raire + Rneumáticos
 
-   Ftracción = u * Fmotor
-
-   Raire = -Cdrag * v * |v|
+   Fconducción = \frac{u * Pmotor * Xg * Xm * n}{Rw}
 
 Donde:
 
-- Cdrag es la constante de resistencia del aire.
+- u es el vector unitario que refleja la orientación del coche
+- Pmotor es el par motor en rpm
+- xm es la relación de transmisión de las marchas
+- xd es el coeficiente del `diferencial <http://es.wikipedia.org/wiki/Mecanismo_diferencial>`_
+- n es la eficiencia de la transmisión
+- Rw es el radio de la rueda.
+
+Si esta fuera la única fuerza que influye en el movimiento, el coche
+aceleraría hasta alcanzar una velocidad infinita. Aquí es donde entran
+en juego las resistencia. A altas velocidades la mas importante es la
+resistencia del aire. Esta fuerza es muy importante porque es
+proporcional al cuadrado de la velocidad.
 
 .. math::
-   Rneumáticos = -Crr * v (constante de rozamiento)
+   Fdrag = - Cdrag * v * |v|
 
+Donde:
 
-   Aceleración = F / Masa
+- Cdrag es una constante de resistencia del aire.
+- v es el vector de velocidad.
+- \|v\| el módulo del vector.
 
-   Velocidad = v0 + aceleración * dt
+El módulo del vector velocidad es la velocidad a la que nos referimos
+comunmente, expresada en km/h cuando hablamos de vehículos.
 
-   Posición = p0 + v*dt
+La siguiente resistencia que encontramos es la resistencia al giro. Es
+causada por la fricción entre la goma del neumático y la superficie de
+contacto debido al desplazamiento de las ruedas.
 
-   Flongitudinal = Ffrenado + Raire + Rneumáticos
+.. math::
 
-   Ffrenado = -u * Cfrenado
+   Frr = -Crr Frr = - Crr * v
 
-(La fuerza de frenado sustituye a la de tracción)
-(incremento de tiempo entre las llamadas al motor de físicas)
+Donde:
+
+- Crr es una constante de rozamiento.
+- v el vector de velocidad.
+
+A bajas velocidades la resistencia al giro es la mayor resistencia que
+encuentra el coche, mientras que a altas velocidades sería la
+resistencia del aire.
+
+La fuerza logitudinal total es la suma de estas tres fuerzas:
+
+.. math::
+
+   Flongitudinal =   Fconducción + Fdrag   + Frr
 
 ==============================
 Transferencia de peso
 ==============================
 
-Fmax = mu * Pesocoche (mu coeficiente de rozamiento del neumático)
+Un efecto importante cuando se acelera o frena es el efecto de la
+transferencia dinámica de peso. Cuando se frena el coche baja el morro
+hacia adelante. Durante la aceleración, el coche se inclina hacia
+atrás. Esto es debido a que el centro de gravedad el coche cambia. El
+efecto de esto es que el peso sobre las ruedas traseras aumenta
+durante la aceleración, mientras que las ruedas delanteras deben
+soportar menos peso.
 
-Para un coche estacionado, la distribución del peso corresponde a la
-siguiente fórmula:
+La distribución de peso afecta dramáticamente a la tracción máxima por
+rueda. Esto es debido a que el límite de fricción es proporcional a la
+carga en esa rueda:
+
+.. math::
+   Fmax = mu * Pesocoche
+
+Donde:
+- mu es coeficiente de rozamiento del neumático.
+
+Para vehiculos estacionados el peso total del coche (W = M*g) se
+distribuye sobre las ruedas delanteras y traseras de acuerdo a la
+distancia entre la parte el eje delantero y trasero al centro de masa:
 
 .. math::
 
@@ -109,53 +191,32 @@ Donde:
 
 - a la aceleración
 
-.. image:: transferencia-peso.jpg
+.. figure:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/ctwd.jpg
    :align: center
-   :alt: Distribución del peso del coche sobre las ruedas
 
-===============================
-Par motor aplicado por el motor
-===============================
-
-A continuación podemos ver la formula que convierte el par motor
-proporcionado por el motor en fuerza de "conducción"; es decir, la
-fuerza longitudinal que ejercen las dos ruedas traseras sobre la
-carretera (en caso que se trate de un coche con tracción trasera).
-
-.. math::
-
-   Fconducción = \frac{u * Pmotor * xg * xm * n}{Rw}
-
-Donde:
-
-- u es el vector unitario que refleja la orientación del coche
-
-- Pmotor es el par motor en rpm
-
-- xm es la relación de transmisión de las marchas
-
-- xd es el coeficiente del `diferencial <http://es.wikipedia.org/wiki/Mecanismo_diferencial>`_
-
-- n es la eficiencia de la transmisión
-
-- Rw es el radio de la rueda.
-
-Cálculo de las rpm
-Velocidad angular
-Ecuaciones diferenciales. Método diferencial para resolución parcial basada en intervalos de tiempo.
+   Distribución del peso del coche sobre las ruedas
 
 ========
 Giros
 ========
 
-Hay que diferenciar entre giros a bajas velocidades y giros a altas velocidades. A bajas velocidades no es necesario considerar fuerzas ni masas, de modo que se reduce a un problema de cinética.
+Una cosa a tener en cuenta cuando estamos simulando giros es que la
+simulación de las propiedades física a baja velocidad es diferente de
+la simulación a alta velocidad. A velocidades bajas (aparcamiento,
+maniobras), las ruedas giran mas o menos en la dirección en la que
+éstas apuntan. Para simular estos giros no se necesita considerar las
+fuerzas y ni la masas. En otras palabras, es un problema de cinética
+no de dinámica.
 
-A velocidades más altas, la dirección del vector de velocidad
-resultante de las ruedas puede no estar alineada con el vector de
-dirección de las ruedas. Esto hace que se tenga que tener en cuenta
-fuerzas laterales y resistencias ocasionadas por los neumáticos del
-vehículo.
-
+A velocidades más altas, puede ocurrir que las ruedas apunten en una
+dirección mientras que se muevan en otra. En otras palabras, las
+ruedas a veces pueden tener una velocidad que no esté alineada con la
+orientación de la rueda. Esto significa que hay una componente de
+velocidad que está en un ángulo recto a la rueda. Por supuesto, esto
+causa mucha fricción. Después de todo una rueda está diseñado para
+rodar en una dirección particular sin demasiado esfuerzo.  En giros a
+alta velocidad, las ruedas están siendo empujadas hacia los lados y
+tenemos que tomar estas fuerzas en cuenta.
 
 *******************
 Vehículos en Bullet
@@ -436,8 +497,11 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   resistencias y la fuerza de tracción se igualarán, cancelándose
 ..   mútuamente, lo que hará que el coche alcance la velocidad punta para
 ..   esa potencia de motor determinada.
+
+.. .. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/ctgraph.jpg
+..   :align: center
+..   :alt: Distribución del peso del coche sobre las ruedas
 ..
-..   file:///home/isaac/Documentos/tfg/fisicas/Car%20Physics_files/ctgraph.jpg
 ..
 ..   En el diagrama el eje de las x denota la velocidad del coche en metros
 ..   por segundo y el eje de las y el valor de las fuerzas. La fuerza de
@@ -523,7 +587,6 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   durante la aceleración, mientras que las ruedas delanteras deben
 ..   soportar menos peso.
 ..
-..
 ..   El efecto de la transferencia de peso es importante por dos
 ..   razones. La primera es que el efecto visual del coche "cabeceando" en
 ..   respuesta a las acciones del usuario aporta gran realismo. De repente
@@ -584,9 +647,11 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   viene determinada por los test a los que son sometidos estos
 ..   motores). Aquí vemos un ejemplo para el motor de un Corvette de 1997 a
 ..   2000: el LS1(5.7 litros V8)
-..
-..   file:///home/isaac/Documentos/tfg/fisicas/Car%20Physics_files/cttorq.gif
-..
+
+.. .. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cttorq.gif
+..   :align: center
+..   :alt: Curva de potencia/par motor del Corvette LS1
+
 ..   Nota que la curva del par motor alcanza el máximo alrededor de las
 ..   4400 rpm con un par motor de 475 N.m y la curva de los caballos de
 ..   potencia alcanza el máximo a 5600rpm a 345 caballos de potencia( 257
@@ -604,7 +669,9 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   algunas personas encuentran interesante tambien la de potencia. A
 ..   continuación se puede ver la misma gráfica en unidades del SMI.
 ..
-..   file:///home/isaac/Documentos/tfg/fisicas/Car%20Physics_files/cttorqsi.gif
+.. .. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cttorqsi.gif
+..   :align: center
+..   :alt: Curva de potencia/par motor del Corvette LS1
 ..
 ..   Ahora, el par de torsión desde el motor (es decir, en el cigüeñal) se
 ..   convierte a través del engranaje diferencial y antes de que sea
@@ -784,9 +851,10 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   estandarizada de expresar la cantidad de deslizamiento es como la
 ..   denominada relación de deslizamiento:
 ..
-.. .. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cteq_sr.gif
+.. .. figure:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/cteq_sr.gif
 ..   :align: center
 ..   :alt: Relación de desplazamiento
+..
 ..         Donde:
 ..         Ww (omega) es la velocidad angular de las ruedas (in rad/s)
 ..         Rw es el radio de las ruedas ( en metros)
@@ -862,7 +930,7 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   conceptos para un coche acelerando. El par motor es amplificado por
 ..   las marchas y el diferencial, proporcionando par a las ruedas
 ..   traseras. La velocidad angular de las ruedas es suficientemente alta
-..   como para provovar deslizamiento entre la superficie del neumático y
+..   como para provocar deslizamiento entre la superficie del neumático y
 ..   la carretera, lo que puede ser expresado como un ratio de
 ..   deslizamiento positivo.  Esto resulta en una fuerza de fricción
 ..   reactiva, conocida como fuerza de tracción, que es lo que empuja el
@@ -895,7 +963,7 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   La inercia de un cilindro sólido alrededor de un eje puede ser
 ..   calculado con la siguiente fórmula:
 ..
-..      InerciaCilindror = Masa * Radio^2 / 2
+..      InerciaCilindro = Masa * Radio^2 / 2
 ..
 ..   Así que para una rueda de 75 kg con un radio de 33 cm su inercia es de
 ..   75 * 0.33 * 0.33 / 2 = 4.1 kg.m2. Multiplicando por dos se obtiene la
@@ -971,7 +1039,7 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..
 ..   Veamos el caso de giros a bajas velocidades. Podemos suponer que las
 ..   ruedas se están moviendo en la dirección que apuntan. En este caso,
-..   las ruedas están rodando pero no se deslice hacia los lados. Si las
+..   las ruedas están rodando pero no se desliza hacia los lados. Si las
 ..   ruedas delanteras están giradas en un ángulo delta y el coche se está
 ..   moviendo a una velocidad constante, entonces el coche describirá una
 ..   trayectoria circular. Imagínese líneas que se proyectan desde el
@@ -994,13 +1062,8 @@ El primer argumento de las funciones anteriores representa el valor de par motor
 ..   El radio del círculo se puede determinar a través de cálculos
 ..   geométricos, como se ve en el siguiente diagrama:
 ..
-..
-
 .. .. image:: http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/ctangles.jpg
 ..   :align: center
-..   :alt: Distribución del peso del coche sobre las ruedas
-
-
 ..
 ..   La distancia entre el eje delantero y el trasero se calcula desde la base de
 ..   la rueda y denota como L. El radio del círculo que describe el coche
