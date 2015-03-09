@@ -6,11 +6,7 @@
     <title>Introducción a Bullet Physics | Tinman</title>
 
     
-            <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/colorbox.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+            <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
@@ -447,11 +443,11 @@ Bullet actualice la posición y rotación de dicho cuerpo gráfico, se creará u
 <pre class="code c++ literal-block">
 <span class="k">class</span> <span class="nc">MyMotionState</span> <span class="o">:</span> <span class="k">public</span> <span class="n">btMotionState</span>
       <span class="p">{</span>
-      <span class="k">protected</span><span class="o">:</span>
+      <span class="nl">protected:</span>
           <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">mSceneNode</span><span class="p">;</span>
           <span class="n">btTransform</span> <span class="n">mInitialPosition</span><span class="p">;</span>
 
-      <span class="k">public</span><span class="o">:</span>
+      <span class="nl">public:</span>
           <span class="n">MyMotionState</span><span class="p">(</span><span class="k">const</span> <span class="n">btTransform</span> <span class="o">&amp;</span><span class="n">initialPosition</span><span class="p">,</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span> <span class="o">*</span><span class="n">node</span><span class="p">)</span>
           <span class="p">{</span>
               <span class="n">mSceneNode</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
@@ -474,7 +470,7 @@ Bullet actualice la posición y rotación de dicho cuerpo gráfico, se creará u
 
           <span class="k">virtual</span> <span class="kt">void</span> <span class="n">setWorldTransform</span><span class="p">(</span><span class="k">const</span> <span class="n">btTransform</span> <span class="o">&amp;</span><span class="n">worldTrans</span><span class="p">)</span>
           <span class="p">{</span>
-              <span class="k">if</span><span class="p">(</span><span class="n">mSceneNode</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
+              <span class="k">if</span><span class="p">(</span><span class="n">mSceneNode</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>
                   <span class="k">return</span><span class="p">;</span> <span class="c1">// silently return before we set a node
 </span>
               <span class="n">btQuaternion</span> <span class="n">rot</span> <span class="o">=</span> <span class="n">worldTrans</span><span class="p">.</span><span class="n">getRotation</span><span class="p">();</span>
@@ -546,11 +542,7 @@ Bullet actualice la posición y rotación de dicho cuerpo gráfico, se creará u
 </div>
 
 
-            <script src="../../assets/js/jquery.min.js"></script>
-            <script src="../../assets/js/bootstrap.min.js"></script>
-            <script src="../../assets/js/moment-with-locales.min.js"></script>
-            <script src="../../assets/js/fancydates.js"></script>
-        <script src="../../assets/js/jquery.colorbox-min.js"></script>
+            <script src="../../assets/js/all-nocdn.js"></script>
         <script src="../../assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
     
 <!-- Social buttons -->

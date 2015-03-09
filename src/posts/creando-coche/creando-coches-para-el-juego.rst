@@ -230,147 +230,121 @@ de la suspensión. La fuerza de la suspensión se aplica sobre el
 chassis de forma que no choque contra el suelo. De hecho, el chasis
 del vehículo flota sobre el suelo sustentándose sobre los rayos. La
 fuerza de fricción se calcula por cada rueda que esté en contacto con
-el suelo. Esto se aplica como una fuerza hacia los lados y adelante.
+el suelo. Esto se aplica como una fuerza hacia los lados y adelante
+por cada rueda; es decir, por cada rayo.
 
-Como cualquier cuerpo físico en Bullet, el chasis está formado como un
-cuerpo rígido y una forma de colisión que modela el comportamiento del
-cuerpo rígido. Es importante señalar que el punto de origen de los
-rayos debe situarse dentro de la forma de colisión del chasis (btCollisionShape) ya que,
-de otro modo, las ruedas no tendrían tracción al no estar enganchadas
-al chasis.
+Hay una serie de clases que son importantes a la hora de utilizar vehículos en Bullet:
 
-A continuación vemos una lista de los atributos mas importantes de un vehículo de Bullet:
+- `btRaycastVehicle <http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle.html>`_: Es la clase que modela el comportamiento del coche.
 
 .. code:: c++
 
-  float     f_max_engine_
-  float     mass_;
-  float     wheel_radius_;
-  float     wheel_width_;
-  float     suspension_stiffness_;
-  float     wheel_friction_;
-  float     suspension_damping_;
-  float     suspension_compression_;
-  float     roll_influence_          ;
-  float     connection_height_;
+   btRaycastVehicle::btRaycastVehicle( const btVehicleTuning& tuning,
+          btRigidBody* chassis,
+   btVehicleRaycaster*	raycaster)
 
-- El máximo par motor que puede proporcionar el motor con el acelerador pisado a fondo.
-- La masa del vehículo, necesaria para crear el cuerpo rígido.
-- Las medidas de las ruedas.
-- La rigidez (stiffness) de la suspensión. Se recomienda asignarle el valor de 10.0 para Todoterrenos, 50.0 para coches deportivos y 200.0 para coches de formula 1.
-- Coeficiente de amortiguación en el caso de que esté comprimida. Toma
-  valores entre 0 y 1. El valor mínimo hace que la amortiguación
-  rebote y el valor máximo hace que sea lo mas rígida posible.
-- La fricción de las ruedas. Asignando valores muy altos (10000) se puede conseguir de forma un poco tramposa que el coche se quede pegado al circuito y no vuelque. Esto facilita hacer juegos donde se pretendan dar giros a altas velocidades, saltándonos las leyes físicas en pos de las mecánicas de juego.
-- La influencia de giro. Permite bajar el centro de gravedad del vehículo, lo que reduce la probabilidad de que de vueltas de campana.
-- La altura de la amortiguación.
+- `btVehicleRaycaster <http://bulletphysics.org/Bullet/BulletFull/structbtVehicleRaycaster.html>`_: clase que proporciona una abstracción a la clase btRaycastVehicle para la gestión de rayqueries.
+- `btRigidBody <http://bulletphysics.org/Bullet/BulletFull/classbtRigidBody.html>`_: clase que representa un `cuerpo rigido <http://es.wikipedia.org/wiki/Cuerpo_r%C3%ADgido>`_.
+  - `btVehicleTuning <http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle_1_1btVehicleTuning.html>`_: clase que sirve como estructura de datos para el almacenamiento de algunos de los atributos mas importantes del vehículo. Los atributos son:
+
+  - btScalar m_suspensionStiffness: La rigidez (stiffness) de la
+    suspensión. Se recomienda asignarle el valor de 10.0 para
+    Todoterrenos, 50.0 para coches deportivos y 200.0 para coches de
+    formula 1.
+  - btScalar 	m_suspensionCompression.
+  - btScalar m_suspensionDamping: Coeficiente de amortiguación en el caso de que esté comprimida. Toma valores entre 0 y 1. El valor mínimo hace que la amortiguación rebote, mientras que el valor máximo sea lo mas rígida posible. Entre 0.1 y 0.3 la amortiguación se suele comportar correctamente.
+  - btScalar 	m_maxSuspensionTravelCm: La distancia máxima que puede ser comprimida la suspensión, en centímetros.
+  - btScalar 	m_frictionSlip:  El coeficiente de fricción entre el neumatico y el suelo. Para coches realistas debería tener el valor de 0.8, pero aumentando el valor mejora la conducción. Para coches de kart se aconseja asignarle un valores muy altos (10000.0).
+  - btScalar 	m_maxSuspensionForce:
+
+Para ampliar mas acerca de este tema, el autor de la implementación del módulo de vehículos escribió un `documento <https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc/edit>`_ en el que hablaba de los aspectos mas relevantes.
 
 **********************
 Veamos algo de código
 **********************
-En primer lugar se va a inicializar el vehículo. El siguiente fragmento de código es una simplificación para ilustrar el proceso de inicialización de un vehículo usando bullet:
+
+A continuación vamos a explicar cómo inicializar un vehículo en Bullet
+y las operaciones mas importantes. En este ejemplo me voy a apoyar del
+`gestor de físicas
+<https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/managers/physics.cpp?at=master>`_
+que he escrito para mi proyecto, que me abstrae a la hora de crear
+cuerpos rígidos, formas de colisión, etcétera. El código completo
+relativo al coche se puede encontrar en la `clase Car
+<https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/model/car.cpp?at=master>`_
+de mi proyecto.
+
+Los pasos que hay que seguir para inicializar un coche en bullet son:
+
+- Creamos un cuerpo rígido
 
 .. code:: c++
 
-   btTransform transform;
-   tr.setIdentity();
+  btVector3 car_dimensions = btVector3(1, 0.5f, 2);
+  btBoxShape* chassis_box = physics->create_shape(car_dimensions);
 
-   btVector3 origin = btVector3(0, 1, 0);
-   btBoxShape* chassis_box = physics->create_shape(controller_->car_dimensions_);
-   btCompoundShape* compound_ =
-          physics->create_compound_shape(origin, chassis_box);
+  btVector3 origin = btVector3(0, 1, 0);
+  btCompoundShape* compound =  physics->create_compound_shape(origin, chassis_box);
 
-   transform.setOrigin(btVector3(0.f,0.f,0.f));
+  btQuaternion rotation = btQuaternion(btVector3(0, 1, 0), btScalar(80));
+  btVector3 position = btVector3(0, 0, 0);
+  btTransform( rotation, position);
 
-   chassis_body_ =  physics->
-    create_rigid_body(btTransform(btQuaternion(btVector3(0, 1, 0), btScalar(80)),
-                                  position),
-                      chassis_node_, compound_, controller_->mass_);
-  chassis_body_->setDamping(0.2,0.2);
+  int mass = 1000;
+  Ogre::SceneNode* chassis_node = new Ogre::SceneNode("chassis_node");
+
+  btRigidBody* chassis_body_ =  physics->create_rigid_body(transform, chassis_node, compound, mass);
+
   chassis_body_->setActivationState(DISABLE_DEACTIVATION);
 
-Añadimos las ruedas
+En el fragmento anterior se crean dos formas de colisión: una caja y una forma compuesta(btCompoundShape), a la que asociamos la primera. Esto permite desplazar la caja una unidad en el eje Y, de forma que esté un poco alzada, indicandolo a través de la variable *origin*.
+
+Tras esto se crea un cuerpo rígido. El primer atributo es una estructura de datos que almacena las rotaciones y la posición inicial. El segundo es un nodo de ogre, dado que mi gestor de físicas integra Bullet con Ogre. El tercer argumento es la forma compuesta que hemos creado antes y, por último, la masa del vehículo expresada en kilogramos.
+
+El último paso consiste en indicarle a Bullet que el cuerpo rígido que acabamos de crear nunca debe ser desactivado; es decir, debe tenerlo en cuenta en todo momento en cada iteración de la simulación física. Bullet ignora algunos cuerpos rígidos que considera que no van a interaccionar en algún momento con otros cuerpos rigidos. Sin embargo, esto tiene como contrapunto que puede que el motor ignore acciones por parte del usuario, como una invocación al método de aceleración. Haciendo que nunca se desactive evitamos esto.
+
+- Añadimos las ruedas. Para esto, usamos el método addWheel de la clase btRaycastVehicle(la clase que modela el vehículo):
 
 .. code:: c++
 
-   btRaycastVehicle* vehicle_;
-   vehicle_->addWheel(connection_point, controller_->wheel_direction_cs0_,
-          controller_->wheel_axle_cs_, controller_->suspension_rest_length_,
-          controller_->wheel_radius_, tuning_ , is_front);
+   btWheelInfo & btRaycastVehicle::addWheel (const btVector3 &connectionPointCS0,
+          const btVector3 &wheelDirectionCS0, const btVector3 &wheelAxleCS,
+          btScalar suspensionRestLength,btScalar wheelRadius, const btVehicleTuning &tuning,
+          bool isFrontWheel);
 
-Creamos el coche:
+Este método recibe:
 
-.. code:: c++
+1. const btVector3 &connectionPointCS0: la posición de donde va a salir el rayo que representa la rueda. Esta posición debe estar dentro del chasis del coche o de lo contrario esa rueda no aplicará fuerza de tracción.
 
-  vehicle_raycaster_ = new btDefaultVehicleRaycaster(physics->dynamics_world_);
-  vehicle_ = new btRaycastVehicle(tuning_ , chassis_body_, vehicle_raycaster_);
+2. const btVector3 &wheelDirectionCS0: El vector dirección de la rueda.
 
-  physics->dynamics_world_->addVehicle(vehicle_);
+3. const btVector3 &wheelAxleCS: El eje sobre el que estará  el eje de la rueda.
+4. btScalar suspensionRestLength: La longitud máxima de la suspensión, en metros.
+5. btScalar wheelRadius: radio de la rueda,
+6. const btVehicleTuning &tuning: Ver explicación anterior.
+7. bool isFrontWheel: indica si la rueda está en el eje delantero o el trasero.
 
-El código completo se puede encontrar la `clase Car <https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/model/car.cpp?at=master>`_ de mi proyecto.
 
-El proceso de inicialización consiste en crear una forma de colisión con forma de caja con las dimensiones del coche. Despues se crea una forma física compuesta de la anterior. Este tipo de formas compuestas nos permiten mover el origen de las formas que la componen, de forma que es posible modificar el centro de gravedad por defecto de la forma de gravedad, cosa que no es posible con las otras formas de colisión pues depende de las propiedades físicas que la forman. Tras esto se crea el cuerpo rígido y se indica al motor de físicas que no se debe desactivar este cuerpo rígido. Esto significa que el motor de físicas tiene que tener en cuenta este cuerpo rígido en cada momento, incluso cuando aparentemente no vaya a tener interacciones.
-
-Acelerar:
-
-.. code:: c++
-
-   void
-   CarController::accelerate() {
-     if(f_engine_ >=  f_max_engine_) {
-       accelerating_ = false;
-       return;
-     }
-     f_engine_ += acceleration_;
-     accelerating_ = true;
-   }
-
-Frenar:
+- Creamos el coche:
 
 .. code:: c++
 
-   void
-   CarController::brake() {
-      accelerating_ = false;
-      braking_ = true;
-      f_braking_ = f_max_braking_;
-      f_engine_ = (f_engine_ <= f_max_engine_) ?
-      -f_max_engine_: f_engine_ - deceleration_;
-   }
+  btDefaultVehicleRaycaster vehicle_raycaster = new btDefaultVehicleRaycaster(physics->dynamics_world_);
+  btRaycastVehicle vehicle = new btRaycastVehicle(tuning_ , chassis_body_, vehicle_raycaster_);
 
-Girar:
+  physics->dynamics_world_->addVehicle(vehicle);
 
-.. code:: c++
+Como vemos, el último paso consiste en crear un objeto de tipo btRaycastVehicle y añadirlo al mundo a través del método addVehicle de la clase btDiscreteDynamicsWorld. Bullet ofrece una implementación por defecto de la intefaz btVehicleRaycaster, lo que nos ahorra tener que implementarla nosotros.
 
-   void
-   CarController::turn(Direction direction) {
-     if(direction == Direction::right){
-       turn_wheels(Direction::right);
-       steering_ = (steering_ < -steering_clamp_)?
-       -steering_clamp_ : steering_ - steering_increment_;
-     }
-     else{
-       turn_wheels(Direction::left);
-       steering_ = (steering_ > steering_clamp_)?
-          steering_clamp_ : steering_ + steering_increment_;
-     }
-  }
+Explicado el proceso de inicialización, sólo nos queda mostrar las operaciones básicas de nuestro vehículo.
 
 Para que el coche acelere se ejecuta la siguiente función, que aplica par motor a las ruedas del coche
 
-.. code:: c++
 
-   vehicle_->applyEngineForce(controller_->f_engine_, 0);
-   vehicle_->applyEngineForce(controller_->f_engine_, 1);
 
-Para hacer que el coche gire se aplica un giro a las ruedas:
 
-.. code:: c++
-
-   vehicle_->setSteeringValue(controller_->steering_, 0);
-   vehicle_->setSteeringValue(controller_->steering_, 1);
-
-El primer argumento de las funciones anteriores representa el valor de par motor o steering aplicado a las ruedas. El segundo argumento es el índice de las ruedas. En este ejemplo, corresponde con las ruedas delanteras.
+- void btRaycastVehicle::applyEngineForce( btScalar force, int wheel): aplica par motor a la rueda con ese índice. Los valores estan expresados en N.m.
+- void btRaycastVehicle::setBrake( btScalar brake, int wheelIndex): aplica frenado a la ruedas con ese índice.
+- void btRaycastVehicle::setSteeringValue (btScalar steering, int wheel): gira la rueda con ese índice los grados que indica el primer argumento.
 
 ..
 ..   Hola, parece que tienes algo de curiosidad.

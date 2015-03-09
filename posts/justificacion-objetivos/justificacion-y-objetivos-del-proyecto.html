@@ -6,11 +6,7 @@
     <title>Justificación y objetivos del proyecto | Tinman</title>
 
     
-            <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/rst.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/colorbox.css" rel="stylesheet" type="text/css">
-        <link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+            <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
@@ -136,20 +132,22 @@ cumplir con el desarrollo del mismo.</p>
 <div class="section" id="que-es-tinman">
 <h2>¿Qué es Tinman?</h2>
 <p><em>Tinman</em> es el nombre corto de mi trabajo fin de Grado(TFG), que se titula: "Instrumentación de un videojuego 3D con fines docentes". El videojuego será un clon del famoso juego de carreras arcade "<a class="reference external" href="http://es.wikipedia.org/wiki/Super_Off_Road">Super Off Road</a>", y de aquí es de donde surge <em>Tinman</em> como nombre de mi proyecto, a modo de broma, dado que el juego original llevó el nombre de Ivan "Ironman" Stewart, un famoso piloto del estilo <em>Off-Road</em>.</p>
-<!-- Mi motivación principal para hacer este proyecto es mi pasión por los videojuegos. La razón por la que comencé a estudiar Ingeniería Informática no era otra que la de convertirme en programador de videojuegos, y creo que esto queda reflejado en la pasión con la que este proyecto se está desarrollando. -->
-<p>Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. No hace falta decir que se trata de un proyecto muy ambicioso, y es por esto que hay que acotar el alcance del mismo. Del título lo que más puede llevar a confusión sea la última parte "con fines docentes". Debido a que desarrollar un <em>Serius Game</em> específicamente orientado a desarrolladores escapa por mucho a lo que se pretende evaluar dentro de un TFG, e incluso en una tesis de Master, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o <a class="reference external" href="http://programmers.stackexchange.com/a/94567">idioms</a> en C++, por poner algunos ejemplos.</p>
-<p>Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3. La principal razón por la que se decidió usar una licencia libre, fue que si se pretendía dar facilidades a quien desease aprender sobre cómo fue creado el proyecto, la forma mas sencilla pasaba por darle la libertad tanto de leer el código, cómo de modificarlo, así como de distribuir tanto sus propias modificaciones del proyecto original como copias de este. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.</p>
-<p>Por otra parte, no abundan los proyectos libres en el mundo de los videojuegos y los que existen o bien no se ha dado al código fuente el mimo que merece , o los creadores son ingenieros con una larga experiencia, con lo cuál el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y mucho más si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones: no sólo ofrece tanto mecanismos de muy alto nivel, sino que permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece una flexibilidad al ingeniero que no ofrecen otros lenguajes, además al ser compilado permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.</p>
-<p>Pero alguien podría estar preguntandose ¿realmente un videojuego se justifica como trabajo fin de Grado?</p>
-<p>Según la "<a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs">normativa sobre la elaboración y defensa del trabajo fin de grado</a>" de la Escuela Superior de Informática de Ciudad Real, en sus artículos 2.1:</p>
-<p>Art. 2.1- "El TFG supone la realización por parte del estudiante, y de
-forma individual, de un proyecto, memoria o estudio bajo la
-supervisión de uno o más tutores/as, en el que se integren y
-desarrollen los contenidos formativos recibidos, capacidades,
-competencias y habilidades adquiridas durante el periodo de docencia
-del Grado en Ingeniería Informática"</p>
-<p>El artículo anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que ni siquiera se requiere implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta en el desarrollo(TDD), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla lo necesario para poder considerar este proyecto como un TFG.</p>
-<p>Por otra parte, todo proyecto debe tener en mente, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su <a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/">publicación</a> sobre la situación mundial del mercado del videojuego señalaba que de seguir la progresión de crecimiento actual, se espera que la cifra de facturación mundial ascienda de los 81.400 millones actuales en 2014 hasta los 102.900 millones en 2017. No hace falta ser economista para darse cuenta que el volumen de facturación es impresionante y, por sí sólo, justifica la creación de nuevos proyectos orientados a este sector.</p>
+<p>Este proyecto nació con el espíritu de crear un videojuego que fuese útil como caso práctico sobre el que estudiar toda una serie de técnicas relacionadas con el desarrollo de videojuegos. Es obvio que se trata de un proyecto muy ambicioso y por ello se ha de acotar el alcance del mismo. Del título, lo que más puede llevar a confusión sea la última parte, con fines docentes. Debido a que desarrollar un <em>Serius Game</em> específicamente orientado a desarrolladores se desmarca del objeto de evaluación dentro de un TFG, e incluso en una tesis de máster, el esfuerzo en este proyecto se ha centrado en desarrollar un código lo más limpio posible, sobre el que poder ejemplificar el uso de técnicas avanzadas como patrones de diseño o como <a class="reference external" href="http://programmers.stackexchange.com/a/94567">idioms</a> en C++, por poner algunos ejemplos.</p>
+<p>Para que lo anterior fuese posible se decidió licenciar el código del proyecto, así como todo el contenido generado, bajo una licencia libre. En nuestro caso, el proyecto se licencia bajo GPLv3.Se decidió usar una licencia libre porque si se pretendía enseñar a quien lo deseara cómo fue creado el proyecto, la forma mas sencilla pasaba por dar libertad para leer el código, modificarlo y distribuir tanto modificaciones del proyecto original como copias del mismo. Creo que la mejor forma de aprender a programar es programando, y a mí me resulta mas sencillo si tengo algo sobre lo que empezar.</p>
+<p>Por otra parte, no abundan proyectos libres en el mundo de los videojuegos y los que existen, o bien no se ha dado al código fuente el mimo que merece, o los creadores son ingenieros con una larga trayectoria, por lo que el código, aunque mantenible, flexible y bien estructurado, se hace difícil de estudiar para quien está comenzando a aprender y más complicado si estos proyectos están escritos en C++. Este lenguaje se ha convertido en estándar para la industria del videojuego, por múltiples razones. No sólo ofrece tanto mecanismos de muy alto nivel, tambien permite trabajar a nivel de dirección de memoria, de registro,...con lo que ofrece al ingeniero una flexibilidad que no se encuentra en otros lenguajes. Además, al ser compilado, permite optimizaciones de bajo nivel que no ofrecen otros lenguajes basados en máquinas virtuales o interpretados.</p>
+<p>Pero alguien podría estar preguntándose: ¿realmente un videojuego se justifica como trabajo fin de Grado?</p>
+<p>Según la "<a class="reference external" href="http://webpub.esi.uclm.es/archivos/336/Normativa-TFGs">Normativa sobre la elaboración y defensa del Trabajo Fin
+de Grado</a>"
+de la Escuela Superior de Informática de Ciudad Real, su artículo 2º
+<em>Naturaleza del Trabajo Fin de Grado</em>, estipula lo siguiente:</p>
+<p>"El Trabajo Fin de Grado supone la realización por parte del estudiante, y de forma
+individual, de un proyecto, memoria o estudio bajo la supervisión de
+uno o más tutores/as, en el que se integren y desarrollen los
+contenidos formativos recibidos, capacidades, competencias y
+habilidades adquiridas durante el periodo de docencia del Grado en
+Ingeniería Informática"</p>
+<p>El apaertado anterior señala que el TFG consiste en desarrollar, de manera individual, un proyecto, memoria o estudio; es decir, que no es requerida implementación alguna. El proyecto Tinman requiere la aplicación de técnicas avanzadas de ingeniería del Software, sigue una metodología concreta de desarrollo (<em>desarrollo orientado por pruebas</em>), requiere la capacidad para resolver problemas complejos, hace uso de un software de control de versiones, que ayuda a realizar un seguimiento del progreso del proyecto, etc. Todo esto hace que se cumpla  lo previamente citado para considerar este proyecto como TFG.</p>
+<p>Por otra parte, en todo proyecto debe contemplarse, de una forma u otra, el contexto económico. En ese sentido, el sector de los videojuegos está en pleno auge. Por aportar algunas cifras, la empresa NewZoo en su <a class="reference external" href="http://www.newzoo.com/insights/global-games-market-will-reach-102-9-billion-2017-2/">publicación</a> sobre la situación mundial del mercado del videojuego señalaba que si la progresión de crecimiento actual se mantiene, se espera que la cifra de facturación mundial ascienda desde los 81.400 millones de dólares actuales en 2014 hasta los 102.900 millones en 2017. No hace es necesario ser economista para darse cuenta que el volumen de facturación es impresionante y que por sí sólo justifica la creación de nuevos proyectos orientados a este sector.</p>
 <img alt="mercado-videojuego.png" class="align-center" id="grafico-mercado" src="mercado-videojuego.png">
 <p>Para finalizar, se listarán los objetivos que se pretenden cumplir.</p>
 </div>
@@ -207,11 +205,7 @@ distribuirá bajo una licencia libre.</li>
 </div>
 
 
-            <script src="../../assets/js/jquery.min.js"></script>
-            <script src="../../assets/js/bootstrap.min.js"></script>
-            <script src="../../assets/js/moment-with-locales.min.js"></script>
-            <script src="../../assets/js/fancydates.js"></script>
-        <script src="../../assets/js/jquery.colorbox-min.js"></script>
+            <script src="../../assets/js/all-nocdn.js"></script>
         <script src="../../assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
     
 <!-- Social buttons -->
