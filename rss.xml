@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Mon, 09 Mar 2015 17:12:58 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Creando coches para el juego</title><link>http://isaaclacoba.github.io/tinman/posts/creando-coche/creando-coches-para-el-juego.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;img alt="tinman.jpg" class="align-center" id="logo-tinman" src="http://isaaclacoba.github.io/tinman/posts/creando-coche/tinman.jpg"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Tinman</title><link>http://isaaclacoba.github.io/tinman/</link><description>blog del proyecto Tinman</description><atom:link href="http://isaaclacoba.github.io/tinman/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>es</language><lastBuildDate>Tue, 10 Mar 2015 09:42:09 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Creando coches para el juego</title><link>http://isaaclacoba.github.io/tinman/posts/creando-coche/creando-coches-para-el-juego.html</link><dc:creator>Isaac Lacoba Molina</dc:creator><description>&lt;div&gt;&lt;img alt="tinman.jpg" class="align-center" id="logo-tinman" src="http://isaaclacoba.github.io/tinman/posts/creando-coche/tinman.jpg"&gt;
 &lt;p&gt;En esta entrada se va a hablar acerca del componente de dinámica de
 vehículos que incorpora Bullet Physics, el motor de físicas que se
 está usando en este proyecto. Se explicará como inicializar el
@@ -24,8 +24,8 @@ fuerzas laterales.&lt;/p&gt;
 &lt;h3&gt;Movimientos rectilíneos&lt;/h3&gt;
 &lt;p&gt;La primera fuerza que entra en juego es la fuerza de tracción. La
 fuerza de tracción es ocasionada por la fricción del neumático contra
-la superficie del asfalto, que es ocasinada por el desplazamiento
-del neumático contra el asfalto debido al par motor aplicado por este.&lt;/p&gt;
+la superficie del asfalto, que es provocada por el desplazamiento
+del neumático contra el asfalto debido al par motor aplicado por el motor.&lt;/p&gt;
 &lt;p&gt;El par motor es el momento de fuerza que ejerce el motor del coche
 sobre el eje de transmisión, expresado en N.m. El par motor que
 puede entregar depende de la velocidad a la cuál este gira,
@@ -46,7 +46,7 @@ representa la máxima potencia que puede entregar el motor para unas
 rpm dadas.&lt;/p&gt;
 &lt;p&gt;El par motor se transmite a través de los engranajes hasta llegar a
 las ruedas, que se acaba conviertiendo en una fuerza a través del giro
-de esta sobre la carretera, dividido por el radio.  La siguiente
+de estas sobre la carretera, dividido por el radio.  La siguiente
 imagen ilustra el proceso:&lt;/p&gt;
 &lt;div class="figure align-center"&gt;
 &lt;img alt="http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/tc_torques.png" src="http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/tc_torques.png"&gt;
@@ -64,7 +64,7 @@ Fconducción = \frac{u * Pmotor * Xg * Xm * n}{Rw}
 &lt;p&gt;Donde:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;u es el vector unitario que refleja la orientación del coche&lt;/li&gt;
-&lt;li&gt;Pmotor es el par motor en rpm&lt;/li&gt;
+&lt;li&gt;Pmotor es el par motor del motor para unas rpm dadas. Expresado en en N.m&lt;/li&gt;
 &lt;li&gt;xm es la relación de transmisión de las marchas&lt;/li&gt;
 &lt;li&gt;xd es el coeficiente del &lt;a class="reference external" href="http://es.wikipedia.org/wiki/Mecanismo_diferencial"&gt;diferencial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;n es la eficiencia de la transmisión&lt;/li&gt;
@@ -119,20 +119,21 @@ hacia adelante. Durante la aceleración, el coche se inclina hacia
 atrás. Esto es debido a que el centro de gravedad el coche cambia. El
 efecto de esto es que el peso sobre las ruedas traseras aumenta
 durante la aceleración, mientras que las ruedas delanteras deben
-soportar menos peso.&lt;/p&gt;
-&lt;p&gt;La distribución de peso afecta dramáticamente a la tracción máxima por
-rueda. Esto es debido a que el límite de fricción es proporcional a la
-carga en esa rueda:&lt;/p&gt;
+soportar menos peso. La distribución de peso afecta dramáticamente a
+la tracción máxima por rueda. Esto es debido a que el límite de
+fricción es proporcional a la carga en esa rueda:&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
 Fmax = mu * Pesocoche
 \end{equation*}
 &lt;/div&gt;
-&lt;p&gt;Donde:
-- mu es coeficiente de rozamiento del neumático.&lt;/p&gt;
-&lt;p&gt;Para vehiculos estacionados el peso total del coche (W = M*g) se
+&lt;p&gt;Donde:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;mu es coeficiente de rozamiento del neumático.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para vehiculos estacionados el peso total del coche se
 distribuye sobre las ruedas delanteras y traseras de acuerdo a la
-distancia entre la parte el eje delantero y trasero al centro de masa:&lt;/p&gt;
+distancia entre el eje delantero y trasero al centro de masa:&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
 Peso ruedas traseras = \frac{c}{L} * M
@@ -177,7 +178,7 @@ simulación de las propiedades física a baja velocidad es diferente de
 la simulación a alta velocidad. A velocidades bajas (aparcamiento,
 maniobras), las ruedas giran mas o menos en la dirección en la que
 éstas apuntan. Para simular estos giros no se necesita considerar las
-fuerzas y ni la masas. En otras palabras, es un problema de cinética
+fuerzas y ni masas. En otras palabras, es un problema de cinética
 no de dinámica.&lt;/p&gt;
 &lt;p&gt;A velocidades más altas, puede ocurrir que las ruedas apunten en una
 dirección mientras que se muevan en otra. En otras palabras, las
@@ -195,9 +196,9 @@ tenemos que tomar estas fuerzas en cuenta.&lt;/p&gt;
 &lt;p&gt;El componente de dinámica de vehículos de Bullet ofrece una
 implementación basada en rayqueries, de tal manera que se lanza un
 rayo por cada rueda del coche. Usando como referencia el punto de
-contacto del rayo contra el suelo, calculamos la longitud y la fuerza
+contacto del rayo contra el suelo, se calcula la longitud y la fuerza
 de la suspensión. La fuerza de la suspensión se aplica sobre el
-chassis de forma que no choque contra el suelo. De hecho, el chasis
+chasis de forma que no choque contra el suelo. De hecho, el chasis
 del vehículo flota sobre el suelo sustentándose sobre los rayos. La
 fuerza de fricción se calcula por cada rueda que esté en contacto con
 el suelo. Esto se aplica como una fuerza hacia los lados y adelante
@@ -208,22 +209,21 @@ por cada rueda; es decir, por cada rayo.&lt;/p&gt;
 &lt;/ul&gt;
 &lt;pre class="code c++ literal-block"&gt;
 &lt;span class="n"&gt;btRaycastVehicle&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;btRaycastVehicle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;btVehicleTuning&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;tuning&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-       &lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;chassis&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="n"&gt;btVehicleRaycaster&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;  &lt;span class="n"&gt;raycaster&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                  &lt;span class="n"&gt;btRigidBody&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;chassis&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;btVehicleRaycaster&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;raycaster&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/structbtVehicleRaycaster.html"&gt;btVehicleRaycaster&lt;/a&gt;: clase que proporciona una abstracción a la clase btRaycastVehicle para la gestión de rayqueries.&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRigidBody.html"&gt;btRigidBody&lt;/a&gt;: clase que representa un &lt;a class="reference external" href="http://es.wikipedia.org/wiki/Cuerpo_r%C3%ADgido"&gt;cuerpo rigido&lt;/a&gt;.
-- &lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle_1_1btVehicleTuning.html"&gt;btVehicleTuning&lt;/a&gt;: clase que sirve como estructura de datos para el almacenamiento de algunos de los atributos mas importantes del vehículo. Los atributos son:&lt;ul&gt;
-&lt;li&gt;btScalar m_suspensionStiffness: La rigidez (stiffness) de la
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRigidBody.html"&gt;btRigidBody&lt;/a&gt;: clase que representa un &lt;a class="reference external" href="http://es.wikipedia.org/wiki/Cuerpo_r%C3%ADgido"&gt;cuerpo rigido&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle_1_1btVehicleTuning.html"&gt;btVehicleTuning&lt;/a&gt;: clase que sirve como estructura de datos para el almacenamiento de algunos de los atributos mas importantes del vehículo. Los atributos son:&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;btScalar m_suspensionStiffness&lt;/em&gt;: La rigidez (stiffness) de la
 suspensión. Se recomienda asignarle el valor de 10.0 para
 Todoterrenos, 50.0 para coches deportivos y 200.0 para coches de
 formula 1.&lt;/li&gt;
-&lt;li&gt;btScalar    m_suspensionCompression.&lt;/li&gt;
-&lt;li&gt;btScalar m_suspensionDamping: Coeficiente de amortiguación en el caso de que esté comprimida. Toma valores entre 0 y 1. El valor mínimo hace que la amortiguación rebote, mientras que el valor máximo sea lo mas rígida posible. Entre 0.1 y 0.3 la amortiguación se suele comportar correctamente.&lt;/li&gt;
-&lt;li&gt;btScalar    m_maxSuspensionTravelCm: La distancia máxima que puede ser comprimida la suspensión, en centímetros.&lt;/li&gt;
-&lt;li&gt;btScalar    m_frictionSlip:  El coeficiente de fricción entre el neumatico y el suelo. Para coches realistas debería tener el valor de 0.8, pero aumentando el valor mejora la conducción. Para coches de kart se aconseja asignarle un valores muy altos (10000.0).&lt;/li&gt;
-&lt;li&gt;btScalar    m_maxSuspensionForce:&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;btScalar   m_suspensionCompression&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;btScalar m_suspensionDamping*&lt;/em&gt;: Coeficiente de amortiguación en el caso de que esté comprimida. Toma valores entre 0 y 1. El valor mínimo hace que la amortiguación rebote, mientras que el valor máximo sea lo mas rígida posible. Entre 0.1 y 0.3 la amortiguación se suele comportar correctamente.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;btScalar   m_maxSuspensionTravelCm*&lt;/em&gt;: La distancia máxima que puede ser comprimida la suspensión, en centímetros.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;btScalar   m_frictionSlip&lt;/em&gt;:  El coeficiente de fricción entre el neumatico y el suelo. Para coches realistas debería tener el valor de 0.8, pero aumentando el valor mejora la conducción. Para coches de kart se aconseja asignarle un valores muy altos (10000.0).&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;btScalar   m_maxSuspensionForce&lt;/em&gt;: fuerza máxima que puede ejercer la suspensión sobre el chasis.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -231,9 +231,9 @@ formula 1.&lt;/li&gt;
 &lt;/div&gt;
 &lt;div class="section" id="veamos-algo-de-codigo"&gt;
 &lt;h2&gt;Veamos algo de código&lt;/h2&gt;
-&lt;p&gt;A continuación vamos a explicar cómo inicializar un vehículo en Bullet
-y las operaciones mas importantes. En este ejemplo me voy a apoyar del
-&lt;a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/managers/physics.cpp?at=master"&gt;gestor de físicas&lt;/a&gt;
+&lt;p&gt;A continuación vamos a explicar cómo inicializar un vehículo en
+Bullet, así como las operaciones mas importantes. En este ejemplo me
+voy a apoyar del &lt;a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/managers/physics.cpp?at=master"&gt;gestor de físicas&lt;/a&gt;
 que he escrito para mi proyecto, que me abstrae a la hora de crear
 cuerpos rígidos, formas de colisión, etcétera. El código completo
 relativo al coche se puede encontrar en la &lt;a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/model/car.cpp?at=master"&gt;clase Car&lt;/a&gt;
@@ -292,56 +292,18 @@ de mi proyecto.&lt;/p&gt;
 &lt;span class="n"&gt;physics&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;dynamics_world_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;addVehicle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vehicle&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/pre&gt;
 &lt;p&gt;Como vemos, el último paso consiste en crear un objeto de tipo btRaycastVehicle y añadirlo al mundo a través del método addVehicle de la clase btDiscreteDynamicsWorld. Bullet ofrece una implementación por defecto de la intefaz btVehicleRaycaster, lo que nos ahorra tener que implementarla nosotros.&lt;/p&gt;
-&lt;p&gt;Acelerar:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
-&lt;span class="kt"&gt;void&lt;/span&gt;
-&lt;span class="n"&gt;CarController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;accelerate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_engine_&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt;  &lt;span class="n"&gt;f_max_engine_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;accelerating_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="p"&gt;}&lt;/span&gt;
-  &lt;span class="n"&gt;f_engine_&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;acceleration_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-  &lt;span class="n"&gt;accelerating_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;Frenar:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
-&lt;span class="kt"&gt;void&lt;/span&gt;
-&lt;span class="n"&gt;CarController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;brake&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-   &lt;span class="n"&gt;accelerating_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;braking_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;f_braking_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f_max_braking_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="n"&gt;f_engine_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f_engine_&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;f_max_engine_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;?&lt;/span&gt;
-   &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f_max_engine_&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;f_engine_&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;deceleration_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;Girar:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
- &lt;span class="kt"&gt;void&lt;/span&gt;
- &lt;span class="n"&gt;CarController&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;turn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Direction&lt;/span&gt; &lt;span class="n"&gt;direction&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-   &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;direction&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;Direction&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-     &lt;span class="n"&gt;turn_wheels&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Direction&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;right&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-     &lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;steering_clamp_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
-     &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;steering_clamp_&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;steering_increment_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="p"&gt;}&lt;/span&gt;
-   &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
-     &lt;span class="n"&gt;turn_wheels&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Direction&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;left&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-     &lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;steering_clamp_&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;
-        &lt;span class="n"&gt;steering_clamp_&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;steering_&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;steering_increment_&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-   &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;
+&lt;p&gt;Explicado el proceso de inicialización, sólo nos queda mostrar las operaciones básicas de nuestro vehículo.&lt;/p&gt;
 &lt;p&gt;Para que el coche acelere se ejecuta la siguiente función, que aplica par motor a las ruedas del coche&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
-&lt;span class="n"&gt;vehicle_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;applyEngineForce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;controller_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;f_engine_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;vehicle_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;applyEngineForce&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;controller_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;f_engine_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;Para hacer que el coche gire se aplica un giro a las ruedas:&lt;/p&gt;
-&lt;pre class="code c++ literal-block"&gt;
-&lt;span class="n"&gt;vehicle_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setSteeringValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;controller_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;steering_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;vehicle_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;setSteeringValue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;controller_&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;steering_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;
-&lt;p&gt;El primer argumento de las funciones anteriores representa el valor de par motor o steering aplicado a las ruedas. El segundo argumento es el índice de las ruedas. En este ejemplo, corresponde con las ruedas delanteras.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;void btRaycastVehicle::applyEngineForce( btScalar force, int wheel): aplica par motor a la rueda con ese índice. Los valores estan expresados en N.m.&lt;/li&gt;
+&lt;li&gt;void btRaycastVehicle::setBrake( btScalar brake, int wheelIndex): aplica frenado a la ruedas con ese índice.&lt;/li&gt;
+&lt;li&gt;void btRaycastVehicle::setSteeringValue (btScalar steering, int wheel): gira la rueda con ese índice los grados que indica el primer argumento.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="conclusiones"&gt;
+&lt;h2&gt;Conclusiones&lt;/h2&gt;
+&lt;p&gt;En este artículo he intentado explicar de la forma mas clara posible con qué problemas he tenido que lidiar a la hora de configurar e implementar la clase Car en mi proyecto. He dejado muchas cosas en el tintero, pero creo que lo mas importante ha quedado reflejado en este post.&lt;/p&gt;
+&lt;p&gt;Un saludo y nos vemos en el siguiente artículo.&lt;/p&gt;
 &lt;!--  --&gt;
 &lt;!-- Hola, parece que tienes algo de curiosidad. --&gt;
 &lt;!-- Como recompensa, aquí tienes la traducción del artículo completo sobre el que me he basado para escribir el apartado teórico de este post --&gt;
