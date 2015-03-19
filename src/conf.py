@@ -114,6 +114,7 @@ NAVIGATION_LINKS = {
         ("/archive.html", "Archivo"),
         ("/categories/index.html", "Tags"),
         ("/rss.xml", "feed RSS"),
+        ("https://bitbucket.org/arco_group/tfg.tinman", "Repository"),
     ),
 }
 
@@ -449,7 +450,7 @@ EXTRA_IMAGE_EXTENSIONS = []
 # }
 
 # Show only teasers in the index pages? Defaults to False.
-# INDEX_TEASERS = False
+INDEX_TEASERS = True
 
 # HTML fragments with the Read more... links.
 # The following tags exist and are replaced for you:
