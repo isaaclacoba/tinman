@@ -19,6 +19,7 @@ la biblioteca de renderizado usada en este proyecto.
 
 .. TEASER_END: click to read the rest of the article
 
+
 ************************
 ¿Qué es Bullet Physics?
 ************************

@@ -18,6 +18,7 @@ cumplir con el desarrollo del mismo.
 
 .. TEASER_END: click to read the rest of the article
 
+
 *****************
 ¿Qué es Tinman?
 *****************

@@ -17,6 +17,7 @@ la estructura típica de un programa que hace uso de esta biblioteca.
 
 .. TEASER_END: click to read the rest of the article
 
+
 Este post es una adaptación del tutorial que realicé hace unos meses y que podeis encontrar aquí: `<https://bitbucket.org/IsaacLacoba/intro-ogre/overview>`_
 
 ****************

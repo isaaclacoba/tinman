@@ -19,10 +19,11 @@ vehículo y los elementos mas relevantes de éste módulo de Bullet. Por
 último, mostraremos un pequeño ejemplo que servirá para ejemplificar
 lo hablado en esta entrada.
 
-.. TEASER_END: click to read the rest of the article
-
 Pero para empezar, vamos a introducir brevemente los principios
 físicos que permiten el movimiento de un coche.
+
+.. TEASER_END: click to read the rest of the article
+
 
 ******************
 Un poco de teoría

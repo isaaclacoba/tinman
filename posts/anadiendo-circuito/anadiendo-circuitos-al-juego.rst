@@ -11,6 +11,8 @@ resolver para poder añadir circuitos al juego. Se explicará la
 situación al empezar a estudiar el problema y después se mostrará el
 proceso que se ha segudio para crear nuevos circuitos.
 
+.. TEASER_END: click to read the rest of the article
+
 *******************************************************
 Problemas iniciales y justificacion de las elecciones
 *******************************************************

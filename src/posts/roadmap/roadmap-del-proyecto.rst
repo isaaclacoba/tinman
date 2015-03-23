@@ -9,6 +9,7 @@
 En esta entrada se va a mostrar cuál es el estado actual del proyecto, qué objetivos se han cumplido y en qué porcentaje. Además se hablará en qué se está trabajando actualmente.
 
 .. TEASER_END: click to read the rest of the article
+
 ********************
 Estado del proyecto
 ********************
