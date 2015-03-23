@@ -28,6 +28,7 @@
     <meta name="description" itemprop="description" content="Tutorial de dinámica de vehículos en Bullet Physics">
     <meta name="author" content="Isaac Lacoba Molina">
         <link rel="prev" href="../roadmap/roadmap-del-proyecto.html" title="Roadmap del proyecto" type="text/html">
+        <link rel="next" href="../anadiendo-circuito/anadiendo-circuitos-al-juego.html" title="Añadiendo circuitos al juego" type="text/html">
     
     <meta property="og:site_name" content="Tinman">
     <meta property="og:title" content="Creando coches para el juego">
@@ -136,7 +137,6 @@ está usando en este proyecto. Se explicará como inicializar el
 vehículo y los elementos mas relevantes de éste módulo de Bullet. Por
 último, mostraremos un pequeño ejemplo que servirá para ejemplificar
 lo hablado en esta entrada.</p>
-<!-- TEASER_END: click to read the rest of the article -->
 <p>Pero para empezar, vamos a introducir brevemente los principios
 físicos que permiten el movimiento de un coche.</p>
 <div class="section" id="un-poco-de-teoria">
@@ -155,8 +155,8 @@ fuerzas laterales.</p>
 <h3>Movimientos rectilíneos</h3>
 <p>La primera fuerza que entra en juego es la fuerza de tracción. La
 fuerza de tracción es ocasionada por la fricción del neumático contra
-la superficie del asfalto, que es provocada por el desplazamiento
-del neumático contra el asfalto debido al par motor aplicado por el motor.</p>
+la superficie del asfalto, que es ocasinada por el desplazamiento
+del neumático contra el asfalto debido al par motor aplicado por este.</p>
 <p>El par motor es el momento de fuerza que ejerce el motor del coche
 sobre el eje de transmisión, expresado en N.m. El par motor que
 puede entregar depende de la velocidad a la cuál este gira,
@@ -177,7 +177,7 @@ representa la máxima potencia que puede entregar el motor para unas
 rpm dadas.</p>
 <p>El par motor se transmite a través de los engranajes hasta llegar a
 las ruedas, que se acaba conviertiendo en una fuerza a través del giro
-de estas sobre la carretera, dividido por el radio.  La siguiente
+de esta sobre la carretera, dividido por el radio.  La siguiente
 imagen ilustra el proceso:</p>
 <div class="figure align-center">
 <img alt="http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/tc_torques.png" src="http://www.asawicki.info/Mirror/Car%20Physics%20for%20Games/Car%20Physics%20for%20Games_files/tc_torques.png">
@@ -195,7 +195,7 @@ Fconducción = \frac{u * Pmotor * Xg * Xm * n}{Rw}
 <p>Donde:</p>
 <ul class="simple">
 <li>u es el vector unitario que refleja la orientación del coche</li>
-<li>Pmotor es el par motor del motor para unas rpm dadas. Expresado en en N.m</li>
+<li>Pmotor es el par motor en rpm</li>
 <li>xm es la relación de transmisión de las marchas</li>
 <li>xd es el coeficiente del <a class="reference external" href="http://es.wikipedia.org/wiki/Mecanismo_diferencial">diferencial</a>
 </li>
@@ -251,21 +251,20 @@ hacia adelante. Durante la aceleración, el coche se inclina hacia
 atrás. Esto es debido a que el centro de gravedad el coche cambia. El
 efecto de esto es que el peso sobre las ruedas traseras aumenta
 durante la aceleración, mientras que las ruedas delanteras deben
-soportar menos peso. La distribución de peso afecta dramáticamente a
-la tracción máxima por rueda. Esto es debido a que el límite de
-fricción es proporcional a la carga en esa rueda:</p>
+soportar menos peso.</p>
+<p>La distribución de peso afecta dramáticamente a la tracción máxima por
+rueda. Esto es debido a que el límite de fricción es proporcional a la
+carga en esa rueda:</p>
 <div class="math">
 \begin{equation*}
 Fmax = mu * Pesocoche
 \end{equation*}
 </div>
-<p>Donde:</p>
-<ul class="simple">
-<li>mu es coeficiente de rozamiento del neumático.</li>
-</ul>
-<p>Para vehiculos estacionados el peso total del coche se
+<p>Donde:
+- mu es coeficiente de rozamiento del neumático.</p>
+<p>Para vehiculos estacionados el peso total del coche (W = M*g) se
 distribuye sobre las ruedas delanteras y traseras de acuerdo a la
-distancia entre el eje delantero y trasero al centro de masa:</p>
+distancia entre la parte el eje delantero y trasero al centro de masa:</p>
 <div class="math">
 \begin{equation*}
 Peso ruedas traseras = \frac{c}{L} * M
@@ -314,7 +313,7 @@ simulación de las propiedades física a baja velocidad es diferente de
 la simulación a alta velocidad. A velocidades bajas (aparcamiento,
 maniobras), las ruedas giran mas o menos en la dirección en la que
 éstas apuntan. Para simular estos giros no se necesita considerar las
-fuerzas y ni masas. En otras palabras, es un problema de cinética
+fuerzas y ni la masas. En otras palabras, es un problema de cinética
 no de dinámica.</p>
 <p>A velocidades más altas, puede ocurrir que las ruedas apunten en una
 dirección mientras que se muevan en otra. En otras palabras, las
@@ -332,124 +331,131 @@ tenemos que tomar estas fuerzas en cuenta.</p>
 <p>El componente de dinámica de vehículos de Bullet ofrece una
 implementación basada en rayqueries, de tal manera que se lanza un
 rayo por cada rueda del coche. Usando como referencia el punto de
-contacto del rayo contra el suelo, se calcula la longitud y la fuerza
+contacto del rayo contra el suelo, calculamos la longitud y la fuerza
 de la suspensión. La fuerza de la suspensión se aplica sobre el
-chasis de forma que no choque contra el suelo. De hecho, el chasis
+chassis de forma que no choque contra el suelo. De hecho, el chasis
 del vehículo flota sobre el suelo sustentándose sobre los rayos. La
 fuerza de fricción se calcula por cada rueda que esté en contacto con
-el suelo. Esto se aplica como una fuerza hacia los lados y adelante
-por cada rueda; es decir, por cada rayo.</p>
-<p>Hay una serie de clases que son importantes a la hora de utilizar vehículos en Bullet:</p>
-<ul class="simple">
-<li>
-<a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle.html">btRaycastVehicle</a>: Es la clase que modela el comportamiento del coche.</li>
-</ul>
+el suelo. Esto se aplica como una fuerza hacia los lados y adelante.</p>
+<p>Como cualquier cuerpo físico en Bullet, el chasis está formado como un
+cuerpo rígido y una forma de colisión que modela el comportamiento del
+cuerpo rígido. Es importante señalar que el punto de origen de los
+rayos debe situarse dentro de la forma de colisión del chasis (btCollisionShape) ya que,
+de otro modo, las ruedas no tendrían tracción al no estar enganchadas
+al chasis.</p>
+<p>A continuación vemos una lista de los atributos mas importantes de un vehículo de Bullet:</p>
 <pre class="code c++ literal-block">
-<span class="n">btRaycastVehicle</span><span class="o">::</span><span class="n">btRaycastVehicle</span><span class="p">(</span> <span class="k">const</span> <span class="n">btVehicleTuning</span><span class="o">&amp;</span> <span class="n">tuning</span><span class="p">,</span>
-                  <span class="n">btRigidBody</span><span class="o">*</span> <span class="n">chassis</span><span class="p">,</span> <span class="n">btVehicleRaycaster</span><span class="o">*</span> <span class="n">raycaster</span><span class="p">);</span>
+<span class="kt">float</span>     <span class="n">f_max_engine_</span>
+<span class="kt">float</span>     <span class="n">mass_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">wheel_radius_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">wheel_width_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">suspension_stiffness_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">wheel_friction_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">suspension_damping_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">suspension_compression_</span><span class="p">;</span>
+<span class="kt">float</span>     <span class="n">roll_influence_</span>          <span class="p">;</span>
+<span class="kt">float</span>     <span class="n">connection_height_</span><span class="p">;</span>
 </pre>
 <ul class="simple">
-<li>
-<a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/structbtVehicleRaycaster.html">btVehicleRaycaster</a>: clase que proporciona una abstracción a la clase btRaycastVehicle para la gestión de rayqueries.</li>
-<li>
-<a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRigidBody.html">btRigidBody</a>: clase que representa un <a class="reference external" href="http://es.wikipedia.org/wiki/Cuerpo_r%C3%ADgido">cuerpo rigido</a>.</li>
-<li>
-<a class="reference external" href="http://bulletphysics.org/Bullet/BulletFull/classbtRaycastVehicle_1_1btVehicleTuning.html">btVehicleTuning</a>: clase que sirve como estructura de datos para el almacenamiento de algunos de los atributos mas importantes del vehículo. Los atributos son:<ul>
-<li>
-<em>btScalar m_suspensionStiffness</em>: La rigidez (stiffness) de la
-suspensión. Se recomienda asignarle el valor de 10.0 para
-Todoterrenos, 50.0 para coches deportivos y 200.0 para coches de
-formula 1.</li>
-<li>
-<em>btScalar   m_suspensionCompression</em>.</li>
-<li>
-<em>btScalar m_suspensionDamping*</em>: Coeficiente de amortiguación en el caso de que esté comprimida. Toma valores entre 0 y 1. El valor mínimo hace que la amortiguación rebote, mientras que el valor máximo sea lo mas rígida posible. Entre 0.1 y 0.3 la amortiguación se suele comportar correctamente.</li>
-<li>
-<em>btScalar   m_maxSuspensionTravelCm*</em>: La distancia máxima que puede ser comprimida la suspensión, en centímetros.</li>
-<li>
-<em>btScalar   m_frictionSlip</em>:  El coeficiente de fricción entre el neumatico y el suelo. Para coches realistas debería tener el valor de 0.8, pero aumentando el valor mejora la conducción. Para coches de kart se aconseja asignarle un valores muy altos (10000.0).</li>
-<li>
-<em>btScalar   m_maxSuspensionForce</em>: fuerza máxima que puede ejercer la suspensión sobre el chasis.</li>
+<li>El máximo par motor que puede proporcionar el motor con el acelerador pisado a fondo.</li>
+<li>La masa del vehículo, necesaria para crear el cuerpo rígido.</li>
+<li>Las medidas de las ruedas.</li>
+<li>La rigidez (stiffness) de la suspensión. Se recomienda asignarle el valor de 10.0 para Todoterrenos, 50.0 para coches deportivos y 200.0 para coches de formula 1.</li>
+<li>Coeficiente de amortiguación en el caso de que esté comprimida. Toma
+valores entre 0 y 1. El valor mínimo hace que la amortiguación
+rebote y el valor máximo hace que sea lo mas rígida posible.</li>
+<li>La fricción de las ruedas. Asignando valores muy altos (10000) se puede conseguir de forma un poco tramposa que el coche se quede pegado al circuito y no vuelque. Esto facilita hacer juegos donde se pretendan dar giros a altas velocidades, saltándonos las leyes físicas en pos de las mecánicas de juego.</li>
+<li>La influencia de giro. Permite bajar el centro de gravedad del vehículo, lo que reduce la probabilidad de que de vueltas de campana.</li>
+<li>La altura de la amortiguación.</li>
 </ul>
-</li>
-</ul>
-<p>Para ampliar mas acerca de este tema, el autor de la implementación del módulo de vehículos escribió un <a class="reference external" href="https://docs.google.com/document/d/18edpOwtGgCwNyvakS78jxMajCuezotCU_0iezcwiFQc/edit">documento</a> en el que hablaba de los aspectos mas relevantes.</p>
 </div>
 <div class="section" id="veamos-algo-de-codigo">
 <h2>Veamos algo de código</h2>
-<p>A continuación vamos a explicar cómo inicializar un vehículo en
-Bullet, así como las operaciones mas importantes. En este ejemplo me
-voy a apoyar del <a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/managers/physics.cpp?at=master">gestor de físicas</a>
-que he escrito para mi proyecto, que me abstrae a la hora de crear
-cuerpos rígidos, formas de colisión, etcétera. El código completo
-relativo al coche se puede encontrar en la <a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/model/car.cpp?at=master">clase Car</a>
-de mi proyecto.</p>
-<p>Los pasos que hay que seguir para inicializar un coche en bullet son:</p>
-<ul class="simple">
-<li>Creamos un cuerpo rígido</li>
-</ul>
+<p>En primer lugar se va a inicializar el vehículo. El siguiente fragmento de código es una simplificación para ilustrar el proceso de inicialización de un vehículo usando bullet:</p>
 <pre class="code c++ literal-block">
-<span class="n">btVector3</span> <span class="n">car_dimensions</span> <span class="o">=</span> <span class="n">btVector3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5f</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-<span class="n">btBoxShape</span><span class="o">*</span> <span class="n">chassis_box</span> <span class="o">=</span> <span class="n">physics</span><span class="o">-&gt;</span><span class="n">create_shape</span><span class="p">(</span><span class="n">car_dimensions</span><span class="p">);</span>
+ <span class="n">btTransform</span> <span class="n">transform</span><span class="p">;</span>
+ <span class="n">tr</span><span class="p">.</span><span class="n">setIdentity</span><span class="p">();</span>
 
-<span class="n">btVector3</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">btCompoundShape</span><span class="o">*</span> <span class="n">compound</span> <span class="o">=</span>  <span class="n">physics</span><span class="o">-&gt;</span><span class="n">create_compound_shape</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">chassis_box</span><span class="p">);</span>
+ <span class="n">btVector3</span> <span class="n">origin</span> <span class="o">=</span> <span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+ <span class="n">btBoxShape</span><span class="o">*</span> <span class="n">chassis_box</span> <span class="o">=</span> <span class="n">physics</span><span class="o">-&gt;</span><span class="n">create_shape</span><span class="p">(</span><span class="n">controller_</span><span class="o">-&gt;</span><span class="n">car_dimensions_</span><span class="p">);</span>
+ <span class="n">btCompoundShape</span><span class="o">*</span> <span class="n">compound_</span> <span class="o">=</span>
+        <span class="n">physics</span><span class="o">-&gt;</span><span class="n">create_compound_shape</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">chassis_box</span><span class="p">);</span>
 
-<span class="n">btQuaternion</span> <span class="n">rotation</span> <span class="o">=</span> <span class="n">btQuaternion</span><span class="p">(</span><span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">btScalar</span><span class="p">(</span><span class="mi">80</span><span class="p">));</span>
-<span class="n">btVector3</span> <span class="n">position</span> <span class="o">=</span> <span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="n">btTransform</span><span class="p">(</span> <span class="n">rotation</span><span class="p">,</span> <span class="n">position</span><span class="p">);</span>
+ <span class="n">transform</span><span class="p">.</span><span class="n">setOrigin</span><span class="p">(</span><span class="n">btVector3</span><span class="p">(</span><span class="mf">0.f</span><span class="p">,</span><span class="mf">0.f</span><span class="p">,</span><span class="mf">0.f</span><span class="p">));</span>
 
-<span class="kt">int</span> <span class="n">mass</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
-<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="o">*</span> <span class="n">chassis_node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">SceneNode</span><span class="p">(</span><span class="s">"chassis_node"</span><span class="p">);</span>
-
-<span class="n">btRigidBody</span><span class="o">*</span> <span class="n">chassis_body_</span> <span class="o">=</span>  <span class="n">physics</span><span class="o">-&gt;</span><span class="n">create_rigid_body</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">chassis_node</span><span class="p">,</span> <span class="n">compound</span><span class="p">,</span> <span class="n">mass</span><span class="p">);</span>
-
+ <span class="n">chassis_body_</span> <span class="o">=</span>  <span class="n">physics</span><span class="o">-&gt;</span>
+  <span class="n">create_rigid_body</span><span class="p">(</span><span class="n">btTransform</span><span class="p">(</span><span class="n">btQuaternion</span><span class="p">(</span><span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">btScalar</span><span class="p">(</span><span class="mi">80</span><span class="p">)),</span>
+                                <span class="n">position</span><span class="p">),</span>
+                    <span class="n">chassis_node_</span><span class="p">,</span> <span class="n">compound_</span><span class="p">,</span> <span class="n">controller_</span><span class="o">-&gt;</span><span class="n">mass_</span><span class="p">);</span>
+<span class="n">chassis_body_</span><span class="o">-&gt;</span><span class="n">setDamping</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
 <span class="n">chassis_body_</span><span class="o">-&gt;</span><span class="n">setActivationState</span><span class="p">(</span><span class="n">DISABLE_DEACTIVATION</span><span class="p">);</span>
 </pre>
-<p>En el fragmento anterior se crean dos formas de colisión: una caja y una forma compuesta(btCompoundShape), a la que asociamos la primera. Esto permite desplazar la caja una unidad en el eje Y, de forma que esté un poco alzada, indicandolo a través de la variable <em>origin</em>.</p>
-<p>Tras esto se crea un cuerpo rígido. El primer atributo es una estructura de datos que almacena las rotaciones y la posición inicial. El segundo es un nodo de ogre, dado que mi gestor de físicas integra Bullet con Ogre. El tercer argumento es la forma compuesta que hemos creado antes y, por último, la masa del vehículo expresada en kilogramos.</p>
-<p>El último paso consiste en indicarle a Bullet que el cuerpo rígido que acabamos de crear nunca debe ser desactivado; es decir, debe tenerlo en cuenta en todo momento en cada iteración de la simulación física. Bullet ignora algunos cuerpos rígidos que considera que no van a interaccionar en algún momento con otros cuerpos rigidos. Sin embargo, esto tiene como contrapunto que puede que el motor ignore acciones por parte del usuario, como una invocación al método de aceleración. Haciendo que nunca se desactive evitamos esto.</p>
-<ul class="simple">
-<li>Añadimos las ruedas. Para esto, usamos el método addWheel de la clase btRaycastVehicle(la clase que modela el vehículo):</li>
-</ul>
+<p>Añadimos las ruedas</p>
 <pre class="code c++ literal-block">
-<span class="n">btWheelInfo</span> <span class="o">&amp;</span> <span class="n">btRaycastVehicle</span><span class="o">::</span><span class="n">addWheel</span> <span class="p">(</span><span class="k">const</span> <span class="n">btVector3</span> <span class="o">&amp;</span><span class="n">connectionPointCS0</span><span class="p">,</span>
-       <span class="k">const</span> <span class="n">btVector3</span> <span class="o">&amp;</span><span class="n">wheelDirectionCS0</span><span class="p">,</span> <span class="k">const</span> <span class="n">btVector3</span> <span class="o">&amp;</span><span class="n">wheelAxleCS</span><span class="p">,</span>
-       <span class="n">btScalar</span> <span class="n">suspensionRestLength</span><span class="p">,</span><span class="n">btScalar</span> <span class="n">wheelRadius</span><span class="p">,</span> <span class="k">const</span> <span class="n">btVehicleTuning</span> <span class="o">&amp;</span><span class="n">tuning</span><span class="p">,</span>
-       <span class="kt">bool</span> <span class="n">isFrontWheel</span><span class="p">);</span>
+<span class="n">btRaycastVehicle</span><span class="o">*</span> <span class="n">vehicle_</span><span class="p">;</span>
+<span class="n">vehicle_</span><span class="o">-&gt;</span><span class="n">addWheel</span><span class="p">(</span><span class="n">connection_point</span><span class="p">,</span> <span class="n">controller_</span><span class="o">-&gt;</span><span class="n">wheel_direction_cs0_</span><span class="p">,</span>
+       <span class="n">controller_</span><span class="o">-&gt;</span><span class="n">wheel_axle_cs_</span><span class="p">,</span> <span class="n">controller_</span><span class="o">-&gt;</span><span class="n">suspension_rest_length_</span><span class="p">,</span>
+       <span class="n">controller_</span><span class="o">-&gt;</span><span class="n">wheel_radius_</span><span class="p">,</span> <span class="n">tuning_</span> <span class="p">,</span> <span class="n">is_front</span><span class="p">);</span>
 </pre>
-<p>Este método recibe:</p>
-<ol class="arabic simple">
-<li>const btVector3 &amp;connectionPointCS0: la posición de donde va a salir el rayo que representa la rueda. Esta posición debe estar dentro del chasis del coche o de lo contrario esa rueda no aplicará fuerza de tracción.</li>
-<li>const btVector3 &amp;wheelDirectionCS0: El vector dirección de la rueda.</li>
-<li>const btVector3 &amp;wheelAxleCS: El eje sobre el que estará  el eje de la rueda.</li>
-<li>btScalar suspensionRestLength: La longitud máxima de la suspensión, en metros.</li>
-<li>btScalar wheelRadius: radio de la rueda,</li>
-<li>const btVehicleTuning &amp;tuning: Ver explicación anterior.</li>
-<li>bool isFrontWheel: indica si la rueda está en el eje delantero o el trasero.</li>
-</ol>
-<ul class="simple">
-<li>Creamos el coche:</li>
-</ul>
+<p>Creamos el coche:</p>
 <pre class="code c++ literal-block">
-<span class="n">btDefaultVehicleRaycaster</span> <span class="n">vehicle_raycaster</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btDefaultVehicleRaycaster</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">dynamics_world_</span><span class="p">);</span>
-<span class="n">btRaycastVehicle</span> <span class="n">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btRaycastVehicle</span><span class="p">(</span><span class="n">tuning_</span> <span class="p">,</span> <span class="n">chassis_body_</span><span class="p">,</span> <span class="n">vehicle_raycaster_</span><span class="p">);</span>
+<span class="n">vehicle_raycaster_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btDefaultVehicleRaycaster</span><span class="p">(</span><span class="n">physics</span><span class="o">-&gt;</span><span class="n">dynamics_world_</span><span class="p">);</span>
+<span class="n">vehicle_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btRaycastVehicle</span><span class="p">(</span><span class="n">tuning_</span> <span class="p">,</span> <span class="n">chassis_body_</span><span class="p">,</span> <span class="n">vehicle_raycaster_</span><span class="p">);</span>
 
-<span class="n">physics</span><span class="o">-&gt;</span><span class="n">dynamics_world_</span><span class="o">-&gt;</span><span class="n">addVehicle</span><span class="p">(</span><span class="n">vehicle</span><span class="p">);</span>
+<span class="n">physics</span><span class="o">-&gt;</span><span class="n">dynamics_world_</span><span class="o">-&gt;</span><span class="n">addVehicle</span><span class="p">(</span><span class="n">vehicle_</span><span class="p">);</span>
 </pre>
-<p>Como vemos, el último paso consiste en crear un objeto de tipo btRaycastVehicle y añadirlo al mundo a través del método addVehicle de la clase btDiscreteDynamicsWorld. Bullet ofrece una implementación por defecto de la intefaz btVehicleRaycaster, lo que nos ahorra tener que implementarla nosotros.</p>
-<p>Explicado el proceso de inicialización, sólo nos queda mostrar las operaciones básicas de nuestro vehículo.</p>
+<p>El código completo se puede encontrar la <a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/4ed771a44142c75b196e147a6cec8d2da220aab5/src/model/car.cpp?at=master">clase Car</a> de mi proyecto.</p>
+<p>El proceso de inicialización consiste en crear una forma de colisión con forma de caja con las dimensiones del coche. Despues se crea una forma física compuesta de la anterior. Este tipo de formas compuestas nos permiten mover el origen de las formas que la componen, de forma que es posible modificar el centro de gravedad por defecto de la forma de gravedad, cosa que no es posible con las otras formas de colisión pues depende de las propiedades físicas que la forman. Tras esto se crea el cuerpo rígido y se indica al motor de físicas que no se debe desactivar este cuerpo rígido. Esto significa que el motor de físicas tiene que tener en cuenta este cuerpo rígido en cada momento, incluso cuando aparentemente no vaya a tener interacciones.</p>
+<p>Acelerar:</p>
+<pre class="code c++ literal-block">
+<span class="kt">void</span>
+<span class="n">CarController</span><span class="o">::</span><span class="n">accelerate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">f_engine_</span> <span class="o">&gt;=</span>  <span class="n">f_max_engine_</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">accelerating_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">f_engine_</span> <span class="o">+=</span> <span class="n">acceleration_</span><span class="p">;</span>
+  <span class="n">accelerating_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>Frenar:</p>
+<pre class="code c++ literal-block">
+<span class="kt">void</span>
+<span class="n">CarController</span><span class="o">::</span><span class="n">brake</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">accelerating_</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+   <span class="n">braking_</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+   <span class="n">f_braking_</span> <span class="o">=</span> <span class="n">f_max_braking_</span><span class="p">;</span>
+   <span class="n">f_engine_</span> <span class="o">=</span> <span class="p">(</span><span class="n">f_engine_</span> <span class="o">&lt;=</span> <span class="n">f_max_engine_</span><span class="p">)</span> <span class="o">?</span>
+   <span class="o">-</span><span class="n">f_max_engine_</span><span class="o">:</span> <span class="n">f_engine_</span> <span class="o">-</span> <span class="n">deceleration_</span><span class="p">;</span>
+<span class="p">}</span>
+</pre>
+<p>Girar:</p>
+<pre class="code c++ literal-block">
+ <span class="kt">void</span>
+ <span class="n">CarController</span><span class="o">::</span><span class="n">turn</span><span class="p">(</span><span class="n">Direction</span> <span class="n">direction</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">if</span><span class="p">(</span><span class="n">direction</span> <span class="o">==</span> <span class="n">Direction</span><span class="o">::</span><span class="n">right</span><span class="p">){</span>
+     <span class="n">turn_wheels</span><span class="p">(</span><span class="n">Direction</span><span class="o">::</span><span class="n">right</span><span class="p">);</span>
+     <span class="n">steering_</span> <span class="o">=</span> <span class="p">(</span><span class="n">steering_</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">steering_clamp_</span><span class="p">)</span><span class="o">?</span>
+     <span class="o">-</span><span class="n">steering_clamp_</span> <span class="o">:</span> <span class="n">steering_</span> <span class="o">-</span> <span class="n">steering_increment_</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">else</span><span class="p">{</span>
+     <span class="n">turn_wheels</span><span class="p">(</span><span class="n">Direction</span><span class="o">::</span><span class="n">left</span><span class="p">);</span>
+     <span class="n">steering_</span> <span class="o">=</span> <span class="p">(</span><span class="n">steering_</span> <span class="o">&gt;</span> <span class="n">steering_clamp_</span><span class="p">)</span><span class="o">?</span>
+        <span class="n">steering_clamp_</span> <span class="o">:</span> <span class="n">steering_</span> <span class="o">+</span> <span class="n">steering_increment_</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre>
 <p>Para que el coche acelere se ejecuta la siguiente función, que aplica par motor a las ruedas del coche</p>
-<ul class="simple">
-<li>void btRaycastVehicle::applyEngineForce( btScalar force, int wheel): aplica par motor a la rueda con ese índice. Los valores estan expresados en N.m.</li>
-<li>void btRaycastVehicle::setBrake( btScalar brake, int wheelIndex): aplica frenado a la ruedas con ese índice.</li>
-<li>void btRaycastVehicle::setSteeringValue (btScalar steering, int wheel): gira la rueda con ese índice los grados que indica el primer argumento.</li>
-</ul>
-</div>
-<div class="section" id="conclusiones">
-<h2>Conclusiones</h2>
-<p>En este artículo he intentado explicar de la forma mas clara posible con qué problemas he tenido que lidiar a la hora de configurar e implementar la clase Car en mi proyecto. He dejado muchas cosas en el tintero, pero creo que lo mas importante ha quedado reflejado en este post.</p>
-<p>Un saludo y nos vemos en el siguiente artículo.</p>
+<pre class="code c++ literal-block">
+<span class="n">vehicle_</span><span class="o">-&gt;</span><span class="n">applyEngineForce</span><span class="p">(</span><span class="n">controller_</span><span class="o">-&gt;</span><span class="n">f_engine_</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">vehicle_</span><span class="o">-&gt;</span><span class="n">applyEngineForce</span><span class="p">(</span><span class="n">controller_</span><span class="o">-&gt;</span><span class="n">f_engine_</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre>
+<p>Para hacer que el coche gire se aplica un giro a las ruedas:</p>
+<pre class="code c++ literal-block">
+<span class="n">vehicle_</span><span class="o">-&gt;</span><span class="n">setSteeringValue</span><span class="p">(</span><span class="n">controller_</span><span class="o">-&gt;</span><span class="n">steering_</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">vehicle_</span><span class="o">-&gt;</span><span class="n">setSteeringValue</span><span class="p">(</span><span class="n">controller_</span><span class="o">-&gt;</span><span class="n">steering_</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre>
+<p>El primer argumento de las funciones anteriores representa el valor de par motor o steering aplicado a las ruedas. El segundo argumento es el índice de las ruedas. En este ejemplo, corresponde con las ruedas delanteras.</p>
 <!--  -->
 <!-- Hola, parece que tienes algo de curiosidad. -->
 <!-- Como recompensa, aquí tienes la traducción del artículo completo sobre el que me he basado para escribir el apartado teórico de este post -->
@@ -1400,6 +1406,9 @@ de mi proyecto.</p>
         <ul class="pager">
             <li class="previous">
                 <a href="../roadmap/roadmap-del-proyecto.html" rel="prev" title="Roadmap del proyecto">Post anterior</a>
+            </li>
+            <li class="next">
+                <a href="../anadiendo-circuito/anadiendo-circuitos-al-juego.html" rel="next" title="Añadiendo circuitos al juego">Siguiente post</a>
             </li>
         </ul>
 

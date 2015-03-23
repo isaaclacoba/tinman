@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="es">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="creacion de circuitos">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Añadiendo circuitos al juego | Tinman</title>
+
+    
+            <link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+
+      <link rel="canonical" href="http://isaaclacoba.github.io/tinman/posts/anadiendo-circuito/anadiendo-circuitos-al-juego.html">
+
+
+
+
+    
+        <!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="description" itemprop="description" content="creacion de circuitos">
+    <meta name="author" content="Isaac Lacoba Molina">
+        <link rel="prev" href="../creando-coche/creando-coches-para-el-juego.html" title="Creando coches para el juego" type="text/html">
+    
+    <meta property="og:site_name" content="Tinman">
+    <meta property="og:title" content="Añadiendo circuitos al juego">
+    <meta property="og:url" content="http://isaaclacoba.github.io/tinman/posts/anadiendo-circuito/anadiendo-circuitos-al-juego.html">
+    <meta property="og:description" content="creacion de circuitos">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2015-03-14T11:46:24+01:00">
+           <meta property="article:tag" content="regex">
+
+    
+
+    
+
+
+
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://isaaclacoba.github.io/tinman/">
+
+                <span id="blog-title">Tinman</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../../archive.html">Archivo</a>
+                </li>
+<li>
+<a href="../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">feed RSS</a>
+                </li>
+<li>
+<a href="https://bitbucket.org/arco_group/tfg.tinman">Repository</a>
+
+                
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="anadiendo-circuitos-al-juego.rst" id="sourcelink">Código</a>
+    </li>
+
+                
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container" id="content">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">Añadiendo circuitos al juego</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Isaac Lacoba Molina</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2015-03-14T11:46:24+01:00" itemprop="datePublished" title="2015-03-14 11:46">2015-03-14 11:46</time></a></p>
+            
+        <p class="sourceline"><a href="anadiendo-circuitos-al-juego.rst" id="sourcelink">Código</a></p>
+
+                <meta name="description" itemprop="description" content="creacion de circuitos">
+        </div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>En esta entrada se van a exponer los problemas que se han tenido que
+resolver para poder añadir circuitos al juego. Se explicará la
+situación al empezar a estudiar el problema y después se mostrará el
+proceso que se ha segudio para crear nuevos circuitos.</p>
+<div class="section" id="problemas-iniciales-y-justificacion-de-las-elecciones">
+<h2>Problemas iniciales y justificacion de las elecciones</h2>
+<p>En cualquier videojuego 3D se hace necesario disponer de un software
+que permita modelar los objetos que se quieren añadir a la escena, en
+el caso de este proyecto, el circuito. El proceso de modelado consiste en dar forma
+a cuerpos geométricos simples hasta alcanzar la forma deseada.</p>
+<p>En este proyecto se ha usado <a class="reference external" href="http://www.blender.org/">Blender</a>. Blender es una herramienta de software
+libre para realizar modelado, iluminación, renderizado, animación y
+creación de gráficos tridimensionales.</p>
+<!-- En particular, destacan páginas como `cgcookies -->
+<!-- <https://cgcookie.com/blender>`_, donde se pueden encontrar -->
+<!-- completísimos tutoriales orientados a artistas, y `sketchfab -->
+<!-- <https://sketchfab.com/>`_ o `blenderswap -->
+<!-- <http://www.blendswap.com/>`_, donde los autores pueden compartir su -->
+<!-- trabajo bajo diferentes licencias de tipo Creative Commons. -->
+<p>La razón por la que se ha elegido blender, en lugar de otras
+herramientas como Maya3D, es que se distribuye bajo una licencia de
+software libre (GNU GPL license) y cuenta con una grandísima
+comunidad. Además, existen proyectos profesionales que respaldan la
+calidad de Blender; por ejemplo, <a class="reference external" href="https://www.youtube.com/watch?v=eRsGyueVLvQ">Sintel</a>.</p>
+<p>Tras la elección del software de modelado el siguiente problema que se
+debía solucionar es la propia creación del circuito; es decir, decidir
+la manera en que se iba a construir el circuito a partir de los
+objetos modelados.</p>
+<p>La decisión que se tomó fue la de crear el circuito como si se tratase
+de un Scalextric. Se crearían una serie de piezas, de tal forma, que
+encajaran unas con otras perfectamente. Las ventajas de esta
+aproximación son:</p>
+<ul class="simple">
+<li>reduce el tiempo de creación de nuevos circuitos una vez que se tienen modeladas las piezas base. Esto es así debido a que los nuevos circuitos consisten en diferentes combinaciones de las piezas básicas. Cuando se quieran hacer nuevos circuitos no será necesario utilizar Blender.</li>
+<li>El hecho de codificar el circuito en formato de texto evita tener que recompilar el juego cada vez que queramos añadir nuevos circuitos.</li>
+<li>Permite distribuir de una menera fácil nuevos circuitos entre usuarios sin necesidad de recompilar el videojuego, ya que un circuito se codifica como un fichero de texto.</li>
+</ul>
+<p>Las mayores desventajas de este método es la de tener que parsear el
+fichero del circuito y la elección de texturas que al ser concatenadas
+no revelen patrones que hagan ver que existe un punto de unión entre
+las piezas del circuito. Sin embargo, la dificultad de parsear un
+fichero de texto con un formato simple es trivial, de modo que en este
+caso los pros superan altamente los contras, mientras que el segundo
+problema se trata de algo puramente artístico.</p>
+</div>
+<div class="section" id="proceso-de-creacion">
+<h2>Proceso de creación</h2>
+<p>En el siguiente vídeo se muestra el proceso de creación de la curva:</p>
+<iframe width="425" height="344" src="//www.youtube.com/embed/emC5s0C4Q54?rel=0&amp;hd=1&amp;wmode=transparent"></iframe><p>En el minuto 6:33 se puede ver como se corrigen las piezas para que
+encajen perfectamente unas con otras. El modelado 3D requiere una
+larga experiencia, ya que se trata de un proceso complejo con
+muchísima casuística. Por otro lado, se ha realizado un
+esfuerzo por que todo los modelos del juego tengan el mínimo número de
+polígonos. En el vídeo no se muestra el proceso de limpiado de la
+geometría, fundiendo caras o eliminandos vértices que puedan sobrar.</p>
+<p>Una vez creadas las piezas, el siguiente paso consiste en guardar en
+un fichero de texto la información relativa al circuito.</p>
+</div>
+<div class="section" id="parseando-el-fichero-del-circuito">
+<h2>Parseando el fichero del circuito</h2>
+<p>Una vez decidido que el circuito se almacenaría en un fichero de texto,
+se debía elegir qué biblioteca se iba a usar para parsearlo.</p>
+<p>Aunque en C++ existen multitud de bibliotecas de <a class="reference external" href="http://es.wikipedia.org/wiki/Analizador_sint%C3%A1ctico">parseo</a> para los
+formatos de fichero mas comunes (por ejemplo
+<a class="reference external" href="https://github.com/open-source-parsers/jsoncpp">https://github.com/open-source-parsers/jsoncpp</a>), se decidió crear una
+implementación propia haciendo uso de la <a class="reference external" href="http://es.cppreference.com/w/cpp/regex">biblioteca de expresiones
+regulares</a> que incluye
+C++11.</p>
+<p>Las razones por la cuales se decidió utilizar esta nueva
+características del estándar es que se trata de una forma rápida y
+sencilla de implementar un parser flexible que se pudiese ajustar a
+cualquier estructura de fichero, al tiempo que se reducía el número de
+dependencias del proyecto, ya que la biblioteca estándar viene
+incluida por defecto. Por contra, la desventaja de
+usar expresiones regulares es que puede ser relativamente complejo
+crear la expresión que se adapta a la estructura del fichero.</p>
+<div class="section" id="implementacion-del-parser">
+<h3>Implementación del parser</h3>
+<p>Dado que podría ser innecesariamente complejo utilizar una estructura
+en cascada, se decidió que cada línea del fichero tuviese información
+autocontenida.  Cada una de las líneas del fichero del circuito sigue la siguiente estructura:</p>
+<pre class="code bash literal-block">
+section: <span class="o">{</span> position: <span class="o">{</span>x, y, z<span class="o">}</span> rotation: <span class="o">{</span>Delta<span class="o">}</span> <span class="nb">type</span>: <span class="o">{</span>Tipo<span class="o">}</span> <span class="o">}</span>
+</pre>
+<p>Siendo:</p>
+<ul class="simple">
+<li>x, y, z, Delta  variables de tipo float.</li>
+<li>Tipo una variable de tipo string. Toma los valores <em>rect</em> o  <em>curve</em>.</li>
+</ul>
+<p>La implementación completa del parser se puede encontrar <a class="reference external" href="https://bitbucket.org/arco_group/tfg.tinman/src/a211ee73757119ffd56193e4ac02040eb8fbed18/src/util/parser.cpp?at=master">aquí</a>. De
+lo anterior, el método más importante es el que nos devuelve un vector
+de resultados:</p>
+<pre class="code c++ literal-block">
+<span class="ln"> 1 </span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">Match</span><span class="p">;</span>
+<span class="ln"> 2 </span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Match</span><span class="o">&gt;</span> <span class="n">Results</span><span class="p">;</span>
+<span class="ln"> 3 </span>
+<span class="ln"> 4 </span><span class="n">Parser</span><span class="o">::</span><span class="n">Results</span>
+<span class="ln"> 5 </span><span class="n">Parser</span><span class="o">::</span><span class="n">get_results</span><span class="p">()</span> <span class="p">{</span>
+<span class="ln"> 6 </span>   <span class="n">Parser</span><span class="o">::</span><span class="n">Results</span> <span class="n">results</span><span class="p">;</span>
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span>   <span class="n">std</span><span class="o">::</span><span class="n">smatch</span> <span class="n">matches</span><span class="p">;</span>
+<span class="ln"> 9 </span>   <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">line</span><span class="p">;</span> <span class="n">getline</span><span class="p">(</span><span class="n">file_</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span><span class="p">)</span> <span class="p">{</span>
+<span class="ln">10 </span>       <span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">regex_search</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">matches</span><span class="p">,</span> <span class="n">pattern_</span><span class="p">))</span> <span class="p">{</span>
+<span class="ln">11 </span>         <span class="n">Parser</span><span class="o">::</span><span class="n">Match</span> <span class="n">string_matches</span><span class="p">;</span>
+<span class="ln">12 </span>         <span class="n">string_matches</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">string_matches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">matches</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">matches</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+<span class="ln">13 </span>         <span class="n">results</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">string_matches</span><span class="p">);</span>
+<span class="ln">14 </span>       <span class="p">}</span>
+<span class="ln">15 </span>   <span class="p">}</span>
+<span class="ln">16 </span>   <span class="n">file_</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="ln">17 </span>
+<span class="ln">18 </span>   <span class="k">return</span> <span class="n">results</span><span class="p">;</span>
+<span class="ln">19 </span><span class="p">}</span>
+</pre>
+<p>Este método lee línea por línea un fichero, y por cada línea, ejecuta
+el método std::regex_search. Este método busca en <em>line</em> cualquier
+ocurrencia de <em>pattern_</em> (el patrón que estamos buscando) y lo
+almacena en <em>matches</em>. Si no encuentra nada, devuelve falso. Es decir,
+para cada línea del fichero, se comprueba que contenga la
+estructura que le hemos indicado a través de la expresión regular
+<em>pattern_</em> (el patrón de búsqueda). Si es así, almacena los resultados,
+finalizando haya analizado todas las líneas del fichero <em>file_</em>,
+termina.</p>
+<p>En la línea 10 se puede ver que para realizar la búsqueda
+se usa la función std::regex_search. Dicha función analiza la
+variable <em>line</em> (una línea del fichero) en busca del patrón <em>pattern_</em>
+( la expresión regular que define la estructura de una línea del
+fichero) y en caso de encontrar una coincidencia, almacena el
+resultado en la variable de salida <em>matches</em>. Dicha variable está
+declarada en la línea 8. La variable <em>matches</em> es de tipo <a class="reference external" href="http://www.cplusplus.com/reference/regex/smatch/">std::smatch</a>, que es una
+instanciación de la plantilla <a class="reference external" href="http://www.cplusplus.com/reference/regex/match_results/">std::match_results</a> para
+variables de tipo string. Un objeto de tipo <em>std::match_results</em> (la
+variable <em>std::smatch</em> es un subtipo) tiene la siguiente estructura:</p>
+<pre class="code bash literal-block">
+            -----------------------------------
+           |               m<span class="o">[</span>0<span class="o">]</span>                |
+-----------------------------------------------------------
+| m.prefix | m<span class="o">[</span>1<span class="o">]</span> | m<span class="o">[</span>2<span class="o">]</span> | ... |  m<span class="o">[</span>m.size<span class="o">()]</span>  | m.suffix<span class="o">()</span> |
+ ------------------------------------------------------------
+</pre>
+<ul class="simple">
+<li>m.prefix: son los caracteres que preceden al resultado de la búsqueda.</li>
+<li>m[0]: es el resultado de la búsqueda al completo.</li>
+<li>m.suffix: son los caracteres que siguen al resultado de la búsqueda.</li>
+</ul>
+<p>La biblioteca de expresiones regulares permite definir subgrupos
+dentro de la expresión regular. Estos subgrupos se definen englobando
+entre paréntesis los elementos que queremos almacenar, y estan
+representados en el diagrama anterior debajo de m[0]. Gracias a esto
+podemos acceder de forma fácil a los elementos que nos interesen,
+haciendo la labor de parseo del fichero muy sencilla. La única desventaja es que, en la implementación propuesta, los subgrupos son de tipo string. Es decir, se ha de saber a priori el tipo de dato de cada subgrupo para poder hacer el casting. Por ejemplo, cuando se accede a la posición, los componentes son de tipo float, de modo que hay que hacer un casting de string a float. La expresión
+regular que define la estructura de nuestro fichero es la siguiente:</p>
+<pre class="code bash literal-block">
+<span class="o">(</span>section: <span class="se">\{\s</span>position: <span class="se">\{</span><span class="o">(</span>-?<span class="se">\b\d</span>*.<span class="se">\d</span>*<span class="o">)</span>, <span class="o">(</span>-?<span class="se">\b\d</span>*.<span class="se">\d</span>*<span class="o">)</span>, <span class="o">(</span>-?<span class="se">\b\d</span>*.<span class="se">\d</span>*<span class="o">)</span><span class="se">\}\s</span>*rotation: <span class="se">\{</span><span class="o">(</span>-?<span class="se">\d</span><span class="o">{</span>1,3<span class="o">})</span><span class="se">\}\s</span>*type: <span class="se">\{</span><span class="o">(</span><span class="se">\w</span>*<span class="o">)</span><span class="se">\}</span> <span class="se">\}</span><span class="o">)</span>
+</pre>
+<p>Existen multitud de <a class="reference external" href="https://msdn.microsoft.com/en-us/library/bb982727.aspx">tutoriales</a> que explican detalladamente cómo usar expresiones regulares.</p>
+</div>
+</div>
+<div class="section" id="trabajo-futuro">
+<h2>Trabajo futuro</h2>
+<p>Debido a la enorme carga de trabajo de este proyecto, existen una gran
+cantidad de características que se quedarán en el tintero.</p>
+<p>Sin embargo, gracias a la gran flexibilidad que añade el mecanismo
+explicado en este post, no tiene una gran complejidad crear un editor
+gráfico de circuitos, de modo que se le de al jugador la posibilidad
+de añadir nuevos a placer.</p>
+<p>Por otra parte, estaría bien contar con mas tipos de segmentos de
+circuito, en especial cambiando el tipo de suelo, de modo que añada
+mas baches e incluso rampas, que permitan aprovechar de una forma mas
+óptima el motor de físicas.</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+        <ul itemprop="keywords" class="tags">
+           <li><a class="tag p-category" href="../../categories/regex.html" rel="tag">regex</a></li>
+        </ul>
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="../creando-coche/creando-coches-para-el-juego.html" rel="prev" title="Creando coches para el juego">Post anterior</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+    
+
+</article>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:isaac.lacoba@gmail.com">Isaac Lacoba Molina</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../../assets/js/all-nocdn.js"></script>
+        <script src="../../assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <!-- fancy dates -->
+    <script>
+    moment.locale("es");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script>
+    <!-- end fancy dates -->
+    
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57580832-1', 'auto');ga('send', 'pageview');</script>
+
+</body>
+</html>
