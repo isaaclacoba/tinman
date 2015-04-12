@@ -10,6 +10,7 @@ En esta entrada se va a mostrar cuál es el estado actual del proyecto, qué obj
 
 .. TEASER_END: click to read the rest of the article
 
+
 ********************
 Estado del proyecto
 ********************

@@ -17,6 +17,7 @@ programa que ilustrará cómo integrar Bullet junto a `Ogre3D
 <http://isaaclacoba.github.io/tinman/posts/introduccion-ogre3d/introduccion-a-ogre3d.html>`_,
 la biblioteca de renderizado usada en este proyecto.
 
+
 .. TEASER_END: click to read the rest of the article
 
 

@@ -15,6 +15,7 @@ ha creado un pequeño programa usando Ogre en el que se renderiza su
 mascota, Sinbad, al mismo tiempo que servirá como ejemplo para mostrar
 la estructura típica de un programa que hace uso de esta biblioteca.
 
+
 .. TEASER_END: click to read the rest of the article
 
 

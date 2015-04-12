@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="es">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compartiendo geometría entre cuerpos gráficos y físicos | Tinman</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://isaaclacoba.github.io/tinman/posts/compartiendo-geometria-entre-cuerpos-graficos-y-fisicos.html">
+
+
+
+
+    
+        <!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+    
+
+    <meta name="author" content="Isaac Lacoba Molina">
+        <link rel="prev" href="modelos-red/modelos-de-red-en-videojuegos.html" title="Modelos de red en videojuegos" type="text/html">
+    
+    <meta property="og:site_name" content="Tinman">
+    <meta property="og:title" content="Compartiendo geometría entre cuerpos gráficos y físicos">
+    <meta property="og:url" content="http://isaaclacoba.github.io/tinman/posts/compartiendo-geometria-entre-cuerpos-graficos-y-fisicos.html">
+    <meta property="og:description" content="En esta entrada se va a explicar cómo crear cuerpos físicos que tengan
+la misma geometría que un determinado cuerpo gráfico.
+
+
+Compartiendo la geometría
+Cuando se está creando un escenario en un video">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2015-04-12T10:09:17+02:00">
+
+    
+
+    
+
+
+
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://isaaclacoba.github.io/tinman/">
+
+                <span id="blog-title">Tinman</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                
+                <li>
+<a href="../archive.html">Archivo</a>
+                </li>
+<li>
+<a href="../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../rss.xml">feed RSS</a>
+                </li>
+<li>
+<a href="https://bitbucket.org/arco_group/tfg.tinman">Repository</a>
+
+                
+            </li>
+</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                    
+    <li>
+    <a href="compartiendo-geometria-entre-cuerpos-graficos-y-fisicos.rst" id="sourcelink">Código</a>
+    </li>
+
+                
+            </ul>
+        </div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav>
+
+<!-- End of Menubar -->
+
+<div class="container" id="content">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <header>
+        
+    <h1 class="p-name entry-title" itemprop="headline name"><a href="#" class="u-url">Compartiendo geometría entre cuerpos gráficos y físicos</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">Isaac Lacoba Molina</span></p>
+            <p class="dateline"><a href="#" rel="bookmark"><time class="published dt-published" datetime="2015-04-12T10:09:17+02:00" itemprop="datePublished" title="2015-04-12 10:09">2015-04-12 10:09</time></a></p>
+            
+        <p class="sourceline"><a href="compartiendo-geometria-entre-cuerpos-graficos-y-fisicos.rst" id="sourcelink">Código</a></p>
+
+        </div>
+        
+
+    </header>
+
+    <div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>En esta entrada se va a explicar cómo crear cuerpos físicos que tengan
+la misma geometría que un determinado cuerpo gráfico.</p>
+<!-- TEASER_END: click to read the rest of the article -->
+<div class="section" id="compartiendo-la-geometria">
+<h2>Compartiendo la geometría</h2>
+<p>Cuando se está creando un escenario en un videojuego, típicamente se quiere que los elementos estáticos tengan cuerpos rígidos que compartan la forma geométrica de los elementos gráficos. Si usamos Bullet, esto es posible implementando la interfaz <a class="reference external" href="http://www.continuousphysics.com/Bullet/BulletFull/classbtStridingMeshInterface.html">btStridingMeshInterface</a>. Dicha interfaz ofrece una forma de crear formas de colisión usando <a class="reference external" href="http://www.continuousphysics.com/Bullet/BulletFull/classbtBvhTriangleMeshShape.html">btBvhTriangleMeshShape</a>.</p>
+<p>Una de las cosas buenas que tiene Ogre para alguien que está empezando a trabajar con él es la cantidad de snippets que se pueden encontrar en la wiki del proyecto. En este caso, se puede encontrar una solución al problema planteado en esta <a class="reference external" href="http://www.ogre3d.org/tikiwiki/BulletMeshStrider">página de la wiki</a>. En dicha página podemos encontrar una implementación de la interfaz de Bullet mencionada anteriormente.</p>
+<ul class="simple">
+<li>Archivo de cabecera:</li>
+</ul>
+<pre class="code c++ literal-block">
+<span class="cp">#ifndef MeshStrider_h__
+#define MeshStrider_h__
+</span>
+<span class="cp">#include "..\common.h"
+</span>
+<span class="c1">/// Shares vertices/indexes between Ogre and Bullet
+</span><span class="k">class</span> <span class="nc">MeshStrider</span> <span class="o">:</span> <span class="k">public</span> <span class="n">btStridingMeshInterface</span><span class="p">{</span>
+
+<span class="nl">public:</span>
+    <span class="n">MeshStrider</span><span class="p">(</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span><span class="o">:</span><span class="n">mMesh</span><span class="p">(</span><span class="n">m</span><span class="p">){}</span>
+
+    <span class="kt">void</span> <span class="n">set</span><span class="p">(</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">m</span> <span class="p">)</span> <span class="p">{</span> <span class="n">ASSERT</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="n">mMesh</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span> <span class="p">}</span>
+    <span class="c1">// inherited interface
+</span>    <span class="k">virtual</span> <span class="kt">int</span>        <span class="n">getNumSubParts</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">getLockedVertexIndexBase</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">vertexbase</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">numverts</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">stride</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">indexbase</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span> <span class="n">indexstride</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">numfaces</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">indicestype</span><span class="p">,</span><span class="kt">int</span> <span class="n">subpart</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="n">getLockedReadOnlyVertexIndexBase</span><span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">vertexbase</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">numverts</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">stride</span><span class="p">,</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">indexbase</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span> <span class="n">indexstride</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">numfaces</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">indicestype</span><span class="p">,</span><span class="kt">int</span> <span class="n">subpart</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">unLockVertexBase</span><span class="p">(</span><span class="kt">int</span> <span class="n">subpart</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="n">unLockReadOnlyVertexBase</span><span class="p">(</span><span class="kt">int</span> <span class="n">subpart</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">preallocateVertices</span><span class="p">(</span><span class="kt">int</span> <span class="n">numverts</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">preallocateIndices</span><span class="p">(</span><span class="kt">int</span> <span class="n">numindices</span><span class="p">);</span>
+<span class="nl">private:</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">mMesh</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cp">#endif </span><span class="c1">// MeshStrider_h__
+</span>
+</pre>
+<ul class="simple">
+<li>Implementación:</li>
+</ul>
+<pre class="code c++ literal-block">
+<span class="cp">#include "common.h"
+</span>
+<span class="cp">#include "MeshStrider.h"
+</span>
+<span class="kt">int</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">getNumSubParts</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">getNumSubMeshes</span><span class="p">();</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="n">ret</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">getLockedReadOnlyVertexIndexBase</span><span class="p">(</span>
+    <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">vertexbase</span><span class="p">,</span>
+    <span class="kt">int</span><span class="o">&amp;</span> <span class="n">numverts</span><span class="p">,</span>
+    <span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">type</span><span class="p">,</span>
+    <span class="kt">int</span><span class="o">&amp;</span> <span class="n">stride</span><span class="p">,</span>
+    <span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">indexbase</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="o">&amp;</span> <span class="n">indexstride</span><span class="p">,</span>
+    <span class="kt">int</span><span class="o">&amp;</span> <span class="n">numfaces</span><span class="p">,</span>
+    <span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">indicestype</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">subpart</span><span class="cm">/*=0*/</span> <span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">SubMesh</span><span class="o">*</span> <span class="n">submesh</span> <span class="o">=</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">getSubMesh</span><span class="p">(</span><span class="n">subpart</span><span class="p">);</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">sharedVertexData</span> <span class="o">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexElement</span><span class="o">*</span> <span class="n">posElem</span> <span class="o">=</span>
+        <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexDeclaration</span><span class="o">-&gt;</span><span class="n">findElementBySemantic</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">VES_POSITION</span><span class="p">);</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareVertexBufferSharedPtr</span> <span class="n">vbuf</span> <span class="o">=</span>
+        <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexBufferBinding</span><span class="o">-&gt;</span><span class="n">getBuffer</span><span class="p">(</span><span class="n">posElem</span><span class="o">-&gt;</span><span class="n">getSource</span><span class="p">());</span>
+
+    <span class="o">*</span><span class="n">vertexbase</span> <span class="o">=</span>
+        <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">vbuf</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareBuffer</span><span class="o">::</span><span class="n">HBL_READ_ONLY</span><span class="p">));</span>
+    <span class="c1">// There is _no_ baseVertexPointerToElement() which takes an Ogre::Real or a double
+</span>    <span class="c1">//  as second argument. So make it float, to avoid trouble when Ogre::Real will
+</span>    <span class="c1">//  be comiled/typedefed as double:
+</span>    <span class="c1">//Ogre::Real* pReal;
+</span>    <span class="kt">float</span><span class="o">*</span> <span class="n">pReal</span><span class="p">;</span>
+    <span class="n">posElem</span><span class="o">-&gt;</span><span class="n">baseVertexPointerToElement</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="o">*</span><span class="n">vertexbase</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">pReal</span><span class="p">);</span>
+    <span class="o">*</span><span class="n">vertexbase</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span><span class="p">)</span> <span class="n">pReal</span><span class="p">;</span>
+
+    <span class="n">stride</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">vbuf</span><span class="o">-&gt;</span><span class="n">getVertexSize</span><span class="p">();</span>
+
+    <span class="n">numverts</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexCount</span><span class="p">;</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="n">numverts</span> <span class="p">);</span>
+
+    <span class="n">type</span> <span class="o">=</span> <span class="n">PHY_FLOAT</span><span class="p">;</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">IndexData</span><span class="o">*</span> <span class="n">index_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">indexData</span><span class="p">;</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareIndexBufferSharedPtr</span> <span class="n">ibuf</span> <span class="o">=</span> <span class="n">index_data</span><span class="o">-&gt;</span><span class="n">indexBuffer</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">()</span> <span class="o">==</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareIndexBuffer</span><span class="o">::</span><span class="n">IT_32BIT</span><span class="p">){</span>
+        <span class="n">indicestype</span> <span class="o">=</span> <span class="n">PHY_INTEGER</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">ASSERT</span><span class="p">(</span><span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">getType</span><span class="p">()</span> <span class="o">==</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareIndexBuffer</span><span class="o">::</span><span class="n">IT_16BIT</span><span class="p">);</span>
+        <span class="n">indicestype</span> <span class="o">=</span> <span class="n">PHY_SHORT</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">operationType</span> <span class="o">==</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">RenderOperation</span><span class="o">::</span><span class="n">OT_TRIANGLE_LIST</span> <span class="p">){</span>
+        <span class="n">numfaces</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">index_data</span><span class="o">-&gt;</span><span class="n">indexCount</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+        <span class="n">indexstride</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">getIndexSize</span><span class="p">()</span><span class="o">*</span><span class="mi">3</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">operationType</span> <span class="o">==</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">RenderOperation</span><span class="o">::</span><span class="n">OT_TRIANGLE_STRIP</span> <span class="p">){</span>
+        <span class="n">numfaces</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">index_data</span><span class="o">-&gt;</span><span class="n">indexCount</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+        <span class="n">indexstride</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">getIndexSize</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+        <span class="n">ASSERT</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span> <span class="c1">// not supported
+</span>    <span class="p">}</span>
+
+    <span class="o">*</span><span class="n">indexbase</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareBuffer</span><span class="o">::</span><span class="n">HBL_READ_ONLY</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">getLockedVertexIndexBase</span><span class="p">(</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">vertexbase</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">numverts</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">stride</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">**</span><span class="n">indexbase</span><span class="p">,</span><span class="kt">int</span> <span class="o">&amp;</span> <span class="n">indexstride</span><span class="p">,</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">numfaces</span><span class="p">,</span><span class="n">PHY_ScalarType</span><span class="o">&amp;</span> <span class="n">indicestype</span><span class="p">,</span><span class="kt">int</span> <span class="n">subpart</span><span class="cm">/*=0*/</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">unLockReadOnlyVertexBase</span><span class="p">(</span> <span class="kt">int</span> <span class="n">subpart</span> <span class="p">)</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">SubMesh</span><span class="o">*</span> <span class="n">submesh</span> <span class="o">=</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">getSubMesh</span><span class="p">(</span><span class="n">subpart</span><span class="p">);</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">sharedVertexData</span> <span class="o">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
+
+    <span class="k">const</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexElement</span><span class="o">*</span> <span class="n">posElem</span> <span class="o">=</span>
+        <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexDeclaration</span><span class="o">-&gt;</span><span class="n">findElementBySemantic</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">VES_POSITION</span><span class="p">);</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareVertexBufferSharedPtr</span> <span class="n">vbuf</span> <span class="o">=</span>
+        <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexBufferBinding</span><span class="o">-&gt;</span><span class="n">getBuffer</span><span class="p">(</span><span class="n">posElem</span><span class="o">-&gt;</span><span class="n">getSource</span><span class="p">());</span>
+
+    <span class="n">vbuf</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">();</span>
+
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">IndexData</span><span class="o">*</span> <span class="n">index_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">indexData</span><span class="p">;</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">HardwareIndexBufferSharedPtr</span> <span class="n">ibuf</span> <span class="o">=</span> <span class="n">index_data</span><span class="o">-&gt;</span><span class="n">indexBuffer</span><span class="p">;</span>
+    <span class="n">ibuf</span><span class="o">-&gt;</span><span class="n">unlock</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">unLockVertexBase</span><span class="p">(</span> <span class="kt">int</span> <span class="n">subpart</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">preallocateVertices</span><span class="p">(</span> <span class="kt">int</span> <span class="n">numverts</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MeshStrider</span><span class="o">::</span><span class="n">preallocateIndices</span><span class="p">(</span> <span class="kt">int</span> <span class="n">numindices</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">ASSERT</span><span class="p">(</span> <span class="mi">0</span> <span class="p">);</span>
+<span class="p">}</span>
+</pre>
+<div class="section" id="como-usarlo">
+<h3>¿Cómo usarlo?</h3>
+<p>Para usar esta clase en un proyecto, se debe hacer lo siguiente:</p>
+<ul class="simple">
+<li>Crear dos ficheros conteniendo la declaración y la definición de la clase, disponible en los listados de código anteriores y en el enlace a la <a class="reference external" href="http://www.ogre3d.org/tikiwiki/BulletMeshStrider">wiki</a>.</li>
+<li>Crear un puntero de tipo MeshStrider, pasándole la referencia a la malla de la que se quiera crear una forma física:</li>
+</ul>
+<pre class="code c++ literal-block">
+<span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Root</span><span class="p">();</span>
+<span class="n">Ogre</span><span class="o">::</span><span class="n">SceneManager</span><span class="o">*</span> <span class="n">scene_manager</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">getSceneManager</span><span class="p">();</span>
+<span class="n">Ogre</span><span class="o">::</span><span class="n">Entity</span><span class="o">*</span> <span class="n">entity</span> <span class="o">=</span> <span class="n">scene_manager</span><span class="o">-&gt;</span><span class="n">createEntity</span><span class="p">(</span><span class="s">"entity_name"</span><span class="p">,</span> <span class="s">"file.mesh"</span><span class="p">);</span>
+
+<span class="n">MeshStrider</span><span class="o">*</span> <span class="n">strider</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MeshStrider</span><span class="p">(</span><span class="n">entity</span><span class="o">-&gt;</span><span class="n">getMesh</span><span class="p">().</span><span class="n">get</span><span class="p">());</span>
+</pre>
+<p>Observar que el método Ogre::Entity::getMesh devuelve <a class="reference external" href="http://www.ogre3d.org/docs/api/1.9/namespace_ogre.html#a5c4c0c56ea9f824c49e331f6fad33ddb">Ogre::MeshPtr</a>, que en realidad es una implementación propia de Ogre de un shared_ptr.</p>
+<ul class="simple">
+<li>Crear una forma de colisión de tipo btBvhTriangleMeshShape, pasandole el mesh strider. Después crear el cuerpo físico y añadirlo al mundo:</li>
+</ul>
+<pre class="code c++ literal-block">
+<span class="n">btCollisionShape</span><span class="o">*</span> <span class="n">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btBvhTriangleMeshShape</span><span class="p">(</span><span class="n">strider</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+
+<span class="n">btVector3</span> <span class="nf">inertia</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="mi">0</span> <span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c1">//Creación típica de un cuerpo rígido en Bullet
+</span><span class="n">btVector3</span> <span class="nf">inertia</span><span class="p">(</span><span class="mi">0</span> <span class="p">,</span><span class="mi">0</span> <span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">mass</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="n">mass</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>  <span class="n">shape</span><span class="o">-&gt;</span><span class="n">calculateLocalInertia</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">inertia</span><span class="p">);</span>
+
+<span class="n">btQuaternion</span> <span class="nf">rotation</span><span class="p">(</span><span class="n">btVector3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">btScalar</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="n">btVector3</span> <span class="nf">origin</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">btTransform</span> <span class="nf">transform</span> <span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">rotation</span><span class="p">);</span>
+<span class="n">MotionState</span><span class="o">*</span> <span class="n">motionState</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MotionState</span><span class="p">(</span><span class="n">world_transform</span><span class="p">,</span> <span class="n">node</span><span class="p">);</span>
+
+<span class="n">btRigidBody</span><span class="o">::</span><span class="n">btRigidBodyConstructionInfo</span> <span class="n">rigidBodyCI</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">motionState</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">inertia</span><span class="p">);</span>
+
+<span class="n">btRigidBody</span><span class="o">*</span> <span class="n">rigidBody</span> <span class="o">=</span> <span class="k">new</span> <span class="n">btRigidBody</span><span class="p">(</span><span class="n">rigidBodyCI</span><span class="p">);</span>
+
+<span class="n">dynamics_world_</span><span class="o">-&gt;</span><span class="n">addRigidBody</span><span class="p">(</span><span class="n">body</span><span class="p">);</span>
+</pre>
+<p>Con esto ya tendremos un cuerpo rígido con una forma de colisión <em>estática</em> cuya geometría corresponderá con la malla de Ogre que se le haya pasado. Hay que recordar que un cuerpo estático está pensado para colisionar contra cuerpos dinámico, y nunca contra otros cuerpos estáticos. Normalmente lo que suele ocurrir si usamos este método para crear cuerpos que tienen que interaccionar con el entorno, como por ejemplo una pelota, es que se ignoran las colisiones entre cuerpos estáticos.</p>
+<p>Por la razón anterior, la geometría estática es muy eficiente a la hora de crear escenarios.</p>
+</div>
+</div>
+<div class="section" id="conclusiones">
+<h2>Conclusiones</h2>
+<p>En este post se ha visto como usar la interfaz btStridingMeshInterface de Bullet para crear cuerpos rígidos con formas de colisión estática que se ajustan a la geometría del cuerpo gráfico que queramos.</p>
+</div>
+</div>
+    </div>
+    <aside class="postpromonav">
+    <nav>
+    
+
+    
+        <ul class="pager">
+            <li class="previous">
+                <a href="modelos-red/modelos-de-red-en-videojuegos.html" rel="prev" title="Modelos de red en videojuegos">Post anterior</a>
+            </li>
+        </ul>
+
+    </nav>
+    </aside>
+    
+
+</article>
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:isaac.lacoba@gmail.com">Isaac Lacoba Molina</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+    </div>
+</div>
+
+
+            <script src="../assets/js/all-nocdn.js"></script>
+        <script src="../assets/js/colorbox-i18n/jquery.colorbox-es.js"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    <script>jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+    <!-- fancy dates -->
+    <script>
+    moment.locale("es");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script>
+    <!-- end fancy dates -->
+    
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57580832-1', 'auto');ga('send', 'pageview');</script>
+
+</body>
+</html>
