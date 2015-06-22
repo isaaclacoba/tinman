@@ -1,0 +1,7 @@
+<map id="State" name="State">
+<area shape="rect" id="node3" href="$classInitial.html" title="Initial" alt="" coords="5,89,59,122"/>
+<area shape="rect" id="node5" href="$classMenu.html" title="Menu" alt="" coords="83,89,136,122"/>
+<area shape="rect" id="node7" href="$classPause.html" title="Pause" alt="" coords="160,89,219,122"/>
+<area shape="rect" id="node9" href="$classPlay.html" title="Play" alt="" coords="243,89,291,122"/>
+<area shape="rect" id="node11" href="$classResults.html" title="Results" alt="" coords="315,89,381,122"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/icontroller.cpp" name="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/icontroller.cpp">
+<area shape="rect" id="node3" href="$icontroller_8h.html" title="icontroller.h" alt="" coords="947,131,1035,165"/>
+<area shape="rect" id="node5" href="$controller_8h.html" title="controller.h" alt="" coords="1036,214,1121,247"/>
+<area shape="rect" id="node128" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="607,297,751,330"/>
+<area shape="rect" id="node15" href="$network_8h.html" title="network.h" alt="" coords="961,297,1039,330"/>
+<area shape="rect" id="node19" href="$tinmanI_8h.html" title="tinmanI.h" alt="" coords="825,379,900,413"/>
+<area shape="rect" id="node23" href="$car_8h.html" title="car.h" alt="" coords="935,379,985,413"/>
+<area shape="rect" id="node28" href="$physics_8h.html" title="physics.h" alt="" coords="2915,627,2992,661"/>
+<area shape="rect" id="node43" href="$scene_8h.html" title="scene.h" alt="" coords="1412,627,1479,661"/>
+<area shape="rect" id="node72" href="$carcontroller_8h.html" title="carcontroller.h" alt="" coords="1055,462,1156,495"/>
+<area shape="rect" id="node94" href="$sound_8h.html" title="sound.h" alt="" coords="360,627,427,661"/>
+<area shape="rect" id="node105" href="$objecttextdisplay_8h.html" title="objecttextdisplay.h" alt="" coords="948,545,1079,578"/>
+<area shape="rect" id="node111" href="$track_8h.html" title="track.h" alt="" coords="863,545,924,578"/>
+<area shape="rect" id="node34" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="3077,710,3179,743"/>
+<area shape="rect" id="node38" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="2904,710,3003,743"/>
+<area shape="rect" id="node75" href="$parser_8h.html" title="parser.h" alt="" coords="516,627,583,661"/>
+<area shape="rect" id="node83" href="$powerup_8h.html" title="powerup.h" alt="" coords="1204,545,1287,578"/>
+<area shape="rect" id="node87" href="$animation_8h.html" title="animation.h" alt="" coords="1201,627,1289,661"/>
+<area shape="rect" id="node108" href="$gui_8h.html" title="gui.h" alt="" coords="1025,627,1076,661"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node3" href="$classTinman_1_1Callback__AuthoritativeServer__disconnect__Base.html" title="Tinman::Callback_Authoritative\lServer_disconnect_Base" alt="" coords="159,234,361,289"/>
+<area shape="rect" id="node9" href="$classTinman_1_1Callback__AuthoritativeServer__login__Base.html" title="Tinman::Callback_Authoritative\lServer_login_Base" alt="" coords="159,698,361,753"/>
+<area shape="rect" id="node15" href="$classTinman_1_1Callback__AuthoritativeServer__notify__Base.html" title="Tinman::Callback_Authoritative\lServer_notify_Base" alt="" coords="159,423,361,478"/>
+<area shape="rect" id="node21" href="$classTinman_1_1Callback__AuthoritativeServer__startRace__Base.html" title="Tinman::Callback_Authoritative\lServer_startRace_Base" alt="" coords="159,511,361,566"/>
+<area shape="rect" id="node27" href="$classTinman_1_1Callback__Peer__notify__Base.html" title="Tinman::Callback_Peer\l_notify_Base" alt="" coords="181,82,339,137"/>
+<area shape="rect" id="node5" href="$classTinman_1_1Callback__AuthoritativeServer__disconnect.html" title="Tinman::Callback_Authoritative\lServer_disconnect\&lt; T, CT \&gt;" alt="" coords="412,159,615,214"/>
+<area shape="rect" id="node7" href="$classTinman_1_1CallbackNC__AuthoritativeServer__disconnect.html" title="Tinman::CallbackNC\l_AuthoritativeServer\l_disconnect\&lt; T \&gt;" alt="" coords="441,237,585,313"/>
+<area shape="rect" id="node11" href="$classTinman_1_1Callback__AuthoritativeServer__login.html" title="Tinman::Callback_Authoritative\lServer_login\&lt; T, CT \&gt;" alt="" coords="412,687,615,742"/>
+<area shape="rect" id="node13" href="$classTinman_1_1CallbackNC__AuthoritativeServer__login.html" title="Tinman::CallbackNC\l_AuthoritativeServer\l_login\&lt; T \&gt;" alt="" coords="441,765,585,841"/>
+<area shape="rect" id="node17" href="$classTinman_1_1Callback__AuthoritativeServer__notify.html" title="Tinman::Callback_Authoritative\lServer_notify\&lt; T, CT \&gt;" alt="" coords="412,335,615,390"/>
+<area shape="rect" id="node19" href="$classTinman_1_1CallbackNC__AuthoritativeServer__notify.html" title="Tinman::CallbackNC\l_AuthoritativeServer\l_notify\&lt; T \&gt;" alt="" coords="441,413,585,489"/>
+<area shape="rect" id="node23" href="$classTinman_1_1Callback__AuthoritativeServer__startRace.html" title="Tinman::Callback_Authoritative\lServer_startRace\&lt; T, CT \&gt;" alt="" coords="412,511,615,566"/>
+<area shape="rect" id="node25" href="$classTinman_1_1CallbackNC__AuthoritativeServer__startRace.html" title="Tinman::CallbackNC\l_AuthoritativeServer\l_startRace\&lt; T \&gt;" alt="" coords="441,589,585,665"/>
+<area shape="rect" id="node29" href="$classTinman_1_1Callback__Peer__notify.html" title="Tinman::Callback_Peer\l_notify\&lt; T, CT \&gt;" alt="" coords="435,5,592,59"/>
+<area shape="rect" id="node31" href="$classTinman_1_1CallbackNC__Peer__notify.html" title="Tinman::CallbackNC\l_Peer_notify\&lt; T \&gt;" alt="" coords="441,82,585,137"/>
+</map>

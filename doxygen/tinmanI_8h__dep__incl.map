@@ -1,0 +1,35 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/network/tinmanI.h" name="/home/isaac.lacoba/repos/tfg.tinman/src/network/tinmanI.h">
+<area shape="rect" id="node3" href="$network_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/network/network.h" alt="" coords="1431,131,1572,207"/>
+<area shape="rect" id="node24" href="$tinmanI_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/network/tinmanI.cpp" alt="" coords="1537,883,1681,959"/>
+<area shape="rect" id="node5" href="$controller_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/controller.h" alt="" coords="1068,257,1220,333"/>
+<area shape="rect" id="node22" href="$network_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/network/network.cpp" alt="" coords="1367,883,1513,959"/>
+<area shape="rect" id="node7" href="$bot_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/bot.h" alt="" coords="1367,382,1508,458"/>
+<area shape="rect" id="node60" href="$controller_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/controller.cpp" alt="" coords="612,382,777,458"/>
+<area shape="rect" id="node62" href="$human_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/human.h" alt="" coords="801,382,943,458"/>
+<area shape="rect" id="node67" href="$icontroller_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/icontroller.h" alt="" coords="967,382,1121,458"/>
+<area shape="rect" id="node72" href="$networkcontroller_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/networkcontroller.h" alt="" coords="1145,382,1343,458"/>
+<area shape="rect" id="node9" href="$bot_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/bot.cpp" alt="" coords="1367,758,1508,834"/>
+<area shape="rect" id="node11" href="$player_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/player.h" alt="" coords="1021,507,1163,583"/>
+<area shape="rect" id="node13" href="$player_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/player.cpp" alt="" coords="953,633,1095,709"/>
+<area shape="rect" id="node15" href="$race_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/race.h" alt="" coords="1119,633,1260,709"/>
+<area shape="rect" id="node20" href="$session_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/session.h" alt="" coords="1201,758,1343,834"/>
+<area shape="rect" id="node53" href="$playerfactory_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/util/playerfactory.h" alt="" coords="887,758,1028,834"/>
+<area shape="rect" id="node18" href="$race_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/race.cpp" alt="" coords="1499,1134,1640,1210"/>
+<area shape="rect" id="node26" href="$play_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/play.h" alt="" coords="1201,883,1343,959"/>
+<area shape="rect" id="node28" href="$game_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/game.h" alt="" coords="832,1009,973,1085"/>
+<area shape="rect" id="node30" href="$main_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/main.cpp" alt="" coords="1333,1134,1475,1210"/>
+<area shape="rect" id="node33" href="$session_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/model/session.cpp" alt="" coords="5,1134,147,1210"/>
+<area shape="rect" id="node35" href="$initial_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/initial.cpp" alt="" coords="171,1134,312,1210"/>
+<area shape="rect" id="node37" href="$menu_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/menu.cpp" alt="" coords="336,1134,477,1210"/>
+<area shape="rect" id="node39" href="$pause_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/pause.cpp" alt="" coords="501,1134,643,1210"/>
+<area shape="rect" id="node41" href="$play_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/play.cpp" alt="" coords="667,1134,808,1210"/>
+<area shape="rect" id="node43" href="$results_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/results.cpp" alt="" coords="832,1134,973,1210"/>
+<area shape="rect" id="node45" href="$state_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/state.cpp" alt="" coords="997,1134,1139,1210"/>
+<area shape="rect" id="node47" href="$statemachine_8h.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/statemachine.h" alt="" coords="1163,1134,1309,1210"/>
+<area shape="rect" id="node49" href="$game_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/game.cpp" alt="" coords="1077,1259,1219,1335"/>
+<area shape="rect" id="node51" href="$statemachine_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/state/statemachine.cpp" alt="" coords="1243,1259,1405,1335"/>
+<area shape="rect" id="node56" href="$playerfactory_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/util/playerfactory.cpp" alt="" coords="940,883,1087,959"/>
+<area shape="rect" id="node64" href="$human_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/human.cpp" alt="" coords="648,507,803,583"/>
+<area shape="rect" id="node69" href="$icontroller_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/icontroller.cpp" alt="" coords="827,507,997,583"/>
+<area shape="rect" id="node74" href="$networkcontroller_8cpp.html" title="/home/isaac.lacoba\l/repos/tfg.tinman/src\l/controllers/networkcontroller.cpp" alt="" coords="1187,507,1400,583"/>
+</map>

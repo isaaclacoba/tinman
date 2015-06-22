@@ -1,0 +1,19 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/util/playerfactory.h" name="/home/isaac.lacoba/repos/tfg.tinman/src/util/playerfactory.h">
+<area shape="rect" id="node3" href="$race_8h.html" title="race.h" alt="" coords="927,131,985,165"/>
+<area shape="rect" id="node9" href="$player_8h.html" title="player.h" alt="" coords="564,214,631,247"/>
+<area shape="rect" id="node62" href="$timer_8h.html" title="timer.h" alt="" coords="968,297,1029,330"/>
+<area shape="rect" id="node67" href="$powerup_8h.html" title="powerup.h" alt="" coords="1056,297,1139,330"/>
+<area shape="rect" id="node11" href="$bot_8h.html" title="bot.h" alt="" coords="529,297,580,330"/>
+<area shape="rect" id="node39" href="$human_8h.html" title="human.h" alt="" coords="604,297,676,330"/>
+<area shape="rect" id="node54" href="$networkcontroller_8h.html" title="networkcontroller.h" alt="" coords="375,297,505,330"/>
+<area shape="rect" id="node57" href="$icontroller_8h.html" title="icontroller.h" alt="" coords="263,297,351,330"/>
+<area shape="rect" id="node15" href="$controller_8h.html" title="controller.h" alt="" coords="360,379,445,413"/>
+<area shape="rect" id="node22" href="$physics_8h.html" title="physics.h" alt="" coords="552,379,629,413"/>
+<area shape="rect" id="node28" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="136,462,237,495"/>
+<area shape="rect" id="node32" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="312,462,411,495"/>
+<area shape="rect" id="node42" href="$input_8h.html" title="input.h" alt="" coords="832,379,893,413"/>
+<area shape="rect" id="node60" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="192,379,336,413"/>
+<area shape="rect" id="node74" href="$scene_8h.html" title="scene.h" alt="" coords="2081,379,2148,413"/>
+<area shape="rect" id="node101" href="$animation_8h.html" title="animation.h" alt="" coords="1053,379,1141,413"/>
+<area shape="rect" id="node111" href="$parser_8h.html" title="parser.h" alt="" coords="704,379,771,413"/>
+</map>

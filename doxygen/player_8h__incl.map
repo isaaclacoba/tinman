@@ -1,0 +1,20 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/model/player.h" name="/home/isaac.lacoba/repos/tfg.tinman/src/model/player.h">
+<area shape="rect" id="node3" href="$bot_8h.html" title="bot.h" alt="" coords="1423,131,1473,165"/>
+<area shape="rect" id="node95" href="$human_8h.html" title="human.h" alt="" coords="1797,131,1869,165"/>
+<area shape="rect" id="node118" href="$networkcontroller_8h.html" title="networkcontroller.h" alt="" coords="1643,131,1773,165"/>
+<area shape="rect" id="node121" href="$icontroller_8h.html" title="icontroller.h" alt="" coords="1531,131,1619,165"/>
+<area shape="rect" id="node7" href="$controller_8h.html" title="controller.h" alt="" coords="1728,214,1813,247"/>
+<area shape="rect" id="node30" href="$physics_8h.html" title="physics.h" alt="" coords="323,545,400,578"/>
+<area shape="rect" id="node17" href="$network_8h.html" title="network.h" alt="" coords="1732,297,1809,330"/>
+<area shape="rect" id="node21" href="$tinmanI_8h.html" title="tinmanI.h" alt="" coords="1647,379,1721,413"/>
+<area shape="rect" id="node25" href="$car_8h.html" title="car.h" alt="" coords="1745,379,1796,413"/>
+<area shape="rect" id="node47" href="$scene_8h.html" title="scene.h" alt="" coords="1581,545,1648,578"/>
+<area shape="rect" id="node76" href="$carcontroller_8h.html" title="carcontroller.h" alt="" coords="97,545,199,578"/>
+<area shape="rect" id="node79" href="$sound_8h.html" title="sound.h" alt="" coords="1991,545,2057,578"/>
+<area shape="rect" id="node84" href="$objecttextdisplay_8h.html" title="objecttextdisplay.h" alt="" coords="1721,462,1852,495"/>
+<area shape="rect" id="node87" href="$track_8h.html" title="track.h" alt="" coords="1585,462,1647,495"/>
+<area shape="rect" id="node36" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="136,627,237,661"/>
+<area shape="rect" id="node40" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="312,627,411,661"/>
+<area shape="rect" id="node98" href="$input_8h.html" title="input.h" alt="" coords="2731,545,2792,578"/>
+<area shape="rect" id="node124" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="1428,297,1572,330"/>
+</map>

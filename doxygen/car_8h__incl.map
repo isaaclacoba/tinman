@@ -1,0 +1,14 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/model/car.h" name="/home/isaac.lacoba/repos/tfg.tinman/src/model/car.h">
+<area shape="rect" id="node7" href="$physics_8h.html" title="physics.h" alt="" coords="280,297,357,330"/>
+<area shape="rect" id="node24" href="$scene_8h.html" title="scene.h" alt="" coords="1775,297,1841,330"/>
+<area shape="rect" id="node54" href="$carcontroller_8h.html" title="carcontroller.h" alt="" coords="1652,131,1753,165"/>
+<area shape="rect" id="node87" href="$sound_8h.html" title="sound.h" alt="" coords="3241,297,3308,330"/>
+<area shape="rect" id="node98" href="$objecttextdisplay_8h.html" title="objecttextdisplay.h" alt="" coords="1836,214,1967,247"/>
+<area shape="rect" id="node106" href="$track_8h.html" title="track.h" alt="" coords="2640,214,2701,247"/>
+<area shape="rect" id="node13" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="136,379,237,413"/>
+<area shape="rect" id="node17" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="312,379,411,413"/>
+<area shape="rect" id="node57" href="$parser_8h.html" title="parser.h" alt="" coords="2720,297,2787,330"/>
+<area shape="rect" id="node69" href="$powerup_8h.html" title="powerup.h" alt="" coords="1645,214,1728,247"/>
+<area shape="rect" id="node79" href="$animation_8h.html" title="animation.h" alt="" coords="2461,297,2549,330"/>
+<area shape="rect" id="node101" href="$gui_8h.html" title="gui.h" alt="" coords="2573,297,2624,330"/>
+</map>

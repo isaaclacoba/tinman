@@ -1,0 +1,22 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/bot.cpp" name="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/bot.cpp">
+<area shape="rect" id="node3" href="$bot_8h.html" title="bot.h" alt="" coords="1812,297,1863,330"/>
+<area shape="rect" id="node76" href="$race_8h.html" title="race.h" alt="" coords="2175,131,2233,165"/>
+<area shape="rect" id="node7" href="$controller_8h.html" title="controller.h" alt="" coords="1801,379,1887,413"/>
+<area shape="rect" id="node28" href="$physics_8h.html" title="physics.h" alt="" coords="1559,627,1636,661"/>
+<area shape="rect" id="node17" href="$network_8h.html" title="network.h" alt="" coords="1805,462,1883,495"/>
+<area shape="rect" id="node21" href="$tinmanI_8h.html" title="tinmanI.h" alt="" coords="1903,545,1977,578"/>
+<area shape="rect" id="node25" href="$car_8h.html" title="car.h" alt="" coords="1680,545,1731,578"/>
+<area shape="rect" id="node45" href="$scene_8h.html" title="scene.h" alt="" coords="1791,627,1857,661"/>
+<area shape="rect" id="node34" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="113,710,215,743"/>
+<area shape="rect" id="node38" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="289,710,388,743"/>
+<area shape="rect" id="node81" href="$player_8h.html" title="player.h" alt="" coords="1919,214,1985,247"/>
+<area shape="rect" id="node104" href="$timer_8h.html" title="timer.h" alt="" coords="2141,297,2203,330"/>
+<area shape="rect" id="node109" href="$powerup_8h.html" title="powerup.h" alt="" coords="2312,545,2395,578"/>
+<area shape="rect" id="node84" href="$human_8h.html" title="human.h" alt="" coords="2041,297,2113,330"/>
+<area shape="rect" id="node94" href="$networkcontroller_8h.html" title="networkcontroller.h" alt="" coords="1887,297,2017,330"/>
+<area shape="rect" id="node97" href="$icontroller_8h.html" title="icontroller.h" alt="" coords="1700,297,1788,330"/>
+<area shape="rect" id="node87" href="$input_8h.html" title="input.h" alt="" coords="1967,627,2028,661"/>
+<area shape="rect" id="node100" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="1411,462,1555,495"/>
+<area shape="rect" id="node118" href="$animation_8h.html" title="animation.h" alt="" coords="2599,627,2687,661"/>
+<area shape="rect" id="node128" href="$parser_8h.html" title="parser.h" alt="" coords="2500,627,2567,661"/>
+</map>

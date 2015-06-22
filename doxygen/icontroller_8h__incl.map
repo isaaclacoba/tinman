@@ -1,0 +1,19 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/icontroller.h" name="/home/isaac.lacoba/repos/tfg.tinman/src/controllers/icontroller.h">
+<area shape="rect" id="node3" href="$controller_8h.html" title="controller.h" alt="" coords="920,131,1005,165"/>
+<area shape="rect" id="node128" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="1095,214,1239,247"/>
+<area shape="rect" id="node13" href="$network_8h.html" title="network.h" alt="" coords="976,214,1053,247"/>
+<area shape="rect" id="node17" href="$tinmanI_8h.html" title="tinmanI.h" alt="" coords="1055,297,1129,330"/>
+<area shape="rect" id="node21" href="$car_8h.html" title="car.h" alt="" coords="1204,297,1255,330"/>
+<area shape="rect" id="node26" href="$physics_8h.html" title="physics.h" alt="" coords="2909,545,2987,578"/>
+<area shape="rect" id="node43" href="$scene_8h.html" title="scene.h" alt="" coords="1564,545,1631,578"/>
+<area shape="rect" id="node72" href="$carcontroller_8h.html" title="carcontroller.h" alt="" coords="1612,379,1713,413"/>
+<area shape="rect" id="node94" href="$sound_8h.html" title="sound.h" alt="" coords="351,545,417,578"/>
+<area shape="rect" id="node105" href="$objecttextdisplay_8h.html" title="objecttextdisplay.h" alt="" coords="1159,462,1289,495"/>
+<area shape="rect" id="node111" href="$track_8h.html" title="track.h" alt="" coords="1433,462,1495,495"/>
+<area shape="rect" id="node32" href="$motionstate_8h.html" title="motionstate.h" alt="" coords="2955,627,3056,661"/>
+<area shape="rect" id="node36" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="3131,627,3229,661"/>
+<area shape="rect" id="node75" href="$parser_8h.html" title="parser.h" alt="" coords="1081,545,1148,578"/>
+<area shape="rect" id="node83" href="$powerup_8h.html" title="powerup.h" alt="" coords="1645,462,1728,495"/>
+<area shape="rect" id="node87" href="$animation_8h.html" title="animation.h" alt="" coords="1655,545,1743,578"/>
+<area shape="rect" id="node108" href="$gui_8h.html" title="gui.h" alt="" coords="1172,545,1223,578"/>
+</map>

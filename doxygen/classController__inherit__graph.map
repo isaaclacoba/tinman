@@ -1,0 +1,6 @@
+<map id="Controller" name="Controller">
+<area shape="rect" id="node3" href="$classBotController.html" title="BotController" alt="" coords="5,89,104,122"/>
+<area shape="rect" id="node5" href="$classHumanController.html" title="HumanController" alt="" coords="128,89,248,122"/>
+<area shape="rect" id="node7" href="$classIController.html" title="IController" alt="" coords="272,89,355,122"/>
+<area shape="rect" id="node9" href="$classNetworkController.html" title="NetworkController" alt="" coords="379,89,504,122"/>
+</map>

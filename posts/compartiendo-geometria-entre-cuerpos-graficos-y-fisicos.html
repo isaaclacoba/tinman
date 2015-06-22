@@ -81,6 +81,9 @@ Cuando se está creando un escenario en un video">
                 </li>
 <li>
 <a href="https://bitbucket.org/arco_group/tfg.tinman">Repository</a>
+                </li>
+<li>
+<a href="../doxygen/index.html">Doxygen</a>
 
                 
             </li>
@@ -148,7 +151,7 @@ la misma geometría que un determinado cuerpo gráfico.</p>
 <span class="c1">/// Shares vertices/indexes between Ogre and Bullet
 </span><span class="k">class</span> <span class="nc">MeshStrider</span> <span class="o">:</span> <span class="k">public</span> <span class="n">btStridingMeshInterface</span><span class="p">{</span>
 
-<span class="nl">public:</span>
+<span class="k">public</span><span class="o">:</span>
     <span class="n">MeshStrider</span><span class="p">(</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span><span class="o">:</span><span class="n">mMesh</span><span class="p">(</span><span class="n">m</span><span class="p">){}</span>
 
     <span class="kt">void</span> <span class="n">set</span><span class="p">(</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">m</span> <span class="p">)</span> <span class="p">{</span> <span class="n">ASSERT</span><span class="p">(</span><span class="n">m</span><span class="p">);</span> <span class="n">mMesh</span> <span class="o">=</span> <span class="n">m</span><span class="p">;</span> <span class="p">}</span>
@@ -163,12 +166,11 @@ la misma geometría que un determinado cuerpo gráfico.</p>
 
     <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">preallocateVertices</span><span class="p">(</span><span class="kt">int</span> <span class="n">numverts</span><span class="p">);</span>
     <span class="k">virtual</span> <span class="kt">void</span>    <span class="nf">preallocateIndices</span><span class="p">(</span><span class="kt">int</span> <span class="n">numindices</span><span class="p">);</span>
-<span class="nl">private:</span>
+<span class="k">private</span><span class="o">:</span>
     <span class="n">Ogre</span><span class="o">::</span><span class="n">Mesh</span> <span class="o">*</span> <span class="n">mMesh</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="cp">#endif </span><span class="c1">// MeshStrider_h__
-</span>
+<span class="cp">#endif </span><span class="c1">// MeshStrider_h__</span>
 </pre>
 <ul class="simple">
 <li>Implementación:</li>
@@ -198,7 +200,7 @@ la misma geometría que un determinado cuerpo gráfico.</p>
 <span class="p">{</span>
     <span class="n">Ogre</span><span class="o">::</span><span class="n">SubMesh</span><span class="o">*</span> <span class="n">submesh</span> <span class="o">=</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">getSubMesh</span><span class="p">(</span><span class="n">subpart</span><span class="p">);</span>
 
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">sharedVertexData</span> <span class="o">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="nl">sharedVertexData</span> <span class="p">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
 
     <span class="k">const</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexElement</span><span class="o">*</span> <span class="n">posElem</span> <span class="o">=</span>
         <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexDeclaration</span><span class="o">-&gt;</span><span class="n">findElementBySemantic</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">VES_POSITION</span><span class="p">);</span>
@@ -259,7 +261,7 @@ la misma geometría que un determinado cuerpo gráfico.</p>
 <span class="p">{</span>
     <span class="n">Ogre</span><span class="o">::</span><span class="n">SubMesh</span><span class="o">*</span> <span class="n">submesh</span> <span class="o">=</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">getSubMesh</span><span class="p">(</span><span class="n">subpart</span><span class="p">);</span>
 
-    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="n">sharedVertexData</span> <span class="o">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
+    <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexData</span><span class="o">*</span> <span class="n">vertex_data</span> <span class="o">=</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">useSharedVertices</span> <span class="o">?</span> <span class="n">mMesh</span><span class="o">-&gt;</span><span class="nl">sharedVertexData</span> <span class="p">:</span> <span class="n">submesh</span><span class="o">-&gt;</span><span class="n">vertexData</span><span class="p">;</span>
 
     <span class="k">const</span> <span class="n">Ogre</span><span class="o">::</span><span class="n">VertexElement</span><span class="o">*</span> <span class="n">posElem</span> <span class="o">=</span>
         <span class="n">vertex_data</span><span class="o">-&gt;</span><span class="n">vertexDeclaration</span><span class="o">-&gt;</span><span class="n">findElementBySemantic</span><span class="p">(</span><span class="n">Ogre</span><span class="o">::</span><span class="n">VES_POSITION</span><span class="p">);</span>

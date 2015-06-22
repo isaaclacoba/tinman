@@ -115,6 +115,7 @@ NAVIGATION_LINKS = {
         ("/categories/index.html", "Tags"),
         ("/rss.xml", "feed RSS"),
         ("https://bitbucket.org/arco_group/tfg.tinman", "Repository"),
+        ("/doxygen/index.html", "Doxygen"),
     ),
 }
 

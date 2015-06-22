@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['race',['Race',['../classRace.html#a2dfe88ed411ee1baf2ccbda75e84767b',1,'Race']]],
+  ['race_5fended',['race_ended',['../classSession.html#aa1a066908f04e7f777ead7c1d3ad312e',1,'Session']]],
+  ['radians_5fto_5fangle',['radians_to_angle',['../physics_8cpp.html#ab1091e32e326bd0e1a3ca6bda2e0d29f',1,'radians_to_angle(float radians):&#160;physics.cpp'],['../physics_8h.html#ab1091e32e326bd0e1a3ca6bda2e0d29f',1,'radians_to_angle(float radians):&#160;physics.cpp']]],
+  ['raytest',['raytest',['../classPhysics.html#ad9cf026f24787907ff83a235b1f43147',1,'Physics']]],
+  ['read_5flocations',['read_locations',['../classPowerUp.html#a1caff2867268d4ef9f40e35e73b59787',1,'PowerUp']]],
+  ['realize',['realize',['../classCarController.html#a3550c4de9acee0bdb8b70117eacf7946',1,'CarController::realize()'],['../classGame.html#af721d99e4572bc1b7959a476541fe7aa',1,'Game::realize()'],['../classCar.html#a2199de0db08b414e556067084b6f0504',1,'Car::realize(Scene::shared scene, std::string name, std::string material, Ogre::Vector3 position, int scale)'],['../classCar.html#ad474005ad430b51151e0be113494e8b8',1,'Car::realize(Physics::shared physics, Scene::shared scene, Sound::shared sound, std::string name, btVector3 position, std::string material, int checkpoints, Ice::Byte id)'],['../classCar.html#a43c8550a12d4b17ffc157b1e18ffbab6',1,'Car::realize(Physics::shared physics, Sound::shared sound, std::string name, btVector3 position, Ice::Byte id)'],['../classPlayer.html#af4d0672f80e09ca125b42d833ff1d176',1,'Player::realize()'],['../classPowerUp.html#ac267daeae097103ce2afcfd7116854b1',1,'PowerUp::realize()'],['../classRace.html#a560afc6845f62dbf60fb5401b1767824',1,'Race::realize()'],['../classSession.html#abb0cf41cf74ac42e43bc691623438af2',1,'Session::realize()']]],
+  ['register_5fcallback',['register_callback',['../classGUI.html#aef5da2d7413387c5e1a3c540f34dde21',1,'GUI']]],
+  ['remove_5fchild',['remove_child',['../classScene.html#a3ab3ff89faddf072f6d861e893449e52',1,'Scene::remove_child(std::string parent, std::string child)'],['../classScene.html#a2c618f071009d0a808bf9fcaf4c10f8f',1,'Scene::remove_child(std::string parent, Ogre::SceneNode *child)'],['../classScene.html#a0e642831357d2b3870a5fe63ecb9eec9',1,'Scene::remove_child(Ogre::SceneNode *parent, std::string child)'],['../classScene.html#a901834cdf5a7f9ba5318a26f06402c4e',1,'Scene::remove_child(Ogre::SceneNode *parent, Ogre::SceneNode *child)']]],
+  ['remove_5ffrom_5fscene',['remove_from_scene',['../classPowerUp.html#ab46f7dde553ef5db95ab119e3a79aa3c',1,'PowerUp']]],
+  ['remove_5fkey_5ffrom_5fbuffer',['remove_key_from_buffer',['../classEventListener.html#a3a588cf7d9de548c21a5e93bb2c23f7e',1,'EventListener']]],
+  ['remove_5frigid_5fbody',['remove_rigid_body',['../classPhysics.html#aeda2a96b9e55ec8783c182990eacf17a',1,'Physics']]],
+  ['render_5fone_5fframe',['render_one_frame',['../classScene.html#a21fc61830fc5544dd4e13705d8ad6352',1,'Scene']]],
+  ['replace',['replace',['../classPowerUp.html#a92e0b8ce8d1a3a362da9c166c26813c8',1,'PowerUp']]],
+  ['reporterrorwarning',['reportErrorWarning',['../classPhysicsDebugDrawer.html#a04d7de7e121e623ae28e45e5de307ce9',1,'PhysicsDebugDrawer']]],
+  ['reset',['reset',['../classCar.html#a358a191debdcce42cb45a192724dba00',1,'Car::reset()'],['../classPlayer.html#a256a264c27aadad44cd523c55b21d377',1,'Player::reset()'],['../classPowerUp.html#a86050f926d10766829c5a72e10781942',1,'PowerUp::reset()'],['../classRace.html#a6172a8b22e4ba1804c4010239c7c86d1',1,'Race::reset()'],['../classSession.html#a9b92d36aa869c995f57791711e433e6a',1,'Session::reset()'],['../classTrack.html#ab4e7e111378109011379f2a7aa984145',1,'Track::reset()']]],
+  ['reset_5fcars',['reset_cars',['../classRace.html#ab5c27b179a8ab00556bfb12964347dd2',1,'Race']]],
+  ['reset_5fposition',['reset_position',['../classCar.html#aef9fdecf419bedade6b01b7fad18c3e6',1,'Car']]],
+  ['reset_5fpowerups',['reset_powerups',['../classRace.html#a329fda63ca3170460a29888224594da3',1,'Race']]],
+  ['reset_5frace',['reset_race',['../classSession.html#a984cd40f5e5d9bc8399bf0c5c12b68d9',1,'Session']]],
+  ['reset_5fwheels',['reset_wheels',['../classCarController.html#a747bd46c8cdd06e45299058293a28ba5',1,'CarController']]],
+  ['restart',['restart',['../classTimer.html#aa3f7871196bb56202af2bc982bfbfff6',1,'Timer']]],
+  ['results',['Results',['../classResults.html#a3bce40f8cc4c64d16fdc657c80cc2fda',1,'Results']]],
+  ['rotate_5fvector',['rotate_vector',['../classPhysics.html#a64c44d241b7ef276fbfeeae115fdd890',1,'Physics']]],
+  ['run',['run',['../classserver_1_1Server.html#ad2306a8f794080cd3abdf07487534b87',1,'server::Server']]]
+];

@@ -1,0 +1,29 @@
+<map id="/home/isaac.lacoba/repos/tfg.tinman/src/model/race.cpp" name="/home/isaac.lacoba/repos/tfg.tinman/src/model/race.cpp">
+<area shape="rect" id="node3" href="$race_8h.html" title="race.h" alt="" coords="492,379,551,413"/>
+<area shape="rect" id="node86" href="$game_8h.html" title="game.h" alt="" coords="964,131,1028,165"/>
+<area shape="rect" id="node9" href="$player_8h.html" title="player.h" alt="" coords="635,462,701,495"/>
+<area shape="rect" id="node42" href="$timer_8h.html" title="timer.h" alt="" coords="88,545,149,578"/>
+<area shape="rect" id="node47" href="$powerup_8h.html" title="powerup.h" alt="" coords="393,545,476,578"/>
+<area shape="rect" id="node11" href="$bot_8h.html" title="bot.h" alt="" coords="284,545,335,578"/>
+<area shape="rect" id="node22" href="$human_8h.html" title="human.h" alt="" coords="869,545,941,578"/>
+<area shape="rect" id="node34" href="$networkcontroller_8h.html" title="networkcontroller.h" alt="" coords="603,545,733,578"/>
+<area shape="rect" id="node37" href="$icontroller_8h.html" title="icontroller.h" alt="" coords="757,545,845,578"/>
+<area shape="rect" id="node15" href="$controller_8h.html" title="controller.h" alt="" coords="739,627,824,661"/>
+<area shape="rect" id="node18" href="$physics_8h.html" title="physics.h" alt="" coords="173,627,251,661"/>
+<area shape="rect" id="node20" href="$meshstrider_8h.html" title="meshstrider.h" alt="" coords="200,710,299,743"/>
+<area shape="rect" id="node25" href="$input_8h.html" title="input.h" alt="" coords="1732,627,1793,661"/>
+<area shape="rect" id="node40" href="$instrumentatedCarI_8h.html" title="instrumentatedCarI.h" alt="" coords="848,627,992,661"/>
+<area shape="rect" id="node54" href="$scene_8h.html" title="scene.h" alt="" coords="1257,627,1324,661"/>
+<area shape="rect" id="node79" href="$animation_8h.html" title="animation.h" alt="" coords="576,627,664,661"/>
+<area shape="rect" id="node84" href="$parser_8h.html" title="parser.h" alt="" coords="485,627,552,661"/>
+<area shape="rect" id="node93" href="$physicsdebugdrawer_8h.html" title="physicsdebugdrawer.h" alt="" coords="264,214,413,247"/>
+<area shape="rect" id="node100" href="$playerfactory_8h.html" title="playerfactory.h" alt="" coords="659,297,765,330"/>
+<area shape="rect" id="node104" href="$carfactory_8h.html" title="carfactory.h" alt="" coords="877,379,968,413"/>
+<area shape="rect" id="node107" href="$initial_8h.html" title="initial.h" alt="" coords="1205,214,1267,247"/>
+<area shape="rect" id="node114" href="$menu_8h.html" title="menu.h" alt="" coords="1117,214,1181,247"/>
+<area shape="rect" id="node118" href="$pause_8h.html" title="pause.h" alt="" coords="1291,214,1357,247"/>
+<area shape="rect" id="node121" href="$play_8h.html" title="play.h" alt="" coords="936,214,992,247"/>
+<area shape="rect" id="node129" href="$results_8h.html" title="results.h" alt="" coords="1381,214,1453,247"/>
+<area shape="rect" id="node109" href="$state_8h.html" title="state.h" alt="" coords="1223,297,1284,330"/>
+<area shape="rect" id="node124" href="$session_8h.html" title="session.h" alt="" coords="557,297,635,330"/>
+</map>
